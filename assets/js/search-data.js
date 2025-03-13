@@ -53,7 +53,7 @@ ninja.data = [{
           },
         },{id: "nav-people",
           title: "people",
-          description: "members of the lab or group",
+          description: "Strona wspolpracy w budowie. Wkrotce tutaj pojawi sie informacje o osobach, z ktorymi wspolpracuje.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/people/";
