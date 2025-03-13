@@ -58,6 +58,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/people/";
           },
+        },{id: "nav-bookshelf",
+          title: "bookshelf",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/books/";
+          },
         },{id: "post-standardy-danych-czym-są-i-dlaczego-są-ważne-analiza",
       
         title: "Standardy danych. Czym są i dlaczego są ważne? Analiza",
