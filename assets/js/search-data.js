@@ -131,19 +131,19 @@ ninja.data = [{
           section: "News",},{id: "news-pierwszy-artykuł",
           title: 'Pierwszy artykuł',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
+          section: "News",},{id: "projects-analiza-la-liga",
+          title: 'Analiza La Liga',
           description: "Analityczna aplikacja z danymi dotyczacymi La Liga",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
+            },},{id: "projects-skrapowanie-danych",
+          title: 'Skrapowanie danych',
           description: "Projekt skrapowania danych z serwisow z ogloszeniami o prace",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
-            },},{id: "projects-project-3-with-very-long-name",
-          title: 'project 3 with very long name',
-          description: "bAIka - projekt generowania bajek z wykorzystaniem sztucznej inteligencji",
+            },},{id: "projects-baika",
+          title: 'bAIka',
+          description: "projekt generowania bajek z wykorzystaniem sztucznej inteligencji",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project/";
             },},{
