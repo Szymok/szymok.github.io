@@ -1,6 +1,6 @@
 ---
 layout: page
-title: project 2
+title: Skrapowanie danych
 description: Projekt skrapowania danych z serwisow z ogloszeniami o prace
 img: assets/img/3.jpg
 importance: 2

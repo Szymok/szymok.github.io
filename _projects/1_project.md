@@ -1,6 +1,6 @@
 ---
 layout: page
-title: project 1
+title: Analiza La Liga
 description: Analityczna aplikacja z danymi dotyczacymi La Liga
 img: assets/img/12.jpg
 importance: 1
