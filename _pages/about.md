@@ -2,16 +2,15 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: <a href='#'>Let our AI handle it</a>
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Data Consultant</p>
+    <p>Trójmiasto</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -27,8 +26,8 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Moim celem jest dokumentowanie mojej drogi do profesjonalnego `ogarniacza` danych, aby udowodnić, że jest to możliwe dla każdego. Pragnę również przyczynić się do rozwoju wiedzy w naszej społeczności.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Jestem podekscytowany możliwościami wykorzystania danych do tworzenia modeli, które automatycznie uczą się i podejmują decyzje. Dla entuzjastów `sztucznej inteligencji` i `analizy danych` nie ma nic lepszego niż widzenie swoich `algorytmów` działających efektywnie i produkujących znaczące wyniki.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Szukanie nowych sposobów na ulepszenie swoich modeli i zastosowań dla nich pozwala mi na ciągły `rozwój` i postęp w tej dziedzinie. W tym celu stale poszerzam swoją wiedzę i umiejętności, aby móc wykorzystać nowe narzędzia i `technologie`. 
