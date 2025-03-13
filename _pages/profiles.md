@@ -2,7 +2,7 @@
 layout: profiles
 permalink: /people/
 title: people
-description: members of the lab or group
+description: Strona wspolpracy w budowie. Wkrotce tutaj pojawi sie informacje o osobach, z ktorymi wspolpracuje.
 nav: true
 nav_order: 7
 
