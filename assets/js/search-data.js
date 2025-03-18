@@ -39,7 +39,7 @@ ninja.data = [{
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "This is a description of the page. You can modify it in &#39;_pages/cv.md&#39;. You can also change or remove the top pdf download button.",
+          description: "Strona z moim cv. Za pomocą przycisku PDF można pobrać plik z moim cv.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
@@ -65,7 +65,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/books/";
           },
-        },{id: "post-standardy-danych-czym-są-i-dlaczego-są-ważne-analiza",
+        },{id: "post-informatica",
+      
+        title: "Informatica",
+      
+      description: "",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/informatica/";
+        
+      },
+    },{id: "post-standardy-danych-czym-są-i-dlaczego-są-ważne-analiza",
       
         title: "Standardy danych. Czym są i dlaczego są ważne? Analiza",
       
