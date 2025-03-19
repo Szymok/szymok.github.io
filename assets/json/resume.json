@@ -24,6 +24,17 @@
   },
   "work": [
     {
+      "name": "BEST S.A.",
+      "position": "Data Governance Specialist",
+      "url": "https://www.best.com.pl",
+      "startDate": "2024-02-01",
+      "endDate": "",
+      "summary": "",
+      "highlights": [
+
+      ]
+    },
+    {
       "name": "Hogart/Pernod Ricard",
       "position": "Data Consultant",
       "url": "https://businessintelligence.pl",
@@ -100,7 +111,7 @@
   "volunteer": [
     {
       "organization": "L!der",
-      "location": "Zurich, Switzerland",
+      "location": "Gdansk, Poland",
       "position": "Członek",
       "url": "",
       "startDate": "2019-10-01",
@@ -137,6 +148,13 @@
     }
   ],
   "certificates": [
+    {
+      "name": "Ataccama Data Quality",
+      "date": "2025-01-15",
+      "issuer": "Ataccama",
+      "url":"",
+      "icon":""
+    },
     {
       "name": "Machine Learning",
       "date": "2018-01-01",
@@ -186,7 +204,43 @@
   ],
   "skills": [
     {
-
+      "name": "AI Companionship",
+      "level": "Prompt Engineer",
+      "icon": "fa-solid fa-robot",
+      "keywords": [
+        "LLM Whispering",
+        "Neural Network Taming",
+        "Generative AI Storytelling",
+        "NLP Conversation Mastery",
+        "AI Model Fine-tuning",
+        "Prompt Craftsmanship"
+      ]
+    },
+    {
+      "name": "Polish Data Explorer",
+      "level": "National Statistician",
+      "icon": "fa-solid fa-magnifying-glass-chart",
+      "keywords": [
+        "Cultural Pattern Mining",
+        "Regional Trend Spotting",
+        "Survey Design Architecture",
+        "Opinion Data Cartography",
+        "Demographic Insight Extraction",
+        "Statistical Storytelling"
+      ]
+    },
+    {
+      "name": "Digital Homesteading",
+      "level": "Self-Hosting Settler",
+      "icon": "fa-solid fa-server",
+      "keywords": [
+        "Homelab Ecosystem Building",
+        "Container Orchestration Ranching",
+        "Virtual Machine Breeding",
+        "Network Infrastructure Cultivation",
+        "Open Source Harvesting",
+        "Data Privacy Fortification"
+      ]
     }
   ],
   "languages": [
@@ -203,14 +257,79 @@
   ],
   "interests": [
     {
+      "name": "Data Science",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Machine Learning",
+        "Data Engineering",
+        "Statistical Models"
+      ]  
+    },
+    {
+      "name": "Data Stats",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "La Liga History",
+        "Sports Analytics",
+        "Historical Sports Data"
+      ]
+    },
+    {
+      "name": "Artificial Intelligence",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Generative AI"
+      ]
+    },
+    {
+      "name": "Self-Hosting",
+      "icon": "fa-solid fa-tag",
+      "keywords": [
+        "Docker",
+        "Data Privacy",
+        "Open Source Solutions",
+        "Local LLMs"
+      ]
 
-      
     }
   ],
   "references": [
 
   ],
   "projects": [
-
+    {
+      "name": "bAIka - AI Stories",
+      "summary": "Projekt wykorzystujący sztuczną inteligencję do tworzenia spersonalizowanych opowieści i narracji.",
+      "highlights": ["Natural Language Generation", "Interactive Storytelling", "User Customization", "Polish Language Support"],
+      "startDate": "2024-01-01",
+      "endDate": "Present",
+      "url": "https://baika.skszymon.com"
+    },
+    {
+      "name": "La Liga Historical Data Analysis",
+      "summary": "Projekt analizy danych skupiający się na meczach La Liga sięgających lat 90. Projekt obejmuje zbieranie danych, czyszczenie, wizualizację i ostatecznie modelowanie predykcyjne w celu odkrycia historycznych trendów i wzorców w hiszpańskiej piłce nożnej.",
+      "highlights": ["Sports Analytics", "Historical Data Visualization", "Statistical Modeling", "Interactive Dashboard", "Football Performance Metrics"],
+      "startDate": "2023-06-01",
+      "endDate": "Present",
+      "url": ""
+    },
+    {
+      "name": "Polish Job Market Scraper",
+      "summary": "Zautomatyzowane narzędzie, które scrapuje i analizuje oferty pracy z polskiego rynku, ze szczególnym uwzględnieniem stanowisk z zakresu inżynierii danych i data science. Projekt pomaga śledzić trendy rynkowe, zakresy wynagrodzeń i wymagane umiejętności w polskiej branży technologicznej.",
+      "highlights": ["Web Scraping", "Data Engineering", "Market Analysis", "Automated Reporting", "Skills Gap Analysis"],
+      "startDate": "2022-09-01",
+      "endDate": "Present",
+      "url": ""
+    },
+    {
+        "name": "Poland Statistical Survey Forms",
+        "summary": "Projekt zbierania danych skoncentrowany na gromadzeniu interesujących statystyk o Polsce poprzez specjalnie zaprojektowane formularze ankietowe. Projekt zbiera odpowiedzi od różnych grup demograficznych, aby zbudować kompleksowy zbiór danych na temat różnych aspektów polskiego życia, kultury i społeczeństwa.",
+        "highlights": ["Statistical Analysis", "Data Collection", "Survey Design", "Demographic Insights", "Public Opinion Tracking", "Regional Comparisons"],
+        "startDate": "2023-11-01",
+        "endDate": "Present",
+        "url": "https://malystatystyk.skszymon.com"
+      }  
   ]
 }
