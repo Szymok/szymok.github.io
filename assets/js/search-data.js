@@ -16,13 +16,6 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "nav-publications",
-          title: "publications",
-          description: "Publikacje najbardziej znaczące dla każdego milosnika sztucznej inteligencji",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/publications/";
-          },
         },{id: "nav-projects",
           title: "projects",
           description: "Projekty i linki do moich projektów. Aktualnie pracuję nad wdrożeniami modeli AI do różnych dziedzin życia.",
@@ -51,21 +44,35 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
-        },{id: "nav-people",
-          title: "people",
-          description: "Strona wspolpracy w budowie. Wkrotce tutaj pojawi sie informacje o osobach, z ktorymi wspolpracuje.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/people/";
-          },
-        },{id: "nav-bookshelf",
-          title: "bookshelf",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/books/";
-          },
-        },{id: "post-informatica",
+        },{id: "dropdown-ogród-wiedzy",
+              title: "ogród wiedzy",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "http://www.quartz.skszymon.eu";
+              },
+            },{id: "dropdown-bookshelf",
+              title: "bookshelf",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/books/";
+              },
+            },{id: "dropdown-publications",
+              title: "publications",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/publications/";
+              },
+            },{id: "dropdown-people",
+              title: "people",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/people/";
+              },
+            },{id: "post-informatica",
       
         title: "Informatica",
       
