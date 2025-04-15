@@ -72,9 +72,9 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/people/";
               },
-            },{id: "post-informatica",
+            },{id: "post-informatica-jako-narzędzie-data-governance",
       
-        title: "Informatica",
+        title: "Informatica jako narzędzie Data Governance",
       
       description: "",
       section: "Posts",
