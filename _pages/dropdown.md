@@ -6,7 +6,7 @@ nav_order: 6
 dropdown: true
 children:
   - title: ogród wiedzy
-    permalink: http://www.quartz.skszymon.eu
+    permalink: http://quartz.skszymon.eu
   - title: divider
   - title: bookshelf
     permalink: /books/
