@@ -72,7 +72,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/people/";
               },
-            },{id: "post-informatica-jako-narzędzie-data-governance",
+            },{id: "post-ataccama-jako-narzędzie-data-governance",
+      
+        title: "Ataccama jako narzędzie Data Governance",
+      
+      description: "Zarzadzanie danymi w XXI wieku",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/ataccama/";
+        
+      },
+    },{id: "post-informatica-jako-narzędzie-data-governance",
       
         title: "Informatica jako narzędzie Data Governance",
       
