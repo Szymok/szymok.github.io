@@ -49,7 +49,7 @@ ninja.data = [{
               description: "",
               section: "Dropdown",
               handler: () => {
-                window.location.href = "http://www.quartz.skszymon.eu";
+                window.location.href = "http://quartz.skszymon.eu";
               },
             },{id: "dropdown-bookshelf",
               title: "bookshelf",
