@@ -3,7 +3,6 @@ layout: page
 permalink: /tiktok-tos
 title: "Regulamin (Terms of Service) (Privacy Policy)"
 description: "Zasady korzystania z usługi i aplikacji Baika."
-redirect: true
 ---
 
 Ostatnia aktualizacja: 2025-09-06
@@ -32,4 +31,4 @@ Możliwe z ważnych powodów, naruszeń lub wymogów prawnych.
 8. Prawo właściwe i kontakt
 Wskaż właściwą jurysdykcję (np. prawo polskie/UE) i kontakt e‑mail do spraw prawnych.
 
-tiktok-developers-site-verification=pGbYAbt0EWR7VAlMcCgF2d4SAYMQs56C
+[text](../assets/txt/tiktokpGbYAbt0EWR7VAlMcCgF2d4SAYMQs56C.txt)
