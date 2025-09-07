@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /tiktok-tos
+permalink: /tiktok-tos/
 title: "Regulamin (Terms of Service) (Privacy Policy)"
 description: "Zasady korzystania z usługi i aplikacji Baika."
 ---
