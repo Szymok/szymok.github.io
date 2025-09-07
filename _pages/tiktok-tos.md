@@ -32,3 +32,5 @@ Możliwe z ważnych powodów, naruszeń lub wymogów prawnych.
 Wskaż właściwą jurysdykcję (np. prawo polskie/UE) i kontakt e‑mail do spraw prawnych.
 
 [text](../assets/txt/tiktokpGbYAbt0EWR7VAlMcCgF2d4SAYMQs56C.txt)
+
+tiktok-developers-site-verification=pGbYAbt0EWR7VAlMcCgF2d4SAYMQs56C
