@@ -76,7 +76,7 @@ ninja.data = [{
         
           title: "Kierunek zarządzania danymi w pionierskich modelach sztucznej inteligencji",
         
-        description: "Zarzadzanie danymi w XXI wieku",
+        description: "Zarządzanie danymi jako brakujący filar bezpieczeństwa i regulacji frontier AI",
         section: "Posts",
         handler: () => {
           
