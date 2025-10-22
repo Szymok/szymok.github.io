@@ -72,7 +72,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/people/";
               },
-            },{id: "post-ataccama-jako-narzędzie-data-governance",
+            },{id: "post-kierunek-zarządzania-danymi-w-pionierskich-modelach-sztucznej-inteligencji",
+        
+          title: "Kierunek zarządzania danymi w pionierskich modelach sztucznej inteligencji",
+        
+        description: "Zarzadzanie danymi w XXI wieku",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ai-models-dg/";
+          
+        },
+      },{id: "post-ataccama-jako-narzędzie-data-governance",
         
           title: "Ataccama jako narzędzie Data Governance",
         
