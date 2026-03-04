@@ -3,12 +3,10 @@
   contents:
     - name: Imię i nazwisko
       value: Szymon Kowalewski
-    - name: Data Urodzenia
-      value: 31 marca 1996
     - name: Języki
       value: angielski, polski
     - name: Opis
-      value: Data Scientist z wykształceniem matematycznym, zarówno teoretyk, jak i praktyk. Osoba o otwartym umyśle z głęboką pasją do odkrywania wiedzy i rozwiązywania rzeczywistych problemów za pomocą zaawansowanych narzędzi statystycznych i uczenia maszynowego. Silnie zmotywowany i chętny do ciągłego rozwoju umiejętności, w tym technicznych i społecznych, ze specjalizacją w analityce. Głęboka teoretyczna i praktyczna wiedza na temat statystycznych metod uczenia się. Specjalizuje się w tworzeniu rozwiązań złożonych, nowatorskich problemów z wieloma ograniczeniami. Podejście do problemów pod wieloma kątami. Wykorzystywany do ciągłego uczenia się nowych pakietów, umiejętności, metod, narzędzi, aby dostarczać rozwiązania najwyższej jakości.
+      value: Data Governance Specialist z doświadczeniem w zarządzaniu danymi, jakości danych i inżynierii danych. Specjalizacja w platformie Ataccama ONE — wdrażanie procesów Data Governance, Data Quality i Master Data Management. Wcześniej Data Consultant (Hogart/Pernod Ricard), Junior Data Engineer (No Fluff Jobs) oraz Data Scout (Statscore). Absolwent Informatyki i Ekonometrii na Uniwersytecie Gdańskim.
 
 - title: Edukacja
   type: time_table
@@ -28,25 +26,32 @@
 - title: Doświadczenie zawodowe
   type: time_table
   contents:
+    - title: Data Governance Specialist
+      institution: BEST S.A.
+      year: 02.2024 - obecnie
+      description:
+        - Wdrażanie kompleksowych strategii zarządzania danymi z wykorzystaniem platformy Ataccama ONE
+        - Projektowanie i implementacja procesów zapewniających wysoką jakość danych w organizacji
+        - Współpraca z różnymi działami w celu identyfikacji i rozwiązywania problemów związanych z jakością danych
+        - Tworzenie i utrzymywanie standardów zarządzania danymi zgodnych z polityką firmy
+        - Prowadzenie szkoleń dla użytkowników końcowych w zakresie narzędzi do zarządzania danymi
+
     - title: Data Consultant
-      institution: Sieć piekarni Lubaszka
+      institution: Hogart / Pernod Ricard
+      year: 07.2023 - 01.2024
+      description:
+        - Zarządzanie i rozwiązywanie zgłoszeń dotyczących zmian i problemów w aplikacjach QlikView i Qlik Sense
+        - Implementacja usprawnień w kodzie oraz w warstwie zewnętrznej aplikacji
+        - Projektowanie, tworzenie i zarządzanie procesami ETL w SAP Data Services
+        - Pełnienie roli administratora systemu QlikView, SAP Data Services i Qlik NPrinting
+
+    - title: Data Consultant
+      institution: Hogart / Sieć piekarni Lubaszka
       year: 03.2023 - 06.2023
       description:
-        - Zarządzanie i rozwiązywanie nowych zgłoszeń dotyczących zmian i problemów w aplikacjach QlikView i Qlik Sense.
-        - Implementacja usprawnień w kodzie oraz w warstwie zewnętrznej aplikacji.
-        - Projektowanie, tworzenie i zarządzanie procesami ETL w SAP Data Services..
-        - Pełnienie roli administratora systemu QlikView, SAP Data Services i Qlik NPrinting, odpowiadając za zarządzanie zadaniami, dostępami oraz ogólną konserwację systemów.
-        - Współpraca z różnymi działami firmy w celu identyfikacji obszarów do usprawnienia oraz wdrażanie rozwiązań zwiększających efektywność pracy z narzędziami Qlik.
-
-      institution: Pernord Ricard
-      year: 07.2023-obecnie
-      description:
-        - Zarządzanie i rozwiązywanie nowych zgłoszeń dotyczących zmian i problemów w aplikacjach QlikView i Qlik Sense.
-        - Implementacja usprawnień w kodzie oraz w warstwie zewnętrznej aplikacji.
-        - Projektowanie, tworzenie i zarządzanie procesami ETL w SAP Data Services..
-        - Pełnienie roli administratora systemu QlikView, SAP Data Services i Qlik NPrinting, odpowiadając za zarządzanie zadaniami, dostępami oraz ogólną konserwację systemów.
-        - Współpraca z różnymi działami firmy w celu identyfikacji obszarów do usprawnienia oraz wdrażanie rozwiązań zwiększających efektywność pracy z narzędziami Qlik.
-
+        - Opracowywanie i wdrażanie przepływów danych
+        - Projektowanie i implementacja aplikacji BI w Qlik Sense
+        - Monitorowanie i optymalizacja wydajności baz danych oraz aplikacji
 
     - title: Junior Data Analyst/Engineer
       institution: No Fluff Jobs, Gdynia
@@ -57,7 +62,7 @@
         - Opomiarowanie produktu - określanie celu i zasięgu, analiza i interpretacja wyników oraz wdrożenie (GA, GTM, Google Optimize)
         - Budowa Dashboardów KPI w Tableau dla działów Sales i Marketing
         - Tworzenie podstawowych modeli uczenia maszynowego dot. wyników sprzedaży oraz klasyfikacji klientów
-        - Analiza danych sprzedażowych i produktowych
+
     - title: Data Scout
       institution: Statscore, Katowice
       year: 2016 - 2022
@@ -66,21 +71,25 @@
         - Budowanie baz danych statystycznych
         - Analiza dużych zbiorów danych dot. aktualnej sytuacji na boisku
 
-- title: Kursy
+- title: Kursy i certyfikaty
   type: time_table
   contents:
+    - year: 2025
+      items:
+        - Ataccama Data Quality - Ataccama
     - year: 2021
-      items: 
+      items:
         - Practice ML/NLP - Dataworkshop
         - Databricks Academy - Accenture
         - IoT/Network Fundamentals/CCNA R&S - Cisco
+        - Natural Language Processing - Dataworkshop
     - year: 2022
-      items: 
+      items:
         - ML in Python with scikit-learn - fun-mooc
         - EITC/IS - EITCA Academy
         - SAS SCYP - SAS
 
-- title: Other Interests
+- title: Zainteresowania
   type: list
   contents:
-    - <u>Hobbies:</u> Ogrodnictwo, IoT, Optymalizacja urządzeń mobilnych
+    - <u>Hobbies:</u> Ogrodnictwo, IoT, Self-hosting, Optymalizacja urządzeń mobilnych

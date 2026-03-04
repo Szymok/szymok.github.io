@@ -2,7 +2,7 @@
 layout: post
 title: Informatica jako narzędzie Data Governance
 date: 2025-03-29 14:30:55
-description: 
+description: Informatica jako kompleksowa platforma do Data Governance — przegląd funkcji, narzędzi Axon i EDC oraz integracji z AI.
 tags: data-governance informatica tool 
 categories: data-governance
 giscus_comments: true

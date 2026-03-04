@@ -6,7 +6,7 @@ description: Zarządzanie danymi jako brakujący filar bezpieczeństwa i regulac
 tags: [data-governance, ai, models]
 categories: [data-governance]
 giscus_comments: true
-featured: false
+featured: true
 toc:
   sidebar: left
 ---

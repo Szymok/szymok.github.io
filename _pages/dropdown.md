@@ -7,7 +7,4 @@ dropdown: true
 children:
   - title: ogród wiedzy
     permalink: http://quartz.skszymon.eu
-  - title: divider
-  - title: bookshelf
-    permalink: /books/
 ---
