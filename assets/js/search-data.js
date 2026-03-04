@@ -16,26 +16,12 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "nav-repositories",
-          title: "repositories",
-          description: "Moje projekty na GitHubie.",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/repositories/";
-          },
         },{id: "nav-cv",
           title: "cv",
-          description: "Strona z moim cv. Za pomocą przycisku PDF można pobrać plik z moim cv.",
+          description: "Moje CV — doświadczenie zawodowe, edukacja i umiejętności.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
-          },
-        },{id: "nav-teaching",
-          title: "teaching",
-          description: "Materiały z kursów i warsztatów",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/teaching/";
           },
         },{id: "dropdown-ogród-wiedzy",
               title: "ogród wiedzy",
@@ -50,13 +36,6 @@ ninja.data = [{
               section: "Dropdown",
               handler: () => {
                 window.location.href = "/books/";
-              },
-            },{id: "dropdown-people",
-              title: "people",
-              description: "",
-              section: "Dropdown",
-              handler: () => {
-                window.location.href = "/people/";
               },
             },{id: "post-kierunek-zarządzania-danymi-w-pionierskich-modelach-sztucznej-inteligencji",
         
@@ -160,6 +139,27 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("mailto:%73%7A%79%6D%6F%6E%6B%6F%77%61%6C%30%31%39@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Szymok", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/skszymon", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/SkSzymon", "_blank");
         },
       },{
         id: 'social-rss',
