@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Które normy ISO są stosowane w Data Governance?
+title: "Które normy ISO stosować w Data Governance? Praktyczny przegląd"
 date: 2024-09-10 22:19:50
-description: Często stosowane standardy ISO w praktykach Data Governance.
-tags: data-governance data-standards iso-standards 
+description: Przegląd standardów ISO przydatnych w programie Data Governance — od jakości danych (ISO 8000) po bezpieczeństwo informacji (ISO 27001).
+tags: data-governance data-standards iso-standards
 categories: data-governance
 giscus_comments: true
 featured: false
@@ -11,80 +11,123 @@ toc:
   sidebar: left
 ---
 
+# Które normy ISO stosować w Data Governance?
 
-# Jakie standardy ISO są wykorzystywane w zarządzaniu danymi?
+Standardy ISO mogą brzmieć jak biurokratyczny koszmar, ale w programie Data Governance pełnią realną funkcję — dają **audytowalny punkt odniesienia** dla regulatorów, zarządu i partnerów biznesowych. Zamiast wymyślać koło od nowa, możesz oprzeć się na sprawdzonych frameworkach.
 
-W ostatnich latach zarządzanie danymi zyskuje na znaczeniu w różnych sektorach. W miarę jak organizacje zaczynają postrzegać dane jako aktywa, pojawia się potrzeba skutecznego zarządzania nimi. W tym kontekście standardy ISO stają się kluczowym narzędziem, które pomagają wytworzyć ramy dla skutecznego zarządzania danymi, a także w spełnianiu wymogów prawnych. 
+W tym artykule przeglądam normy ISO, które najczęściej pojawiają się w kontekście zarządzania danymi. Nie musisz wdrażać ich wszystkich — ale warto wiedzieć, jakie masz opcje.
 
-## ISO 8000 – Standardy jakości danych
+---
 
-ISO 8000 to standard, który ma na celu zapewnienie, że dane wykorzystywane w różnych kontekstach (takich jak procesy biznesowe, analizy czy podejmowanie decyzji) spełniają określone standardy jakości. Obejmuje on kluczowe elementy danych, takie jak:
+## ISO 8000 — jakość danych
 
-- **Składnia**
-- **Pochodzenie**
-- **Kompletność**
-- **Dokładność**
-- **Certyfikacja**
+[ISO 8000](https://www.iso.org/standard/81745.html) to seria standardów poświęcona wyłącznie **jakości danych**. Obejmuje wymiary takie jak:
 
-Dzięki tym specyfikacjom organizacje mogą oceniać zgodność swoich danych z normami ISO 8000. Standard ten obejmuje kilka części, takich jak 110, 115, 120, z których każda koncentruje się na różnych aspektach zarządzania jakością danych. Na przykład, ISO 8000-115:2018 stanowi przewodnik w formowaniu identyfikatorów przy zarządzaniu danymi bazowymi, takimi jak katalog produktów.
+- **Składnia** — czy dane mają poprawny format?
+- **Pochodzenie** — skąd dane się wzięły?
+- **Kompletność** — czy wszystkie wymagane pola są wypełnione?
+- **Dokładność** — czy dane odzwierciedlają rzeczywistość?
 
-## ISO/IEC 38505-1:2017 – Standard zarządzania danymi
+ISO 8000 składa się z kilku części. Na przykład:
+- **ISO 8000-110** — określa wymagania dotyczące wymiany danych bazowych (Master Data)
+- **ISO 8000-115:2018** — definiuje zasady tworzenia identyfikatorów w zarządzaniu danymi bazowymi, np. w katalogach produktów
+- **ISO 8000-120** — specyfikuje wymagania dotyczące pochodzenia (provenance) danych
 
-ISO/IEC 38505-1:2017 jest standardem dedykowanym zarządzaniu danymi, który dostarcza zbiór wytycznych dotyczących zarządzania danymi w organizacjach. Uznaje on zarządzanie danymi za podzbiór zarządzania IT, które z kolei jest elementem zarządzania organizacją. Standard ten definiuje jasne odpowiedzialności dla organu zarządzającego i mechanizmy nadzoru.
+Normą zarządza komitet techniczny [ISO TC 184/SC 4](https://www.iso.org/committee/54158.html) (Dane przemysłowe). W praktyce jest bardziej popularna w sektorach produkcyjnych i logistycznych, ale jej zasady mają znaczenie universalne.
 
-Celem standardu jest ukazanie członkom organu zarządzającego efektywne, skuteczne i akceptowalne wykorzystanie danych, ze szczególnym uwzględnieniem potrzeby odpowiedzialności na wszystkich etapach zarządzania danymi. W kontekście inicjatyw związanych z regulacjami prawnymi ten standard może zapewnić interesariuszom, że jeśli jego zasady będą przestrzegane, zyskają oni pewność co do zarządzania danymi w organizacji.
+---
 
-## ISO 22745 – Standard dla danych bazowych
+## ISO/IEC 38505-1:2017 — governance danych
 
-ISO 22745 to standard dla danych bazowych oparty na NATO Codification System (NCS). Jest on zaprojektowany dla przemysłu i obejmuje nowoczesną architekturę danych. Skupia się na definiowaniu wymagań dla danych bazowych wymienianych pomiędzy organizacjami. Standard ten określa wymagania dotyczące przekazów zawierających dane bazowe, w tym składnię, kodowanie semantyczne i przenośność.
+[ISO/IEC 38505-1:2017](https://www.iso.org/standard/56639.html) to standard, który **wprost adresuje Data Governance** jako część szerszego governance IT. Kluczowe założenia:
 
-ISO 22745 i ISO 8000 są zarządzane przez techniczny komitet ISO 184/podkomitet 4 (Dane przemysłowe). Podczas gdy ISO 22745 koncentruje się na wymianie danych bazowych, ISO 8000 dostarcza ram dotyczących oceny i doskonalenia jakości danych.
+- Zarządzanie danymi to **podzbiór zarządzania IT**, które jest z kolei częścią zarządzania organizacją
+- Definiuje odpowiedzialności **organu zarządzającego** (np. zarządu) za dane
+- Nacisk na *efektywne, skuteczne i akceptowalne* wykorzystanie danych
 
-## ISO 3166 – Standardy dla danych referencyjnych
+Dlaczego jest ważny? Bo mówi wprost: **odpowiedzialność za dane spoczywa na zarządzie**, nie na IT. To potężny argument, kiedy próbujesz uzyskać sponsoring C-level dla programu DG.
 
-Niektóre standardy ISO mogą być również wykorzystywane do zapewnienia spójnych zewnętrznych danych referencyjnych w wielu aplikacjach biznesowych. Przykład stanowi standard ISO 3166, który definiuje kody dla nazw krajów. Implementacja dostępnych międzynarodowych i krajowych rozszerzeń oraz standardów branżowych może być częścią dostarczanych rezultatów programu zarządzania danymi.
+> **Uwaga:** ISO 38505 to zbiór wytycznych (guidelines), nie wymagań — co oznacza, że **nie można się z niego certyfikować**. To odróżnia go od np. ISO 27001.
 
-## ISO/IEC 11179 – Rejestr metadanych
+---
 
-Innym wartym uwagi standardem ISO jest ISO/IEC 11179, który jest standardem rejestru metadanych (MDR). Zapewnia on ramy w siedmiu częściach do reprezentowania metadanych w organizacji, co czyni dane zrozumiałymi i wymiennymi. Doskonałym przykładem rejestru metadanych, który stosuje wytyczne ISO/IEC 11179, jest Australian Institute of Health and Welfare — Metadata Online Registry (METeOR).
+## ISO 22745 — wymiana danych bazowych
 
-## ISO 27001:2022 – Standard dla systemów zarządzania bezpieczeństwem informacji
+[ISO 22745](https://www.iso.org/standard/73283.html) jest mniej znany, ale istotny w środowiskach, gdzie wymiana Master Data między organizacjami jest kluczowa (np. łańcuch dostaw, obronność). Standard wywodzi się z [NATO Codification System (NCS)](https://www.nato.int/cps/en/natohq/topics_69349.htm) i definiuje:
 
-ISO 27001:2022 to międzynarodowy standard uznawany za ramy najlepszych praktyk dla systemu zarządzania bezpieczeństwem informacji (ISMS). Wdrażanie standardu ISO 27001 zazwyczaj jest wynikiem programu zarządzania bezpieczeństwem informacji, a nie tylko dostarczaniem programów zarządzania danymi. Jednak dojrzałość zarządzania danymi jest kluczowa dla spełnienia wymogów ISO 27001 i zapewnienia bezpieczeństwa, poufności i integralności danych.
+- Wymagania dotyczące **składni** przekazów z danymi bazowymi
+- **Kodowanie semantyczne** — zapewnienie, że termin „śruba M8" znaczy to samo w Polsce i w Niemczech
+- **Przenośność** danych między systemami różnych dostawców
 
-### Kluczowe obszary crossover między zarządzaniem danymi a ISO 27001
+---
 
-1. **Klasyfikacja danych**  
-Zarządzanie danymi często wiąże się z klasyfikacją danych według wrażliwości. Klasyfikacja ta jest niezbędna dla wdrażania zabezpieczeń zgodnych z wymaganiami ISO 27001, które określają różne poziomy ochrony dla różnych kategorii danych.
+## ISO 3166 — dane referencyjne
 
-2. **Kontrola dostępu**  
-Zarządzanie danymi definiuje, kto ma dostęp do danych i jakie ma uprawnienia. ISO 27001 zaleca, aby dostęp do danych był zabezpieczony tak, aby tylko autoryzowane osoby mogły modyfikować i przeglądać dane.
+Pozornie prosty, ale [ISO 3166](https://www.iso.org/iso-3166-country-codes.html) jest jednym z najszerzej stosowanych standardów na świecie. Definiuje kody dla nazw krajów:
 
-3. **Zarządzanie ryzykiem**  
-Zgodność z ISO 27001 wymaga od organizacji identyfikacji i oceny ryzyk związanych z danymi, co jest kluczowe w procesie oceny ryzyka i ustalania odpowiednich zabezpieczeń. 
+- `PL` = Polska
+- `DE` = Niemcy
+- `US` = Stany Zjednoczone
 
-4. **Ochrona danych**  
-Organizacje muszą ustanowić ramy ochrony swoich zasobów informacyjnych, w tym danych, zgodnie z wymaganiami ISO 27001.
+W kontekście DG, implementacja standardowych danych referencyjnych (Reference Data Management) to jedno z najłatwiejszych „quick wins" — zastąpienie chaotycznych wpisów typu „Polska", „PL", „POL", „Poland" jednym kodem ISO.
 
-5. **Audyt i zgodność**  
-Standard ISO 27001 obejmuje przepisy dotyczące regularnych audytów wewnętrznych i zewnętrznych, co przyczynia się do zapewnienia, że polityki związane z danymi są zgodne z wymaganiami normy.
+---
 
-6. **Reagowanie na incydenty**  
-Obecność formalnego zarządzania danymi w organizacji odgrywa kluczową rolę w identyfikacji i zarządzaniu incydentami związanymi z danymi.
+## ISO/IEC 11179 — rejestr metadanych
 
-7. **Zarządzanie danymi wrażliwymi**  
-ISO 27001 zawiera wytyczne dotyczące ochrony danych osobowych (PII), co stanowi istotny element ochrony danych.
+[ISO/IEC 11179](https://www.iso.org/standard/78915.html) to standard rejestru metadanych (Metadata Registry — MDR). W siedmiu częściach definiuje ramy do **opisu, organizacji i wymiany metadanych** w organizacji.
 
-8. **Szkolenie pracowników**  
-Standard kładzie duży nacisk na edukację i szkolenie pracowników, co jest kluczowe dla zapewnienia skuteczności polityki bezpieczeństwa danych.
+Dobrym przykładem zastosowania jest australijski [METeOR (Metadata Online Registry)](https://meteor.aihw.gov.au/) prowadzony przez Australian Institute of Health and Welfare — kompletny rejestr metadanych oparty na ISO 11179, który pozwala zrozumieć definicje danych zdrowotnych w całym kraju.
 
-9. **Ciągłe doskonalenie**  
-ISO 27001 podkreśla potrzebę kultury ciągłego doskonalenia. Program zarządzania danymi może wspierać organizację w dostosowywaniu praktyk zarządzania danymi w odpowiedzi na zmieniające się potrzeby dotyczące bezpieczeństwa.
+---
 
-## Wnioski
+## ISO 27001:2022 — bezpieczeństwo informacji
 
-Wdrażanie standardów ISO to kluczowy krok w stronę uzyskania audytowalnej zgodności z regulacjami prawnymi, a także w budowaniu zaufania do danych przedsiębiorstwa jako wartościowego zasobu. Dlatego przy inicjowaniu programu zarządzania danymi warto przeanalizować celowość, wykonalność i możliwość zastosowania standardów ISO.
+[ISO 27001:2022](https://www.iso.org/standard/27001) to międzynarodowy standard dla **systemów zarządzania bezpieczeństwem informacji (ISMS)**. Choć to standard z domeny security, nie DG, oba obszary mają silne powiązania:
 
-Należy również zauważyć, że certyfikacja ISO jest możliwa jedynie dla standardów z jasno określonymi wymaganiami (np. ISO 27001), a nie dla najlepszych praktyk lub wytycznych (np. ISO 38505).
+### Gdzie Data Governance spotyka ISO 27001?
 
-Z perspektywy Data View House, dostrzegam zastosowanie standardów ISO w czterech fazach „od danych do inteligencji”: Pochodzenie -> Przechowywanie -> Proces -> Dostęp. Kontynuując moje badania, dążę do identyfikacji odpowiednich standardów ISO w tych kluczowych fazach zarządzania danymi. Tylko dzięki świadomemu wdrażaniu i przestrzeganiu standardów ISO można skutecznie zarządzać danymi, zapewniając jednocześnie ich bezpieczeństwo i wartość strategiczną dla organizacji.
+| Obszar | Rola DG | Wymaganie ISO 27001 |
+|--------|---------|---------------------|
+| **Klasyfikacja danych** | DG definiuje, co jest „wrażliwe" | ISO 27001 wymaga klasyfikacji do zastosowania odpowiednich zabezpieczeń |
+| **Kontrola dostępu** | DG ustala, kto jest właścicielem danych | ISO 27001 wymaga ograniczenia dostępu do autoryzowanych osób |
+| **Zarządzanie ryzykiem** | DG identyfikuje krytyczne zasoby danych | ISO 27001 wymaga oceny ryzyk i odpowiednich zabezpieczeń |
+| **Audyt** | DG utrzymuje rejestr polityk i zmian | ISO 27001 wymaga regularnych audytów wewnętrznych i zewnętrznych |
+| **Reagowanie na incydenty** | DG ułatwia identyfikację zakresu naruszenia | ISO 27001 wymaga formalnego zarządzania incydentami |
+| **Szkolenia** | DG buduje świadomość wartości danych | ISO 27001 kładzie nacisk na edukację pracowników |
+
+**Kluczowe:** ISO 27001 jest jednym z niewielu standardów, z którego **można uzyskać certyfikat**. Dojrzałość Data Governance znacząco ułatwia spełnienie jego wymagań.
+
+---
+
+## Którą normę wybrać na start?
+
+Nie musisz wdrażać wszystkich naraz. Moja rekomendacja:
+
+1. **Zacznij od ISO 38505** — daje ramę organizacyjną dla programu DG
+2. **Równolegle wdrażaj ISO 8000** — konkretne wymiary jakości danych
+3. **Użyj ISO 3166 i podobnych** — szybkie wdrożenie standardowych danych referencyjnych (quick win)
+4. **ISO 27001 wdróż, gdy masz budżet** — certyfikacja to inwestycja, ale ROI jest jasne (zgodność regulacyjna)
+
+---
+
+## Podsumowanie
+
+Standardy ISO to nie cel sam w sobie — to **narzędzia budujące wiarygodność** programu Data Governance. Dają Ci gotowe ramy, audytowalną zgodność i wspólny język z regulatorami.
+
+Pamiętaj:
+- Certyfikacja jest możliwa tylko dla standardów z **wymaganiami** (np. ISO 27001), nie dla wytycznych (np. ISO 38505)
+- Nie próbuj wdrażać wszystkiego naraz — **zacznij od tego, co daje wartość biznesową**
+- Standardy ISO najlepiej działają w połączeniu z frameworkami branżowymi (DAMA DMBOK, DGI)
+
+---
+
+### Źródła i dalsze lektury
+
+- ISO 8000, [*Data Quality*](https://www.iso.org/standard/81745.html)
+- ISO/IEC 38505-1:2017, [*Governance of Data*](https://www.iso.org/standard/56639.html)
+- ISO 22745, [*Industrial Data — Open Technical Dictionaries*](https://www.iso.org/standard/73283.html)
+- ISO 3166, [*Country Codes*](https://www.iso.org/iso-3166-country-codes.html)
+- ISO/IEC 11179, [*Metadata Registries*](https://www.iso.org/standard/78915.html)
+- ISO 27001:2022, [*Information Security Management Systems*](https://www.iso.org/standard/27001)
+- Australian Institute of Health and Welfare, [*METeOR Metadata Registry*](https://meteor.aihw.gov.au/)

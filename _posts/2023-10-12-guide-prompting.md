@@ -2,7 +2,7 @@
 layout: post
 title: Wstęp do Promptingu
 date: 2023-10-12 20:55:12
-description: Jak, dlaczego i jakich używać taktyk pisania promptów
+description: Praktyczny przewodnik po promptingu — zasady, iteracyjny rozwój, podsumowywanie, analiza sentymentu i transformacja tekstu z OpenAI API.
 tags: prompt basics prompting chatgpt llm
 categories: prompt-engineering
 giscus_comments: true

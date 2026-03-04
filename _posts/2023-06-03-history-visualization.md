@@ -2,7 +2,7 @@
 layout: post
 title: Historia wizualizacji danych
 date: 2023-06-11 11:59:00
-description: Artykuł, który skupia sie na historii wizualizacji danych
+description: Od malowideł naskalnych po Tableau — historia wizualizacji danych przez pryzmat Playfaira, Nightingale, Snowa, Minarda, Tukeya i Tufta.
 tags: analiza-danych narzedzia historia wizualizacje visualization edukacja 
 categories: article
 giscus_comments: true

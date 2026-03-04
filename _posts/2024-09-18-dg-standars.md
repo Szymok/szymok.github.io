@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Standardy danych. Czym są i dlaczego są ważne? Analiza
+title: "Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?"
 date: 2024-09-18 23:30:21
-description: Ale czym są te standardy danych? Dlaczego są ważne? Jakie są ich korzyści?
-tags: data-governance data-standards iso-standards 
+description: Czym są standardy danych, jak działają w praktyce i dlaczego interoperacyjność jest kluczowa — analiza na podstawie inicjatywy TransparenCEE.
+tags: data-governance data-standards interoperability
 categories: data-governance
 giscus_comments: true
 featured: false
@@ -11,31 +11,35 @@ toc:
   sidebar: left
 ---
 
-# Standardy danych: Czym są i dlaczego są ważne? Analiza
+# Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?
 
-Wielką przyjemnością wprowadzamy analizę dotyczącą standardów danych i ich znaczenia w praktyce. Niniejszy artykuł jest częścią naszych wysiłków na rzecz formułowania regionalnych standardów dla danych oraz procesów z nimi związanych, w tym przepisów prawa.
+Kiedy mówię „standardy danych", większość ludzi wyobraża sobie dokumenty ISO leżące gdzieś na serwerze. W rzeczywistości standardy danych to coś dużo bardziej fundamentalnego — to **umowy między ludźmi i systemami co do tego, jak dane powinny wyglądać**, żeby można było nimi się wymieniać, analizować je i ufać im.
 
-## Cel standardów danych
+Ten artykuł bazuje na analizie przygotowanej w ramach inicjatywy [TransparenCEE](https://transparencee.org/), której celem jest wzmocnienie sektora technologii obywatelskiej w Europie Środkowej i Wschodniej.
 
-Celem inicjatywy TransparenCEE jest wzmocnienie sektora technologii obywatelskiej w Europie Środkowej i Wschodniej. Budujemy fundamenty dla współpracy, częściowo poprzez proponowanie standardów danych, które będą stosowane w projektach wspólnych. Współpraca między różnymi absurdami przekłada się na lepszą jakość i efektywność wymiany informacji.
+---
 
-## Czym są standardy danych?
+## Czym właściwie jest standard danych?
 
-Wyobraź sobie pracę magisterską, którą musisz napisać na studiach. Składa się ona z tytułu, streszczenia, samego tekstu pracy i bibliografii. Jest napisane w ramach Twojego programu studiów i weryfikowane przez innych. Należy więc wskazać uniwersytet, wydział, promotora oraz recenzenta. Powinny być również dostępne logi audytowe: data stworzenia, data ostatniej modyfikacji, data zaakceptowania przez recenzenta (oraz jego/opinii) i data zaakceptowania przez promotora.
+Wyobraź sobie pracę magisterską. Ma tytuł, streszczenie, tekst, bibliografię. Jest napisana w ramach programu studiów na konkretnym wydziale, z promotorem i recenzentem. Jest data utworzenia, data obrony, ocena.
 
-Przypuśćmy, że chcesz stworzyć narzędzie do przeglądania prac magisterskich na dowolny temat. Musisz zgromadzić znaczną liczbę takich prac i wprowadzić je do komputera, co wymaga przekształcenia ich w jedną rekord danych. Planowanie, jak ten rekord danych będzie wyglądał, nazywamy modelowaniem.
+Gdybyś chciał zbudować narzędzie do przeglądania prac magisterskich z różnych uczelni, musiałbyś te wszystkie elementy **ustandaryzować** — zdecydować, jakie pola musi mieć każdy rekord, jakie formaty dat akceptujesz, jak identyfikujesz autorów.
 
-**Modelowanie** polega na przekształceniu rzeczywistych przykładów w rekordy danych. Można pominąć nieistotne szczegóły (jak na przykład, czy opublikowałeś pracę w wersji miękkiej, czy twardej), ale kluczowe jest jednak określenie wymagań. Niezbędna jest współpraca interesariuszy w tej fazie, gdyż różne konteksty muszą być zrozumiane.
+Ten proces nazywamy **modelowaniem danych**. I tu zaczyna się standard.
 
-## Od modelowania do reprezentacji i interoperacyjności
+> Modelowanie polega na przekształceniu rzeczywistych bytów w rekordy danych — z jasno zdefiniowanymi wymaganiami, formatami i ograniczeniami.
 
-Tworzenie standardów danych polega na interoperacyjności: zdolności do wymiany standaryzowanych danych między systemami należącymi do różnych podmiotów. Aby to się udało, może być konieczne **reprezentowanie** danych, które wiąże się z podejmowaniem decyzji, jakie formaty plików użyć oraz jak formatować daty.
+---
 
-### Przykłady reprezentacji danych
+## Od modelu do standardu: interoperacyjność
 
-Oto kilka przykładów tego samego kontentu reprezentowanego w popularnych formatach:
+Sam model to za mało. Standard powstaje wtedy, gdy **wiele organizacji zgadza się stosować ten sam model**. Bez tego mamy silosy — każdy system mówi swoim językiem.
 
-**JSON** (preferowany w rozwiązaniach skryptowych)
+Interoperacyjność to zdolność różnych systemów do wymiany standaryzowanych danych. Żeby to działało, trzeba podjąć decyzje o **reprezentacji danych** — w jakim formacie, w jakiej strukturze.
+
+### Przykłady tego samego rekordu w różnych formatach
+
+**JSON** (preferowany w nowoczesnych API i narzędziach analitycznych):
 ```json
 {
   "author": {"given_name": "Krzysztof", "family_name": "Madejski"},
@@ -44,13 +48,13 @@ Oto kilka przykładów tego samego kontentu reprezentowanego w popularnych forma
 }
 ```
 
-**CSV** (można otworzyć w arkuszu kalkulacyjnym, ale nie obsługuje zagnieżdżonych obiektów)
+**CSV** (uniwersalny, ale płaski — nie obsługuje zagnieżdżeń):
 ```
 author_given_name, author_family_name, title, date_of_final_accept
 Krzysztof, Madejski, Standardy danych: Czym są i dlaczego są ważne?, 2016-01-29
 ```
 
-**XML** (preferowany przez większe instytucje)
+**XML** (nadal popularny w administracji publicznej i sektorze finansowym):
 ```xml
 <thesis>
   <author>
@@ -62,42 +66,78 @@ Krzysztof, Madejski, Standardy danych: Czym są i dlaczego są ważne?, 2016-01-
 </thesis>
 ```
 
-Te pliki mogą być następnie przetwarzane przez komputery.
+Wybór formatu nie jest trywialny — JSON dominuje w sectorze tech, XML w regulowanych branżach (bankowość, ubezpieczenia), a CSV w analityce ad hoc. Warto znać zalety i ograniczenia każdego.
 
-## Standaryzacja standardów
+---
 
-Co by się stało, gdybym stworzył i ogłosił standard taki jak "Madejski Thesis Standard 1.0"? Prawdopodobnie nikt by nie zwrócił na to uwagi. Siła standardu polega na tym, że jest używany przez wielu interesariuszy. Jeśli nie jest powszechnie stosowany, to w rzeczywistości nie jest standardem.
+## Co czyni standard... standardem?
 
-### Kluczowe elementy standardów
+Gdybym ogłosił „Kowalewski Data Standard 1.0", prawdopodobnie nikt by tego nie zauważył. Siła standardu leży w **adopcji** — jeśli nikt go nie używa, to po prostu nie jest standardem.
 
-Kolejnym kluczowym elementem standardów jest ich otwartość. Nie istnieje jedna definicja tego, co stanowi otwarty standard. Istnieje wiele definicji, które podkreślają różne aspekty otwartości, w tym otwartość specyfikacji czy procesu jej tworzenia.
+Według [World Wide Web Consortium (W3C)](https://www.w3.org/standards/), otwarty standard powinien spełniać te kryteria:
 
-Z sugestywną definicją, pochodzącą od World Wide Web Consortium (W3C), zalecamy uwzględnienie następujących wymagań:
-- **Przejrzystość**: proces powinien być publiczny, a decyzje dokumentowane.
-- **Relewancja**: nowa standaryzacja powinna wynikać z analizy potrzeb rynkowych.
-- **Otwartość**: każdy może brać udział w tworzeniu standardów.
-- **Bezstronność i konsensus**: proces decyzyjny powinien być sprawiedliwy.
-- **Dostępność**: darmowy dostęp do tekstów standardów.
-- **Utrzymanie**: ciągły proces testowania i aktualizacji.
+| Kryterium | Opis |
+|-----------|------|
+| **Przejrzystość** | Proces tworzenia jest publiczny, decyzje dokumentowane |
+| **Relewancja** | Standard wynika z realnych potrzeb rynkowych |
+| **Otwartość** | Każdy może w nim uczestniczyć |
+| **Bezstronność** | Proces decyzyjny jest sprawiedliwy |
+| **Dostępność** | Bezpłatny dostęp do specyfikacji |
+| **Utrzymanie** | Ciągłe testowanie i aktualizacja |
 
-Zaangażowanie społeczeństwa obywatelskiego w standardy (działania, korzystanie z nich, a także udział w ich tworzeniu) powinno iść w parze z zapewnieniem, że społeczności mają głos w tych standardach.
+Dobrym przykładem jest [ISO 3166](https://www.iso.org/iso-3166-country-codes.html) — standard kodów krajów, który jest niewidoczny, ale wszechobecny. Każdy formularz online, który prosi o wybór kraju, prawdopodobnie korzysta z tego standardu.
 
-## Jak otworzyć dane?
+---
 
-Otwarcie danych jest procesem kosztownym. Kiedy robimy to w dobrej wierze, pamiętajmy, aby oprócz stworzenia narzędzia do przetwarzania danych również udostępnić same dane.
+## Otwieranie danych — jak to zrobić dobrze?
 
-### Opcje udostępniania danych
+Udostępnianie danych innym organizacjom (open data) to kosztowny proces. [Tim Berners-Lee](https://5stardata.info/en/) zaproponował model 5-gwiazdkowy do oceny otwartości danych:
 
-1. **Eksport danych**: Można wyeksportować dane i publikować je w formie pliku. Każdy może je pobrać. W przypadku, gdy dane się zmieniają, warto zorganizować automatyczne okresowe eksporto (co miesiąc lub codziennie).
+- ⭐ Dane dostępne w internecie (w jakimkolwiek formacie)
+- ⭐⭐ Dane w formacie strukturalnym (np. Excel zamiast PDF)
+- ⭐⭐⭐ Otwarty format (np. CSV zamiast XLS)
+- ⭐⭐⭐⭐ Identyfikatory URI
+- ⭐⭐⭐⭐⭐ Powiązane dane (Linked Data)
 
-2. **API**: Interfejs Programowania Aplikacji (API) jest bardziej złożoną opcją, umożliwiającą innym programom komputerowym dostęp do danych.
+### Dwa podejścia do udostępniania:
 
-**Wskazówka**: API również powinny być standaryzowane, tak jak dane, które udostępniają.
+1. **Eksport pliku** — cykliczna publikacja danych (co dzień, co miesiąc). Proste, ale wymaga manualnej obsługi i szybko się dezaktualizuje
+2. **API** — programistyczny interfejs pozwalający innym systemom odpytywać dane w czasie rzeczywistym. Bardziej złożone, ale bardziej elastyczne
 
-## Analizowane aspekty
+> **Ważne:** API też powinno być standaryzowane. [OpenAPI Specification](https://www.openapis.org/) to de facto standard opisywania REST API.
 
-W ramach tego projektu będziemy analizować i rekomendować standardy danych, które będą stosowane w obszarze technologii dla przejrzystości. Każdy standard zostanie przedstawiony w kontekście zastosowań, narzędzi open source, zasięgu jego stosowania oraz wyzwań dotyczących modelowania danych.
+---
 
-### Zakończenie
+## Standardy danych w kontekście Data Governance
 
-Standardy danych nie tylko poprawiają jakość informacji, ale także umożliwiają efektywną współpracę między różnymi podmiotami. Zrozumienie ich znaczenia jest kluczowe dla budowania lepszego etosu współpracy w obszarze technologii obywatelskiej oraz na rzecz przejrzystości danych.
+Dlaczego piszę o standardach w serii o DG? Bo **standardy to kręgosłup programu Data Governance**. Bez standardów:
+
+- Nie zbudujesz wiarygodnego Data Catalog — bo nie wiadomo, jak interpretować dane
+- Nie zmierzysz jakości — bo nie ma „złotego wzorca"
+- Nie wymieniasz danych — bo każdy system mówi innym językiem
+- Nie zapewnisz compliance — bo regulator wymaga konkretnych formatów (np. [XBRL](https://www.xbrl.org/) w raportowaniu finansowym)
+
+Wdrożenie standardów to nie jednorazowe działanie, ale **ciągły proces negocjacji** między zespołami biznesowymi, IT i regulatorami.
+
+---
+
+## Podsumowanie
+
+Standardy danych to fundament, na którym budujemy interoperacyjność, jakość i zaufanie do danych. Bez nich program DG jest jak budynek bez fundamentów — może stoi, ale przy pierwszym wstrząsie się zawali.
+
+Kluczowe wnioski:
+- Standard to nie dokument — to **umowa społeczna** między użytkownikami danych
+- Format danych (JSON, CSV, XML) ma znaczenie — wybieraj świadomie
+- Otwartość standardu decyduje o jego adopcji
+- Standardy danych są integralną częścią programu Data Governance
+
+---
+
+### Źródła i dalsze lektury
+
+- TransparenCEE, [*Data Standards Initiative*](https://transparencee.org/)
+- W3C, [*Web Standards*](https://www.w3.org/standards/)
+- Tim Berners-Lee, [*5 Star Open Data*](https://5stardata.info/en/)
+- ISO 3166, [*Country Codes*](https://www.iso.org/iso-3166-country-codes.html)
+- OpenAPI Initiative, [*OpenAPI Specification*](https://www.openapis.org/)
+- XBRL International, [*eXtensible Business Reporting Language*](https://www.xbrl.org/)
