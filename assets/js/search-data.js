@@ -30,7 +30,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "http://quartz.skszymon.eu";
               },
-            },{id: "post-ai-w-data-governance-szanse-wyzwania-i-praktyczne-zastosowania",
+            },{id: "post-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality",
+        
+          title: "Wymiary jakości danych: praktyczny przewodnik po Data Quality",
+        
+        description: "6 wymiarów jakości danych, metryki, praktyczne wdrożenie i narzędzia - wszystko, co musisz wiedzieć o Data Quality w kontekście Data Governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/data-quality-dimensions/";
+          
+        },
+      },{id: "post-ai-w-data-governance-szanse-wyzwania-i-praktyczne-zastosowania",
         
           title: "AI w Data Governance: szanse, wyzwania i praktyczne zastosowania",
         
