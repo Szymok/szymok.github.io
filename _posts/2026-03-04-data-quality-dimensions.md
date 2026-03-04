@@ -160,7 +160,7 @@ Scorecard to zbiorczy widok jakości danych, który łączy metryki z różnych 
 
 Data Quality to nie projekt jednorazowy - to **proces ciągły**. Kluczowe elementy automatyzacji:
 
-- **Reguły walidacyjne** uruchamiane automatycznie przy ładowaniu danych (ETL/ELT)
+- **Reguły walidacyjne** uruchamiane automatycznie przy ładowaniu danych ([ETL](https://quartz.skszymon.eu/ETL)/[ELT](https://quartz.skszymon.eu/ELT))
 - **Alerty** wysyłane do data stewardów, gdy metryka spada poniżej progu
 - **Raporty trendów** pokazujące, jak jakość zmienia się w czasie
 - **Data remediation workflows** - przepływy pracy do naprawy wykrytych problemów
@@ -206,6 +206,8 @@ Ale teoria bez praktyki jest bezużyteczna. Kluczem jest:
 - Wspierać się **narzędziami**, ale nie polegać wyłącznie na nich
 
 W kolejnych artykułach planuję zagłębić się w praktyczne aspekty **Master Data Management** oraz **Data Catalog** - kluczowych elementów ekosystemu Data Governance.
+
+> 🌱 Więcej pojęć z zakresu Data Engineering, Data Quality i AI znajdziesz w moim [Ogrodzie Wiedzy](https://quartz.skszymon.eu).
 
 ---
 
