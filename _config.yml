@@ -91,6 +91,7 @@ blog_name: skupienie danych # blog_name will be displayed in your blog page
 blog_description: o zarządzaniu danymi, jakości danych i AI
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
+future: true # allow posts with future dates to be published
 
 # Pagination
 pagination:
