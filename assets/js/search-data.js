@@ -24,11 +24,11 @@ ninja.data = [{
             window.location.href = "/cv/";
           },
         },{id: "dropdown-ogród-wiedzy",
-              title: "ogród wiedzy",
+              title: "🌱 ogród wiedzy",
               description: "",
               section: "Dropdown",
               handler: () => {
-                window.location.href = "http://quartz.skszymon.eu";
+                window.location.href = "https://quartz.skszymon.eu";
               },
             },{id: "post-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality",
         
