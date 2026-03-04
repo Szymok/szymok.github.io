@@ -30,13 +30,6 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "http://quartz.skszymon.eu";
               },
-            },{id: "dropdown-bookshelf",
-              title: "bookshelf",
-              description: "",
-              section: "Dropdown",
-              handler: () => {
-                window.location.href = "/books/";
-              },
             },{id: "post-kierunek-zarządzania-danymi-w-pionierskich-modelach-sztucznej-inteligencji",
         
           title: "Kierunek zarządzania danymi w pionierskich modelach sztucznej inteligencji",
@@ -63,7 +56,7 @@ ninja.data = [{
         
           title: "Informatica jako narzędzie Data Governance",
         
-        description: "",
+        description: "Informatica jako kompleksowa platforma do Data Governance — przegląd funkcji, narzędzi Axon i EDC oraz integracji z AI.",
         section: "Posts",
         handler: () => {
           
@@ -132,6 +125,9 @@ ninja.data = [{
               window.location.href = "/books/the_godfather/";
             },},{id: "news-pierwszy-artykuł",
           title: 'Pierwszy artykuł',
+          description: "",
+          section: "News",},{id: "news-opublikowałem-nowy-artykuł-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality-6-wymiarów-metryki-narzędzia-i-najczęstsze-błędy-wdrożeniowe",
+          title: 'Opublikowałem nowy artykuł: Wymiary jakości danych — praktyczny przewodnik po Data Quality. 6...',
           description: "",
           section: "News",},{
         id: 'social-email',
