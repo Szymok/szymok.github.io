@@ -128,7 +128,8 @@
       "highlights": [
         "3. miejsce w konkursie Startuj do START'upu"
       ]
-    }],
+    }
+  ],
   "education": [
     {
       "institution": "Uniwersytet Gdański",
@@ -160,56 +161,18 @@
       "name": "Ataccama Data Quality",
       "date": "2025-01-15",
       "issuer": "Ataccama",
-      "url":"",
-      "icon":""
-    },
-    {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
-    },
-    {
-      "name": "Quantum Computing",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-tag"
-    },
-    {
-      "name": "Quantum Information",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-envelope"
-    },
-    {
-      "name": "Quantum Cryptography",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-hashtag"
-    },
-    {
-      "name": "Quantum Communication",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-calendar"
+      "url": "",
+      "icon": "fa-solid fa-database"
     },
     {
       "name": "Natural Language Processing",
       "date": "2021-11-15",
       "issuer": "Dataworkshop",
       "url": "",
-      "icon": "fa-solid fa-hashtag"
+      "icon": "fa-solid fa-brain"
     }
-
   ],
-  "publications": [
-
-  ],
+  "publications": [],
   "skills": [
     {
       "name": "AI Companionship",
@@ -255,12 +218,12 @@
     {
       "language": "polski",
       "fluency": "natywny",
-      "icon":""
+      "icon": ""
     },
     {
       "language": "angielski",
       "fluency": "B2",
-      "icon":""
+      "icon": ""
     }
   ],
   "interests": [
@@ -271,7 +234,7 @@
         "Machine Learning",
         "Data Engineering",
         "Statistical Models"
-      ]  
+      ]
     },
     {
       "name": "Data Stats",
@@ -300,17 +263,19 @@
         "Open Source Solutions",
         "Local LLMs"
       ]
-
     }
   ],
-  "references": [
-
-  ],
+  "references": [],
   "projects": [
     {
       "name": "bAIka - AI Stories",
       "summary": "Projekt wykorzystujący sztuczną inteligencję do tworzenia spersonalizowanych opowieści i narracji.",
-      "highlights": ["Natural Language Generation", "Interactive Storytelling", "User Customization", "Polish Language Support"],
+      "highlights": [
+        "Natural Language Generation",
+        "Interactive Storytelling",
+        "User Customization",
+        "Polish Language Support"
+      ],
       "startDate": "2024-01-01",
       "endDate": "Present",
       "url": "https://baika.skszymon.com"
@@ -318,7 +283,13 @@
     {
       "name": "La Liga Historical Data Analysis",
       "summary": "Projekt analizy danych skupiający się na meczach La Liga sięgających lat 90. Projekt obejmuje zbieranie danych, czyszczenie, wizualizację i ostatecznie modelowanie predykcyjne w celu odkrycia historycznych trendów i wzorców w hiszpańskiej piłce nożnej.",
-      "highlights": ["Sports Analytics", "Historical Data Visualization", "Statistical Modeling", "Interactive Dashboard", "Football Performance Metrics"],
+      "highlights": [
+        "Sports Analytics",
+        "Historical Data Visualization",
+        "Statistical Modeling",
+        "Interactive Dashboard",
+        "Football Performance Metrics"
+      ],
       "startDate": "2023-06-01",
       "endDate": "Present",
       "url": ""
@@ -326,18 +297,31 @@
     {
       "name": "Polish Job Market Scraper",
       "summary": "Zautomatyzowane narzędzie, które scrapuje i analizuje oferty pracy z polskiego rynku, ze szczególnym uwzględnieniem stanowisk z zakresu inżynierii danych i data science. Projekt pomaga śledzić trendy rynkowe, zakresy wynagrodzeń i wymagane umiejętności w polskiej branży technologicznej.",
-      "highlights": ["Web Scraping", "Data Engineering", "Market Analysis", "Automated Reporting", "Skills Gap Analysis"],
+      "highlights": [
+        "Web Scraping",
+        "Data Engineering",
+        "Market Analysis",
+        "Automated Reporting",
+        "Skills Gap Analysis"
+      ],
       "startDate": "2022-09-01",
       "endDate": "Present",
       "url": ""
     },
     {
-        "name": "Poland Statistical Survey Forms",
-        "summary": "Projekt zbierania danych skoncentrowany na gromadzeniu interesujących statystyk o Polsce poprzez specjalnie zaprojektowane formularze ankietowe. Projekt zbiera odpowiedzi od różnych grup demograficznych, aby zbudować kompleksowy zbiór danych na temat różnych aspektów polskiego życia, kultury i społeczeństwa.",
-        "highlights": ["Statistical Analysis", "Data Collection", "Survey Design", "Demographic Insights", "Public Opinion Tracking", "Regional Comparisons"],
-        "startDate": "2023-11-01",
-        "endDate": "Present",
-        "url": "https://malystatystyk.skszymon.com"
-      }  
+      "name": "Poland Statistical Survey Forms",
+      "summary": "Projekt zbierania danych skoncentrowany na gromadzeniu interesujących statystyk o Polsce poprzez specjalnie zaprojektowane formularze ankietowe. Projekt zbiera odpowiedzi od różnych grup demograficznych, aby zbudować kompleksowy zbiór danych na temat różnych aspektów polskiego życia, kultury i społeczeństwa.",
+      "highlights": [
+        "Statistical Analysis",
+        "Data Collection",
+        "Survey Design",
+        "Demographic Insights",
+        "Public Opinion Tracking",
+        "Regional Comparisons"
+      ],
+      "startDate": "2023-11-01",
+      "endDate": "Present",
+      "url": "https://malystatystyk.skszymon.com"
+    }
   ]
 }

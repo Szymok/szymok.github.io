@@ -3,7 +3,7 @@ layout: page
 title: projects
 permalink: /projects/
 description: Projekty i linki do moich projektów. Aktualnie pracuję nad wdrożeniami modeli AI do różnych dziedzin życia.
-nav: true
+nav: false
 nav_order: 2
 display_categories: [work, fun]
 horizontal: false

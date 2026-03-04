@@ -66,13 +66,6 @@
         - Budowanie baz danych statystycznych
         - Analiza dużych zbiorów danych dot. aktualnej sytuacji na boisku
 
-- title: Projekty open source
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
 - title: Kursy
   type: time_table
   contents:
@@ -86,25 +79,6 @@
         - ML in Python with scikit-learn - fun-mooc
         - EITC/IS - EITCA Academy
         - SAS SCYP - SAS
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
-
-- title: Academic Interests
-  type: nested_list
-  contents:
-    - title: Topic 1.
-      items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
-      items:
-        - Description 1.
-        - Description 2.
 
 - title: Other Interests
   type: list

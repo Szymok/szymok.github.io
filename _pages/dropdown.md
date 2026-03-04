@@ -11,9 +11,6 @@ children:
   - title: bookshelf
     permalink: /books/
   - title: divider
-  - title: publications
-    permalink: /publications/
-  - title: divider
   - title: people
     permalink: /people/
 ---
