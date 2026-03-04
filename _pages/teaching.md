@@ -3,7 +3,7 @@ layout: page
 permalink: /teaching/
 title: teaching
 description: Materiały z kursów i warsztatów
-nav: true
+nav: false
 nav_order: 5
 ---
 

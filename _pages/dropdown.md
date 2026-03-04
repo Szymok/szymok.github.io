@@ -1,8 +1,8 @@
 ---
 layout: page
-title: submenus
+title: więcej
 nav: true
-nav_order: 6
+nav_order: 4
 dropdown: true
 children:
   - title: ogród wiedzy
@@ -10,7 +10,4 @@ children:
   - title: divider
   - title: bookshelf
     permalink: /books/
-  - title: divider
-  - title: people
-    permalink: /people/
 ---
