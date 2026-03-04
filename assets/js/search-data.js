@@ -30,55 +30,55 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "http://quartz.skszymon.eu";
               },
-            },{id: "post-kierunek-zarządzania-danymi-w-pionierskich-modelach-sztucznej-inteligencji",
+            },{id: "post-ai-w-data-governance-szanse-wyzwania-i-praktyczne-zastosowania",
         
-          title: "Kierunek zarządzania danymi w pionierskich modelach sztucznej inteligencji",
+          title: "AI w Data Governance: szanse, wyzwania i praktyczne zastosowania",
         
-        description: "Zarządzanie danymi jako brakujący filar bezpieczeństwa i regulacji frontier AI",
+        description: "Jak AI zmienia zarządzanie danymi? Od automatycznej klasyfikacji PII po frontier data governance — analiza na podstawie pracy z arXiv.",
         section: "Posts",
         handler: () => {
           
             window.location.href = "/blog/2025/ai-models-dg/";
           
         },
-      },{id: "post-ataccama-jako-narzędzie-data-governance",
+      },{id: "post-ataccama-one-dlaczego-wybrałem-tę-platformę-do-data-governance",
         
-          title: "Ataccama jako narzędzie Data Governance",
+          title: "Ataccama ONE — dlaczego wybrałem tę platformę do Data Governance",
         
-        description: "Zarzadzanie danymi w XXI wieku",
+        description: "Przegląd Ataccama ONE z perspektywy codziennego użytkownika — co potrafi, jak wygląda w praktyce i dla kogo się nadaje.",
         section: "Posts",
         handler: () => {
           
             window.location.href = "/blog/2025/ataccama/";
           
         },
-      },{id: "post-informatica-jako-narzędzie-data-governance",
+      },{id: "post-informatica-jako-narzędzie-data-governance-przegląd-dla-praktyków",
         
-          title: "Informatica jako narzędzie Data Governance",
+          title: "Informatica jako narzędzie Data Governance: przegląd dla praktyków",
         
-        description: "Informatica jako kompleksowa platforma do Data Governance — przegląd funkcji, narzędzi Axon i EDC oraz integracji z AI.",
+        description: "Przegląd platformy Informatica Data Governance — Axon, EDC, CLAIRE GPT. Co potrafi, do czego się nadaje i jak wypada na tle konkurencji.",
         section: "Posts",
         handler: () => {
           
             window.location.href = "/blog/2025/informatica/";
           
         },
-      },{id: "post-standardy-danych-czym-są-i-dlaczego-są-ważne-analiza",
+      },{id: "post-standardy-danych-czym-są-i-dlaczego-bez-nich-nie-zbudujesz-programu-dg",
         
-          title: "Standardy danych. Czym są i dlaczego są ważne? Analiza",
+          title: "Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?",
         
-        description: "Ale czym są te standardy danych? Dlaczego są ważne? Jakie są ich korzyści?",
+        description: "Czym są standardy danych, jak działają w praktyce i dlaczego interoperacyjność jest kluczowa — analiza na podstawie inicjatywy TransparenCEE.",
         section: "Posts",
         handler: () => {
           
             window.location.href = "/blog/2024/dg-standars/";
           
         },
-      },{id: "post-które-normy-iso-są-stosowane-w-data-governance",
+      },{id: "post-które-normy-iso-stosować-w-data-governance-praktyczny-przegląd",
         
-          title: "Które normy ISO są stosowane w Data Governance?",
+          title: "Które normy ISO stosować w Data Governance? Praktyczny przegląd",
         
-        description: "Często stosowane standardy ISO w praktykach Data Governance.",
+        description: "Przegląd standardów ISO przydatnych w programie Data Governance — od jakości danych (ISO 8000) po bezpieczeństwo informacji (ISO 27001).",
         section: "Posts",
         handler: () => {
           
@@ -89,7 +89,7 @@ ninja.data = [{
         
           title: "Wstęp do Data Governance",
         
-        description: "Początek serii postów na temat Data Governance.",
+        description: "Od czego zacząć przygodę z zarządzaniem danymi? Kluczowe elementy, role i wyzwania — z perspektywy praktyka.",
         section: "Posts",
         handler: () => {
           
@@ -100,7 +100,7 @@ ninja.data = [{
         
           title: "Wstęp do Promptingu",
         
-        description: "Jak, dlaczego i jakich używać taktyk pisania promptów",
+        description: "Praktyczny przewodnik po promptingu — zasady, iteracyjny rozwój, podsumowywanie, analiza sentymentu i transformacja tekstu z OpenAI API.",
         section: "Posts",
         handler: () => {
           
@@ -111,7 +111,7 @@ ninja.data = [{
         
           title: "Historia wizualizacji danych",
         
-        description: "Artykuł, który skupia sie na historii wizualizacji danych",
+        description: "Od malowideł naskalnych po Tableau — historia wizualizacji danych przez pryzmat Playfaira, Nightingale, Snowa, Minarda, Tukeya i Tufta.",
         section: "Posts",
         handler: () => {
           
@@ -134,7 +134,7 @@ ninja.data = [{
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%73%7A%79%6D%6F%6E%6B%6F%77%61%6C%30%31%39@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+          window.open("mailto:%68%65%6C%6C%6F@%73%6B%73%7A%79%6D%6F%6E.%65%75", "_blank");
         },
       },{
         id: 'social-github',
