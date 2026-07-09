@@ -153,12 +153,63 @@
   {% include plugins/al_math_styles.liquid %}
 {% endif %}
 
-{% if site.enable_cookie_consent and site.plugins contains 'al_cookie' %}
-  <!-- Cookie Consent -->
-  {% include plugins/al_cookie_styles.liquid %}
-{% endif %}
+<!-- Polish GDPR Cookie Consent -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.css">
+<script defer src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var checkCC = setInterval(function () {
+    if (window.CookieConsent) {
+      clearInterval(checkCC);
+      window.CookieConsent.run({
+        categories: {
+          necessary: { enabled: true, readOnly: true },
+          analytics: {}
+        },
+        language: {
+          default: "pl",
+          translations: {
+            pl: {
+              consentModal: {
+                title: "Używamy ciasteczek 🍪",
+                description: "Ta strona używa plików cookie w celu analizy ruchu i optymalizacji działania. Możesz zaakceptować wszystkie ciasteczka lub zarządzać indywidualnymi preferencjami.",
+                acceptAllBtn: "Akceptuj wszystkie",
+                acceptNecessaryBtn: "Odrzuć wszystkie",
+                showPreferencesBtn: "Zarządzaj ustawieniami"
+              },
+              preferencesModal: {
+                title: "Preferencje plików cookie",
+                acceptAllBtn: "Akceptuj wszystkie",
+                acceptNecessaryBtn: "Odrzuć wszystkie",
+                savePreferencesBtn: "Zapisz wybrane",
+                closeIconLabel: "Zamknij",
+                sections: [
+                  {
+                    title: "Użycie plików cookie",
+                    description: "Używamy plików cookie w celu zapewnienia prawidłowego działania strony oraz analizowania ruchu analitycznego."
+                  },
+                  {
+                    title: "Niezbędne pliki cookie",
+                    description: "Te pliki cookie są wymagane do poprawnego działania witryny.",
+                    linkedCategory: "necessary"
+                  },
+                  {
+                    title: "Analityczne pliki cookie",
+                    description: "Te pliki cookie pozwalają nam mierzyć ruch na stronie w celu ulepszania naszych treści.",
+                    linkedCategory: "analytics"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      });
+    }
+  }, 100);
+});
+</script>
 
-<script async defer
+<script type="text/plain" data-category="analytics" async defer
   data-website-id="70eace4c-383a-45d8-977d-0fb10ff9844a"
   src="https://umami.skszymon.eu/script.js">
 </script>

@@ -7,4 +7,8 @@ dropdown: true
 children:
   - title: 🌱 ogród wiedzy
     permalink: https://quartz.skszymon.eu
+  - title: 💻 repozytoria
+    permalink: /repositories/
+  - title: 📚 biblioteczka
+    permalink: /books/
 ---
