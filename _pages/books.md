@@ -6,8 +6,8 @@ nav: false
 collection: books
 ---
 
-> What an astonishing thing a book is. It's a flat object made from a tree with flexible parts on which are imprinted lots of funny dark squiggles. But one glance at it and you're inside the mind of another person, maybe somebody dead for thousands of years. Across the millennia, an author is speaking clearly and silently inside your head, directly to you. Writing is perhaps the greatest of human inventions, binding together people who never knew each other, citizens of distant epochs. Books break the shackles of time. A book is proof that humans are capable of working magic.
+> Zadziwiającą rzeczą jest książka. To płaski przedmiot wykonany z drzewa z elastycznymi częściami, na których odciśnięto wiele zabawnych ciemnych zawijasów. Ale wystarczy jedno spojrzenie, by znaleźć się w umyśle innej osoby, być może nieżyjącej od tysięcy lat. Przez tysiąclecia autor mówi wyraźnie i cicho wewnątrz twojej głowy, bezpośrednio do ciebie. Pisanie jest być może największym z ludzkich wynalazków, łączącym ludzi, którzy nigdy się nie znali, obywateli odległych epok. Książki zrywają kajdany czasu. Książka jest dowodem na to, że ludzie są zdolni do czynienia magii.
 >
 > -- Carl Sagan, Cosmos, Part 11: The Persistence of Memory (1980)
 
-## Books that I am reading, have read, or will read
+## Książki, które czytam, czytałem lub będę czytał
