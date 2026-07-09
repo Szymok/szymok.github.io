@@ -6,7 +6,7 @@ overrides:
     gem_version: 1.0.11
     upstream_path: _includes/head.liquid
     upstream_sha256: f4e1a5a93ba324f05760652013eb0d44769ec932477a5a0afa70c271153b8278
-    local_sha256: aa85ee63e21f4c09752da50e6d071f773565ecd6dfefb0c36846e85283b999de
+    local_sha256: f06484a714ab255399824e883843381cd2930320dc5c73ab4f94f7730251b35f
     acknowledged_at: '2026-07-09'
   _includes/newsletter.liquid:
     owner: al_folio_core
