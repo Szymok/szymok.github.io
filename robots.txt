@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://szymok.github.io/sitemap.xml
+Sitemap: https://skszymon.eu/sitemap.xml
