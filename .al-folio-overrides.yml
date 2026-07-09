@@ -8,3 +8,31 @@ overrides:
     upstream_sha256: f4e1a5a93ba324f05760652013eb0d44769ec932477a5a0afa70c271153b8278
     local_sha256: 5e4be61cc88735c43737ce7e2dd705ea56ed82e591ca858d96492bfaa4c98bd5
     acknowledged_at: '2026-07-09'
+  _includes/newsletter.liquid:
+    owner: al_folio_core
+    gem_version: 1.0.11
+    upstream_path: _includes/newsletter.liquid
+    upstream_sha256: 9c36dd5d9fe12681cdab99550eb19fe0285e4f00c0790c1505471c99e254a5c4
+    local_sha256: 39f431900225caa6ffd51f4b58f9609effb6757f74419c53304248197dbab710
+    acknowledged_at: '2026-07-09'
+  _includes/plugins/al_newsletter_form_center.liquid:
+    owner: al_folio_core
+    gem_version: 1.0.11
+    upstream_path: _includes/plugins/al_newsletter_form_center.liquid
+    upstream_sha256: 4485dd431a1035af3708d6875825e2777ccdfe756b188c0f4fe42c8a59c3451d
+    local_sha256: 0ae8ca294597e516075543b91d3fefd237c4c21861a92ca5cef641b75725d4fa
+    acknowledged_at: '2026-07-09'
+  _includes/plugins/al_newsletter_form_center_margin.liquid:
+    owner: al_folio_core
+    gem_version: 1.0.11
+    upstream_path: _includes/plugins/al_newsletter_form_center_margin.liquid
+    upstream_sha256: ad56039ddabf6550e6906f35f6e6ce463e61e0d50444e88b7146e09daad05b8f
+    local_sha256: 3d126cf0f1bbf26a4590d9b1affc2196cb36e11a76b3574117de8b8e221dd8e8
+    acknowledged_at: '2026-07-09'
+  _includes/plugins/al_newsletter_form_left.liquid:
+    owner: al_folio_core
+    gem_version: 1.0.11
+    upstream_path: _includes/plugins/al_newsletter_form_left.liquid
+    upstream_sha256: 81f05b8255003d789ae434d67b145f63f45f481356c008a09259dc1fbbdd9137
+    local_sha256: 4b9283d5347d651cf5ca6058e79c182802bb74c0521f1942b781b9a0e39c0d53
+    acknowledged_at: '2026-07-09'
