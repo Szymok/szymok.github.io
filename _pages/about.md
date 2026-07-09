@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='/blog/'>Data Governance · Data Quality · AI</a>
+subtitle: <a href='/blog/'>Data Governance · Data Quality · AI · Self-hosting</a>
 
 profile:
   align: right
@@ -28,6 +28,6 @@ latest_posts:
 
 Specjalizuję się w `zarządzaniu danymi` i `jakości danych`, pomagając organizacjom budować fundamenty pod wiarygodne analizy i decyzje biznesowe. Na co dzień pracuję z platformą `Ataccama` — wdrażam procesy Data Governance, Data Quality i Master Data Management.
 
-Ten blog to miejsce, w którym dokumentuję swoją drogę w świecie danych — od `sztucznej inteligencji` przez `inżynierię danych` po standardy i frameworki zarządzania danymi. Wierzę, że dzielenie się wiedzą jest najlepszym sposobem na jej pogłębienie.
+Na tym blogu będę pisał głównie o **AI**, **Data Governance & Quality** oraz **self-hostingu**. Chcę dzielić się tu swoimi doświadczeniami, dokumentując drogowskazy w świecie danych, automatyzacji oraz hostowania własnych usług.
 
 Wcześniej pracowałem jako Data Consultant (Hogart/Pernod Ricard), Junior Data Engineer (No Fluff Jobs) oraz Data Scout (Statscore). Jestem absolwentem `Informatyki i Ekonometrii` na Uniwersytecie Gdańskim.
