@@ -2,3 +2,5 @@ User-agent: *
 Disallow:
 
 Sitemap: https://skszymon.eu/sitemap.xml
+Sitemap: https://skszymon.eu/garden/sitemap.xml
+
