@@ -160,7 +160,7 @@ Scorecard to zbiorczy widok jakości danych, który łączy metryki z różnych 
 
 Data Quality to nie projekt jednorazowy - to **proces ciągły**. Kluczowe elementy automatyzacji:
 
-- **Reguły walidacyjne** uruchamiane automatycznie przy ładowaniu danych ([ETL](/garden/ETL)/[ELT](/garden/ELT))
+- **Reguły walidacyjne** uruchamiane automatycznie przy ładowaniu danych ([ETL](/garden/etl)/[ELT](/garden/elt))
 - **Alerty** wysyłane do data stewardów, gdy metryka spada poniżej progu
 - **Raporty trendów** pokazujące, jak jakość zmienia się w czasie
 - **Data remediation workflows** - przepływy pracy do naprawy wykrytych problemów
