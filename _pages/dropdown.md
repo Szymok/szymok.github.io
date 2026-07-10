@@ -6,7 +6,7 @@ nav_order: 4
 dropdown: true
 children:
   - title: 🌱 ogród wiedzy
-    permalink: https://quartz.skszymon.eu
+    permalink: /garden/
   - title: 📚 biblioteczka
     permalink: /books/
 ---

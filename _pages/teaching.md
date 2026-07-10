@@ -8,4 +8,4 @@ nav_order: 5
 ---
 
 Strona w budowie, bede tutaj publikowal materialy i notatki z kursow oraz warsztatow, w ktorych uczestnicze.
-Ogród wiedzy: [quartz.skszymon.eu](https://quartz.skszymon.eu)
+Ogród wiedzy: [skszymon.eu/garden](https://skszymon.eu/garden)
