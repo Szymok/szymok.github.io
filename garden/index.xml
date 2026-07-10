@@ -6,65 +6,65 @@
       <description>Last 10 notes on 🪴 Ogród Wiedzy</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>real-time</title>
-    <link>https://skszymon.eu/garden/tags/real-time</link>
-    <guid>https://skszymon.eu/garden/tags/real-time</guid>
+    <title>declarative</title>
+    <link>https://skszymon.eu/garden/tags/declarative</link>
+    <guid>https://skszymon.eu/garden/tags/declarative</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>hadoop</title>
-    <link>https://skszymon.eu/garden/tags/hadoop</link>
-    <guid>https://skszymon.eu/garden/tags/hadoop</guid>
+    <title>imperative</title>
+    <link>https://skszymon.eu/garden/tags/imperative</link>
+    <guid>https://skszymon.eu/garden/tags/imperative</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>transactional-datalake</title>
-    <link>https://skszymon.eu/garden/tags/transactional-datalake</link>
-    <guid>https://skszymon.eu/garden/tags/transactional-datalake</guid>
+    <title>sql</title>
+    <link>https://skszymon.eu/garden/tags/sql</link>
+    <guid>https://skszymon.eu/garden/tags/sql</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>upserts</title>
-    <link>https://skszymon.eu/garden/tags/upserts</link>
-    <guid>https://skszymon.eu/garden/tags/upserts</guid>
+    <title>terraform</title>
+    <link>https://skszymon.eu/garden/tags/terraform</link>
+    <guid>https://skszymon.eu/garden/tags/terraform</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>table-format</title>
-    <link>https://skszymon.eu/garden/tags/table-format</link>
-    <guid>https://skszymon.eu/garden/tags/table-format</guid>
+    <title>dbt</title>
+    <link>https://skszymon.eu/garden/tags/dbt</link>
+    <guid>https://skszymon.eu/garden/tags/dbt</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>event-driven</title>
-    <link>https://skszymon.eu/garden/tags/event-driven</link>
-    <guid>https://skszymon.eu/garden/tags/event-driven</guid>
+    <title>copywriting</title>
+    <link>https://skszymon.eu/garden/tags/copywriting</link>
+    <guid>https://skszymon.eu/garden/tags/copywriting</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>apache</title>
-    <link>https://skszymon.eu/garden/tags/apache</link>
-    <guid>https://skszymon.eu/garden/tags/apache</guid>
+    <title>fab</title>
+    <link>https://skszymon.eu/garden/tags/fab</link>
+    <guid>https://skszymon.eu/garden/tags/fab</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>message-queue</title>
-    <link>https://skszymon.eu/garden/tags/message-queue</link>
-    <guid>https://skszymon.eu/garden/tags/message-queue</guid>
+    <title>social-media</title>
+    <link>https://skszymon.eu/garden/tags/social-media</link>
+    <guid>https://skszymon.eu/garden/tags/social-media</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>apache-spark</title>
-    <link>https://skszymon.eu/garden/tags/apache-spark</link>
-    <guid>https://skszymon.eu/garden/tags/apache-spark</guid>
+    <title>virtualization</title>
+    <link>https://skszymon.eu/garden/tags/virtualization</link>
+    <guid>https://skszymon.eu/garden/tags/virtualization</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item><item>
-    <title>dataengineering</title>
-    <link>https://skszymon.eu/garden/tags/dataengineering</link>
-    <guid>https://skszymon.eu/garden/tags/dataengineering</guid>
+    <title>trino</title>
+    <link>https://skszymon.eu/garden/tags/trino</link>
+    <guid>https://skszymon.eu/garden/tags/trino</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Fri, 10 Jul 2026 13:48:21 GMT</pubDate>
+    <pubDate>Fri, 10 Jul 2026 13:48:19 GMT</pubDate>
   </item>
     </channel>
   </rss>
