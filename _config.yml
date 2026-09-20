@@ -332,7 +332,7 @@ jekyll-archives:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
 display_tags: ["ai", "dg", "prompt", "dq"] # these tags will be displayed on the front page of your blog
-display_categories: ["sztuczna inteligencja", "data governance", "data quality"] # these categories will be displayed on the front page of your blog
+display_categories: ["sztuczna inteligencja", "data governance", "data quality", "homelab"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
