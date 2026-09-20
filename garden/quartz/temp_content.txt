@@ -1,0 +1,45 @@
+﻿---
+title: What Is Data Governance
+created: 2026-02-23
+status: 
+category: 
+difficulty: 
+language: pl
+tags:
+  - 
+aliases:
+  - 
+---
+# ðŸŽ¯ Definicja
+
+**Data Governance** (Åad Danych) to systematyczny nadzÃ³r nad zasobami danych organizacji w celu zapewnienia ich jakoÅ›ci, bezpieczeÅ„stwa, prywatnoÅ›ci, zgodnoÅ›ci (compliance) oraz uÅ¼ytecznoÅ›ci. Celem jest dopasowanie praktyk zarzÄ…dzania danymi do celÃ³w biznesowych organizacji.
+
+# ðŸ”‘ Kluczowe punkty
+
+*   **JakoÅ›Ä‡ danych:** Zapewnienie, Å¼e dane sÄ… poprawne i godne zaufania (zasada "Garbage in, garbage out").
+*   **BezpieczeÅ„stwo i prywatnoÅ›Ä‡:** Kontrola dostÄ™pu, szyfrowanie (at rest, in transit, in process), maskowanie danych oraz procedury bezpiecznego usuwania zbÄ™dnych danych.
+*   **ZgodnoÅ›Ä‡ (Compliance):** Przestrzeganie regulacji prawnych i standardÃ³w branÅ¼owych w celu minimalizacji ryzyka prawnego.
+*   **UÅ¼ytecznoÅ›Ä‡ i dostÄ™pnoÅ›Ä‡:** Maksymalizacja potencjaÅ‚u danych poprzez katalogi danych, sÅ‚owniki biznesowe (data dictionaries) oraz Å›ledzenie pochodzenia danych (data lineage).
+*   **ZarzÄ…dzanie metadanymi:** Gromadzenie i utrzymywanie informacji o danych w celu zwiÄ™kszenia zaufania i uÅ‚atwienia podejmowania decyzji opartych na danych.
+
+# ðŸ“š SzczegÃ³Å‚owe wyjaÅ›nienie
+
+WspÃ³Å‚czesne organizacje sÄ… caÅ‚kowicie zaleÅ¼ne od danych pochodzÄ…cych z baz operacyjnych, systemÃ³w analitycznych, IoT czy mediÃ³w spoÅ‚ecznoÅ›ciowych. IloÅ›Ä‡ danych roÅ›nie wykÅ‚adniczo (od gigabajtÃ³w po petabajty), co rodzi potrzebÄ™ ich Å›cisÅ‚ej kontroli.
+
+Kontrola danych jest niezbÄ™dna z dwÃ³ch powodÃ³w:
+1.  **Pozytywny:** Maksymalizacja potencjaÅ‚u biznesowego i wartoÅ›ci danych.
+2.  **Negatywny:** Minimalizacja ryzyka kradzieÅ¼y, naduÅ¼yÄ‡ oraz strat wizerunkowych i finansowych.
+
+Data Governance obejmuje procesy takie jak inspekcja ÅºrÃ³deÅ‚ danych, wdraÅ¼anie mechanizmÃ³w ochrony (np. maskowanie danych), oraz dokumentowanie wiedzy o danych, aby nie zostaÅ‚a ona utracona. DziÄ™ki temu organizacja buduje zaufanie do produkowanych informacji, co prowadzi do lepszych decyzji biznesowych.
+
+# ðŸ’¡ PrzykÅ‚ad zastosowania
+
+*   **Maskowanie danych:** WyÅ›wietlanie tylko ostatnich czterech cyfr numeru karty kredytowej w systemach obsÅ‚ugi klienta.
+*   **Data Lineage:** UÅ¼ytkownik przeglÄ…dajÄ…cy raport BI moÅ¼e przeÅ›ledziÄ‡ drogÄ™ kaÅ¼dego punktu danych aÅ¼ do oryginalnego ÅºrÃ³dÅ‚a, co pozwala zweryfikowaÄ‡ poprawnoÅ›Ä‡ wyliczeÅ„.
+*   **Katalog Danych:** Pracownik szukajÄ…cy konkretnych informacji moÅ¼e szybko sprawdziÄ‡ w katalogu, jakie dane sÄ… dostÄ™pne, kto jest ich wÅ‚aÅ›cicielem i jakie majÄ… wÅ‚aÅ›ciwoÅ›ci.
+
+## ðŸ“Œ Å¹rÃ³dÅ‚a
+
+## ðŸ‘½ Brudnopis
+
+What is data governance? Every single modern organization is dependent on data, whether it's their databases that they use for operations and analysis, whether it is the data leaks once they've moved on and they started to do data science, big data, and advanced analytics. Nowadays, we also have IoT, the Internet of Things, where we have thousands and millions of devices, all communicating data back to different applications to be used for metrics or sensors or even forecasting or maintenance. And then we also have social media, where we create new messages, new images, new audio, new video every single day. And all this is being tracked and collected by the modern enterprise. So, as we create more and more data sources, the modern organization also has to deal with an increasing amount of data. It used to be that we just had to worry about a few megabytes in a database, and then we had to worry about gigabytes. Now, it's not uncommon for most organizations to have terabytes of data or more, and we're getting to the point where many more organizations are starting to accumulate in the petabyte range, that is 1000 TB. And not only that, it's not just about the quantity. It's also about the increasing detail in the data that we capture. We have a user of our system or a consumer of our products or services, and we capture information that helps us identify them personally, like their address or their phone number. Then we also can capture things like their smartphone usage if they use our app, which also lets us know where they are even located in the world. And then, because most transactions happen digitally, we can even have access to those consumer patterns, know what they like to buy, the businesses they like to support, and more. So with new data sources, an increasing amount of data, and more detail in the data that we collect, there is an increasing need of being able to control that data. We need to control it for two reasons. A positive reason, which is that we want to maximize its potential. And a somewhat negative reason is that we need to control it to decrease the risk for an organization that that data can be stolen, can be misused, and affect us in very negative ways. This is where data governance comes in. Data governance is the systematic oversight of an organization's data assets to ensure data quality, security, privacy, compliance, and usability, while aligning data practices with business objectives. And we're going to break this down in the next few slides. First, data quality. We're going to start inspecting the data sources to make sure that we're not producing bad data. Garbage in, garbage out. If we're not starting with good data, we will not get good results. So that's why data quality is important to ensure that the data is good and will lead to the right outcomes. Next, security and privacy. We want to make sure that we have proper access control to all data sources. We want to make sure that we have proper encryption whenever it is needed, at rest, in transit, in process. We also want to make sure that there's proper data masking. For example, it is very common nowadays where credit card fields only show the last four digits of a credit card number. And something very important, we want to make sure that we have proper procedures for disposal of data that is no longer needed in our organization. Compliance is extremely important nowadays. You have to make sure that all the data handling and management processes are compliant with any relevant regulation that applies to our organization. So again, we decrease risk to our organization not only from bad outcomes, but also from facing legal problems with the government. There's also the issue of usability. Data governance wants to help people maximize the potential of their data. We want people to have data catalogs soo they know what is the data that is available, who owns it, how is it tagged, what are the properties and characteristics? So we build data dictionaries, so people know what are the definition of different tables, different columns, different measures, and we document it so that knowledge is not lost and instead it is shared and collaborated upon. And we also leverage modern tools that will track data lineage so that we always know where every single data point is coming from. And if somebody's looking at a report, they're able to trace back how they got to that number all the way to the original data source. To maximize this usability, we do what is known as metadata management. This is the proper collection and maintenance of the information about the data. And there's a host of modern software tools that allows us to really do this successfully, such as data catalogs, data lineage trackers, ETL tools, automated documentation products, and more. So we can see how data governance really allows us to maximize the power of data. By having good data quality, by having rich metadata that tells us a lot of things about the data itself, we ultimately increase the trust that our organization has in the data that we produce, which will lead to better dataâ€‘driven decisions. And at the same time, we are decreasing risk by implementing governance by having proper security that will minimize the likelihood of a security incident where we might lose data or get it stolen. We will have proper privacy controls so that our consumers or users know that we take their data very seriously. And finally, we are 100% in compliance with any regulations that apply to our organization so that we know that we're applying best practices and we're following all the rules set out by the government.
