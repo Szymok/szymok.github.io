@@ -15,3 +15,7 @@ node_modules/
 output/playwright/
 test-results/
 vendor
+
+# garden is built from Szymok/garden inside deploy.yml, never committed here
+garden/
+garden-src/

@@ -97,7 +97,22 @@ jobs:
           pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
-          cp -r garden _site/
+      - name: Checkout garden 🪴
+        uses: actions/checkout@v4
+        with:
+          repository: Szymok/garden
+          ref: quartz-v5
+          path: garden-src
+      - name: Setup Node for Quartz 🧰
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build garden (Quartz) 🪴
+        working-directory: garden-src
+        run: |
+          npm ci
+          npx quartz plugin install
+          npx quartz build -o ../_site/garden
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss
