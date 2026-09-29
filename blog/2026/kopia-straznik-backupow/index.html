@@ -1,0 +1,356 @@
+<!DOCTYPE html> <html lang="pl"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie | Szymon Kowalewski </title> <meta name="author" content="Szymon Kowalewski"> <meta name="description" content="Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance."> <meta name="keywords" content="data governance, data quality, ai, sztuczna inteligencja, zarządzanie danymi, ataccama, self-hosting, selfhosting, etl, data engineering"> <meta property="og:site_name" content="Szymon Kowalewski"> <meta property="og:type" content="article"> <meta property="og:title" content="Szymon Kowalewski | Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"> <meta property="og:url" content="https://skszymon.eu/blog/2026/kopia-straznik-backupow/"> <meta property="og:description" content="Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance."> <meta property="og:image" content="assets/img/prof_pic.jpg"> <meta property="og:locale" content="pl"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"> <meta name="twitter:description" content="Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance."> <meta name="twitter:image" content="assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Szymon Kowalewski"
+        },
+        "url": "https://skszymon.eu/blog/2026/kopia-straznik-backupow/",
+        "@type": "BlogPosting",
+        "description": "Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance.",
+        "headline": "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie",
+        
+        "sameAs": ["https://github.com/Szymok","https://www.linkedin.com/in/skszymon","https://twitter.com/SkSzymon"],
+        
+        "name": "Szymon Kowalewski",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.css" integrity="sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://skszymon.eu/blog/2026/kopia-straznik-backupow/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_img_tools/css/lightbox2-adapter.css"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.css"> <script defer src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script> <script>
+document.addEventListener("DOMContentLoaded", function () {
+  var checkCC = setInterval(function () {
+    if (window.CookieConsent) {
+      clearInterval(checkCC);
+      window.CookieConsent.run({
+        categories: {
+          necessary: { enabled: true, readOnly: true },
+          analytics: {}
+        },
+        language: {
+          default: "pl",
+          translations: {
+            pl: {
+              consentModal: {
+                title: "Używamy ciasteczek 🍪",
+                description: "Ta strona używa plików cookie w celu analizy ruchu i optymalizacji działania. Możesz zaakceptować wszystkie ciasteczka lub zarządzać indywidualnymi preferencjami.",
+                acceptAllBtn: "Akceptuj wszystkie",
+                acceptNecessaryBtn: "Odrzuć wszystkie",
+                showPreferencesBtn: "Zarządzaj ustawieniami"
+              },
+              preferencesModal: {
+                title: "Preferencje plików cookie",
+                acceptAllBtn: "Akceptuj wszystkie",
+                acceptNecessaryBtn: "Odrzuć wszystkie",
+                savePreferencesBtn: "Zapisz wybrane",
+                closeIconLabel: "Zamknij",
+                sections: [
+                  {
+                    title: "Użycie plików cookie",
+                    description: "Używamy plików cookie w celu zapewnienia prawidłowego działania strony oraz analizowania ruchu analitycznego."
+                  },
+                  {
+                    title: "Niezbędne pliki cookie",
+                    description: "Te pliki cookie są wymagane do poprawnego działania witryny.",
+                    linkedCategory: "necessary"
+                  },
+                  {
+                    title: "Analityczne pliki cookie",
+                    description: "Te pliki cookie pozwalają nam mierzyć ruch na stronie w celu ulepszania naszych treści.",
+                    linkedCategory: "analytics"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      });
+    }
+  }, 100);
+});
+</script> <script type="text/plain" data-category="analytics" async defer data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986" src="https://umami.skszymon.eu/script.js"> </script> <script type="text/plain" data-category="analytics" async defer src="https://umami.skszymon.eu/recorder.js" data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="300000"> </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Szymon</span> Kowalewski </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">więcej </a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/garden/">🌱 ogród wiedzy</a> <a class="dropdown-item " href="/books/">📚 biblioteczka</a> </div> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top toc toc-sidebar" aria-label="Table of contents" data-toc-collapse="expanded" data-toc-collapse-depth=""></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie</h1> <p class="post-meta"> Created on September 29, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/homelab"> <i class="fa-solid fa-hashtag fa-sm"></i> homelab</a>   <a href="/blog/tag/backup"> <i class="fa-solid fa-hashtag fa-sm"></i> backup</a>   <a href="/blog/tag/kopia"> <i class="fa-solid fa-hashtag fa-sm"></i> kopia</a>   <a href="/blog/tag/n8n"> <i class="fa-solid fa-hashtag fa-sm"></i> n8n</a>   <a href="/blog/tag/zfs"> <i class="fa-solid fa-hashtag fa-sm"></i> zfs</a>   <a href="/blog/tag/data-quality"> <i class="fa-solid fa-hashtag fa-sm"></i> data-quality</a>   <a href="/blog/tag/observability"> <i class="fa-solid fa-hashtag fa-sm"></i> observability</a>   ·   <a href="/blog/category/homelab"> <i class="fa-solid fa-tag fa-sm"></i> homelab</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h1 id="backup-który-sam-mówi-czy-działa">Backup, który sam mówi, czy działa</h1> <p>Przez rok mój homelab nie miał żadnego backupu. Dwie maszyny wirtualne z Dockerem, kilkadziesiąt kontenerów, NAS z ZFS-em — i zero kopii poza samą redundancją dysków. Wiedziałem, że to źle. Wiedziałem też, dlaczego nic z tym nie robię: nie bałem się braku backupu. Bałem się backupu, który <strong>wygląda</strong>, jakby działał.</p> <p>W pracy zajmuję się Data Governance i jakością danych. Tam podstawową zasadą jest: <em>jeśli nie mierzysz, to nie wiesz</em>. Ten artykuł to case study przeniesienia tej zasady na własny sprzęt — od pierwszego snapshotu Kopii po workflow w n8n, który co rano ocenia 14 źródeł backupu i mówi, które z nich są nieaktualne, niekompletne lub uszkodzone.</p> <hr> <h2 id="problem-3-2-1-to-polityka-nie-kontrola">Problem: 3-2-1 to polityka, nie kontrola</h2> <p>Reguła 3-2-1 (trzy kopie, dwa nośniki, jedna poza domem) jest wszędzie. Ale to <strong>polityka</strong> — mówi, jak ma być. Nie mówi, jak sprawdzić, czy jest.</p> <p>W praktyce backupy w domu psują się cicho:</p> <ul> <li>cron działa, ale snapshot ma 0 plików, bo katalog źródłowy odmontował się po restarcie,</li> <li>klient backupu nie łączy się z serwerem od tygodnia, a jedyny log leży na maszynie, na którą nikt nie patrzy,</li> <li>baza w kontenerze jest kopiowana „na gorąco” i pliki są niespójne,</li> <li>off-site synchronizuje się, ale z błędem <code class="language-plaintext highlighter-rouge">rc=1</code> na końcu, którego nikt nie czyta.</li> </ul> <p>Każdy z tych przypadków spełnia 3-2-1 na papierze. Potrzebowałem więc dwóch rzeczy: sensownej architektury backupu <strong>i</strong> niezależnej warstwy, która codziennie zweryfikuje, czy ta architektura robi to, co obiecuje.</p> <hr> <h2 id="architektura-kopia-na-nas-ie">Architektura: Kopia na NAS-ie</h2> <p>Wybrałem <a href="https://kopia.io/" rel="external nofollow noopener" target="_blank">Kopię</a> — open-source, deduplikacja, kompresja zstd, szyfrowanie po stronie klienta, tryb serwera z użytkownikami i API. Serwer stoi jako kontener na NAS-ie (TrueNAS), repozytorium leży na puli ZFS.</p> <pre><code class="language-mermaid">flowchart LR
+  subgraph NAS
+    ZFS[dataset z danymi aplikacji] --&gt;|snapshot ZFS 02:55| SNAP[mount read-only]
+    SNAP --&gt;|03:00| KS[Kopia server]
+    DOCS[dokumenty, zdjęcia, eksporty] --&gt;|03:10–03:30| KS
+    KS --&gt;|05:00 sync-to rclone| GD[(off-site: Google Drive)]
+  end
+  subgraph VM z Dockerem x2
+    DUMP[pg_dumpall / mariadb-dump 02:30] --&gt; KC[klient Kopii 03:00 / 03:15]
+    VOL[wolumeny Dockera, configi] --&gt; KC
+  end
+  KC --&gt;|HTTPS + fingerprint| KS
+  PVE[Proxmox vzdump 02:00] --&gt;|NFS| NAS
+</code></pre> <p>Cztery warstwy, każda z innym celem:</p> <table> <thead> <tr> <th>Warstwa</th> <th>Co chroni</th> <th>Narzędzie</th> <th>Kiedy</th> </tr> </thead> <tbody> <tr> <td>Snapshot ZFS + Kopia</td> <td>dane aplikacji na NAS-ie (spójny obraz)</td> <td> <code class="language-plaintext highlighter-rouge">zfs snapshot</code> → Kopia</td> <td>02:55 → 03:00</td> </tr> <tr> <td>Klienci Kopii na VM</td> <td>wolumeny Dockera, configi, zrzuty baz</td> <td>Kopia CLI, cron</td> <td>02:30 → 03:00/03:15</td> </tr> <tr> <td>Off-site</td> <td>całe repozytorium Kopii</td> <td><code class="language-plaintext highlighter-rouge">kopia repository sync-to rclone</code></td> <td>05:00</td> </tr> <tr> <td>vzdump</td> <td>pełne VM (odtworzenie po padzie dysku)</td> <td>Proxmox → NFS na NAS</td> <td>02:00</td> </tr> </tbody> </table> <p>Retencja jako polityka Kopii: 7 dziennych, 4 tygodniowe, 6 miesięcznych; zdjęcia (250 GB) skromniej — 3/2/3 i bez kompresji, bo JPEG-ów i tak nie ściśniesz.</p> <h3 id="spójność-snapshot-zfs-zamiast-kopiuj-na-żywo">Spójność: snapshot ZFS zamiast „kopiuj na żywo”</h3> <p>Kontenery na NAS-ie piszą do plików cały czas. Kopiowanie takiego katalogu daje obraz, w którym połowa plików jest z 03:00, a druga z 03:04. Rozwiązanie: cron o 02:55 robi snapshot ZFS datasetu i montuje go read-only w stałym miejscu; Kopia o 03:00 czyta już tylko zamrożony obraz.</p> <p>Dwie pułapki, których nie znajdziesz w dokumentacji:</p> <ol> <li> <strong><code class="language-plaintext highlighter-rouge">.zfs/snapshot</code> nie działa z wnętrza kontenera</strong> — automount ZFS nie przechodzi przez mount namespace Dockera i kończy się błędem <code class="language-plaintext highlighter-rouge">Too many levels of symbolic links</code>. Stąd jawny <code class="language-plaintext highlighter-rouge">mount -t zfs -o ro</code> na hoście.</li> <li> <strong>Bind mount do kontenera musi wskazywać katalog nadrzędny</strong>, nie sam punkt montowania snapshotu. Inaczej kontener trzyma referencję do starego montu i <code class="language-plaintext highlighter-rouge">zfs destroy</code> zwraca <code class="language-plaintext highlighter-rouge">dataset is busy</code>. Do tego <code class="language-plaintext highlighter-rouge">rslave</code>, żeby kontener widział podmianę montu bez restartu.</li> </ol> <h3 id="bazy-danych-zrzut-jest-źródłem-prawdy">Bazy danych: zrzut jest źródłem prawdy</h3> <p>Wolumeny Dockera na VM leżą na ext4 — nie ma snapshotów. Katalog <code class="language-plaintext highlighter-rouge">pg_data</code> skopiowany w trakcie zapisu jest bezwartościowy. Dlatego przed backupem chodzi generyczny skrypt: iteruje po kontenerach, znajduje te z montem <code class="language-plaintext highlighter-rouge">/var/lib/postgresql/data</code> lub <code class="language-plaintext highlighter-rouge">/var/lib/mysql</code>, robi <code class="language-plaintext highlighter-rouge">pg_dumpall</code> / <code class="language-plaintext highlighter-rouge">mariadb-dump --all-databases</code>, pakuje zstd do jednego katalogu. Szesnaście baz na dwóch VM, poniżej minuty łącznie.</p> <p>To jest decyzja architektoniczna, nie techniczna: <strong>backup katalogu bazy to artefakt pomocniczy, zrzut logiczny to źródło prawdy</strong>. Zapisałem to wprost w notatkach, żeby za pół roku nie kusiło mnie „przecież katalog też jest w Kopii”.</p> <h3 id="off-site-bez-płacenia-za-drugi-nas">Off-site bez płacenia za drugi NAS</h3> <p>Kopia ma wbudowane <code class="language-plaintext highlighter-rouge">repository sync-to</code>, a obraz kontenera zawiera rclone. Jeden skrypt, jeden cron o 05:00, cel: Google Drive z pakietu, który i tak miałem. 70 GB repozytorium (po deduplikacji i kompresji) synchronizuje się przyrostowo w kilka minut; pierwszy pełny sync zdjęć zajął noc. Jedyny warunek, którego przestrzegam: po pierwszym syncu <strong>podłączyłem się do kopii off-site z innego komputera i odpaliłem <code class="language-plaintext highlighter-rouge">kopia snapshot verify</code></strong>. Kopia sama ostrzega, że backend rclone jest „not actively tested” — więc testuję ja.</p> <hr> <h2 id="strażnik-data-observability-dla-backupów">Strażnik: data observability dla backupów</h2> <p>Tu zaczyna się część, dla której powstał ten wpis. Architektura powyżej ma pięć cronów na trzech maszynach i cztery różne logi. Nikt tego nie będzie czytał codziennie. Potrzebowałem jednego punktu, który o 04:00 zada każdemu źródłu backupu to samo pytanie: <strong>czy jesteś świeży, kompletny i bez błędów?</strong></p> <p>Zbudowałem to w <a href="https://n8n.io/" rel="external nofollow noopener" target="_blank">n8n</a>, które i tak stoi w homelabie. Workflow „Strażnik backupów”:</p> <ol> <li> <strong>Pobiera stan z API Kopii</strong> (<code class="language-plaintext highlighter-rouge">GET /api/v1/sources</code>) — jeden request daje wszystkie źródła ze wszystkich hostów: ostatni snapshot, rozmiar, liczbę plików, liczbę błędów.</li> <li> <strong>Ocenia każde źródło progami zdefiniowanymi per źródło</strong>, nie globalnie. Dane aplikacji: wiek ≤ 26 h, rozmiar ≥ 1 GB, pliki ≥ 5000, błędy = 0. Zdjęcia: ≥ 200 GB, ≥ 10 k plików. Backup komputera, który robi się raz w tygodniu: wiek ≤ 192 h.</li> <li> <strong>Sprawdza to, czego nie ma w Kopii</strong>: backupy VM przez API Proxmoxa (ostatni plik ≤ 30 h, ≥ 1 GB), replikację ZFS i alerty TrueNAS przez webhooki push z NAS-a, wynik off-site z kodu wyjścia skryptu.</li> <li> <strong>Brak źródła na liście = alarm krytyczny.</strong> To najważniejsza reguła. Backup, który przestał istnieć, nie zgłosi się sam.</li> <li> <strong>Wysyła wynik do jednego dyspozytora powiadomień</strong> (osobny workflow n8n), który normalizuje severity, deduplikuje po kluczu (<code class="language-plaintext highlighter-rouge">kopia:&lt;host&gt;:&lt;ścieżka&gt;</code>) i kieruje: krytyczne na Discord <code class="language-plaintext highlighter-rouge">#alerts</code> + push na telefon, informacyjne na <code class="language-plaintext highlighter-rouge">#backups</code>.</li> </ol> <p>Efekt: rano widzę czternaście zielonych linijek albo jedną czerwoną z konkretem. Nic pomiędzy.</p> <h3 id="pułapki-które-strażnik-wyłapał-w-pierwszym-tygodniu">Pułapki, które Strażnik wyłapał w pierwszym tygodniu</h3> <ul> <li> <strong>Strefa czasowa NAS-a była ustawiona na US Pacific.</strong> Crony NAS-a (snapshot ZFS 02:55, sync 05:00) chodziły 9 godzin później niż crony w kontenerach. Kopia przez kilka dni kopiowała snapshot sprzed 15 godzin. Backup „działał” — po prostu był stary. Wyszło dopiero, gdy porównałem znaczniki czasu w progu świeżości.</li> <li> <strong><code class="language-plaintext highlighter-rouge">stats.fileCount</code> w API Kopii zwraca 0</strong>, gdy snapshot korzysta z cache’a. Pierwszej nocy Strażnik krzyknął, że backup ma zero plików. Liczba w <code class="language-plaintext highlighter-rouge">summary.files</code> była poprawna. Próg musi patrzeć na właściwe pole — lekcja znana każdemu, kto pisał reguły DQ na źle udokumentowanym schemacie.</li> <li> <strong>Token API Proxmoxa z rolą „tylko audyt” zwracał pustą listę backupów</strong>, nie błąd. Strażnik raportował „brak backupu VM”, mimo że pliki leżały na NAS-ie. Proxmox ukrywa backupy bez uprawnień <code class="language-plaintext highlighter-rouge">VM.Backup</code> na konkretnej VM. Fałszywy alarm krytyczny jest gorszy niż brak alarmu — po tygodniu przestajesz czytać.</li> <li> <strong>Nowe źródła z klientów pojawiają się w API serwera dopiero po restarcie kontenera.</strong> Trzy dni Strażnik nie widział połowy backupów, bo lista była zbuforowana.</li> </ul> <h3 id="test-odtworzenia-bo-inaczej-to-nie-backup">Test odtworzenia, bo inaczej to nie backup</h3> <p>Zanim uznałem system za wdrożony: <code class="language-plaintext highlighter-rouge">qmrestore</code> całej VM z NFS-a do nowego ID (128 GB, 37 minut), start, sprawdzenie konfiguracji, <code class="language-plaintext highlighter-rouge">qm destroy</code>. Osobno odtworzenie pojedynczego katalogu z Kopii do <code class="language-plaintext highlighter-rouge">/tmp</code> i porównanie sum. Oba w notatkach z datą — bo za rok będę chciał wiedzieć, kiedy ostatnio to sprawdzałem.</p> <hr> <h2 id="co-z-tego-dla-data-governance">Co z tego dla Data Governance</h2> <p>Nie pisałem tego jako ćwiczenia z governance. Ale kiedy spojrzałem na gotowy system, zobaczyłem w nim jeden do jednego rzeczy, które robię zawodowo.</p> <p><strong>Progi Strażnika to wymiary jakości danych.</strong> Wiek snapshotu = <em>timeliness</em>. Minimalny rozmiar i liczba plików = <em>completeness</em>. Zero błędów w snapshocie = <em>validity</em>. Zgodność liczby źródeł z listą oczekiwanych = <em>consistency</em> między „co powinno być” a „co jest”. Pisałem <a href="/blog/2026/data-quality-dimensions/">o sześciu wymiarach DQ</a> pół roku temu; tu są te same wymiary zastosowane do metadanych backupu.</p> <p><strong>Polityka bez kontroli to dokument.</strong> Retencja 7/4/6 w Kopii to polityka. Strażnik to kontrola. W firmie nazwałbym to <em>data quality rule</em> podpiętą pod <em>data policy</em> — i dokładnie tak samo jak w firmie, bez kontroli polityka rozjeżdża się cicho (patrz: strefa czasowa).</p> <p><strong>Progi per źródło, nie globalne.</strong> Reguła „backup musi mieć ≥ 1 GB” jest bez sensu dla eksportu dokumentów (400 MB) i dla zdjęć (250 GB). W DQ to banał: progi kompletności ustala właściciel danych, nie zespół platformy. W homelabie właścicielem jestem ja, ale zasada jest ta sama — próg wynika ze znajomości danych.</p> <p><strong>Brak danych to najgroźniejszy stan danych.</strong> Najważniejsza reguła Strażnika — „źródła nie ma na liście = crit” — to odpowiednik kontroli <em>„tabela nie została załadowana”</em>, którą wiele zespołów pomija, bo sprawdzają jakość tylko tego, co przyszło.</p> <p><strong>Fałszywe alarmy zabijają kontrolę.</strong> Trzy z czterech pułapek powyżej to fałszywe pozytywy. Każdy z nich obniżał zaufanie do całego systemu. W governance mówi się o <em>alert fatigue</em>; w domu nazywa się to „wyciszyłem kanał na Discordzie”.</p> <p><strong>Źródło prawdy trzeba nazwać.</strong> Zrzut logiczny bazy, nie katalog z plikami. Zapisane wprost. To jest <em>system of record</em> w skali jednego człowieka.</p> <p>Nie twierdzę, że homelab uczy governance lepiej niż praca. Twierdzę, że <strong>te same zasady działają w obu skalach</strong> — a w domu widzisz konsekwencje ich łamania w tydzień, nie w kwartał.</p> <hr> <h2 id="co-dalej">Co dalej</h2> <ul> <li>Codzienny raport 14 zielonych linijek zamienić na zbiorczy poranny briefing; alarmy zostają natychmiastowe.</li> <li>Automatyczny test odtworzenia losowego pliku z off-site raz w miesiącu — zamiast polegać na tym, że przypomnę sobie za rok.</li> <li>Backup komputera domowego chodzi raz w tygodniu z progiem 192 h. To za rzadko dla dokumentów; do zmiany.</li> </ul> <p>Jeśli masz w homelabie backup, którego nie sprawdza nic poza Tobą — zacznij od jednego pytania zadawanego codziennie automatycznie: <em>ile godzin ma ostatni snapshot?</em> Reszta progów dojdzie sama.</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/data-quality-dimensions/">Wymiary jakości danych: praktyczny przewodnik po Data Quality</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/ai-models-dg/">AI w Data Governance: szanse, wyzwania i praktyczne zastosowania</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/ataccama/">Ataccama ONE — dlaczego wybrałem tę platformę do Data Governance</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/informatica/">Informatica jako narzędzie Data Governance: przegląd dla praktyków</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dg-standars/">Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dg-iso-standards/">Które normy ISO stosować w Data Governance? Praktyczny przegląd</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/data-governance-start/">Wstęp do Data Governance</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2023/guide-prompting/">Wstęp do Promptingu</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2023/history-visualization/">Historia wizualizacji danych</a> </li> </ul> <p class="mb-2" style="margin-top: 1.5rem !important">Subscribe to be notified of future articles:</p> <div class="newsletter-form-container"> <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/" method="POST" style="justify-content: flex-start"> <input class="newsletter-form-input" name="newsletter-form-input" type="email" placeholder="user@example.com" required=""> <button type="submit" class="newsletter-form-button" style="justify-content: flex-start"> Zapisz się </button> <button type="button" class="newsletter-loading-button" style="justify-content: flex-start"> Proszę czekać... </button> </form> <div class="newsletter-success" style="justify-content: flex-start"> <p class="newsletter-success-message">Zapisano pomyślnie! 🎉</p> </div> <div class="newsletter-error" style="justify-content: flex-start"> <p class="newsletter-error-message">Ups! Coś poszło nie tak, spróbuj ponownie.</p> </div> <button class="newsletter-back-button" type="button" onmouseout='this.style.textDecoration="none"' onmouseover='this.style.textDecoration="underline"'> ← Wróć </button> </div> <noscript> <style>
+    .newsletter-form-container {
+      display: none;
+    }
+  </style> </noscript> <div id="giscus_thread" style="max-width: 930px; margin: 0 auto;"> <br> <script>
+    (function setupGiscus() {
+      function determineGiscusTheme() {
+        var theme = localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "system";
+if (theme === "dark") return "dark";
+if (theme === "light") return "light";
+var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+return prefersDark ? "dark" : "light";
+
+      }
+
+      var giscusTheme = determineGiscusTheme();
+      var attrs = {
+        src: "https://giscus.app/client.js",
+        "data-repo": "Szymok/szymok.github.io",
+        "data-repo-id": "941286877",
+        "data-category": "Comments",
+        "data-category-id": "DIC_kwDOI7kDZc4CUF8S",
+        "data-mapping": "title",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "pl",
+        crossorigin: "anonymous",
+        async: true
+      };
+
+      var giscusScript = document.createElement("script");
+      Object.entries(attrs).forEach(function(entry) { giscusScript.setAttribute(entry[0], entry[1]); });
+      var host = document.getElementById("giscus_thread");
+      if (host) host.appendChild(giscusScript);
+    })();
+  </script> <noscript> Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Szymon Kowalewski. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <a href="https://skszymon.eu/privacy-policy/">Impressum</a>. Last updated: September 29, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js" integrity="sha256-TtLOdUA8mstPoO6sGvHIGx2ceXrrX4KgIItO06XOn8A=" crossorigin="anonymous"></script> <script defer src="/assets/al_charts/js/mermaid-setup.js" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script defer src="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.js" integrity="sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw=" crossorigin="anonymous"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/al_img_tools/js/lightbox2-adapter.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-cv",
+          title: "cv",
+          description: "Moje CV — doświadczenie zawodowe, edukacja i umiejętności.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "dropdown-ogród-wiedzy",
+              title: "🌱 ogród wiedzy",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/garden/";
+              },
+            },{id: "dropdown-biblioteczka",
+              title: "📚 biblioteczka",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/books/";
+              },
+            },{id: "post-backup-który-sam-mówi-czy-działa-kopia-n8n-jako-data-observability-w-homelabie",
+        
+          title: "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w...",
+        
+        description: "Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kopia-straznik-backupow/";
+          
+        },
+      },{id: "post-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality",
+        
+          title: "Wymiary jakości danych: praktyczny przewodnik po Data Quality",
+        
+        description: "6 wymiarów jakości danych, metryki, praktyczne wdrożenie i narzędzia - wszystko, co musisz wiedzieć o Data Quality w kontekście Data Governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/data-quality-dimensions/";
+          
+        },
+      },{id: "post-ai-w-data-governance-szanse-wyzwania-i-praktyczne-zastosowania",
+        
+          title: "AI w Data Governance: szanse, wyzwania i praktyczne zastosowania",
+        
+        description: "Jak AI zmienia zarządzanie danymi? Od automatycznej klasyfikacji PII po frontier data governance — analiza na podstawie pracy z arXiv.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ai-models-dg/";
+          
+        },
+      },{id: "post-ataccama-one-dlaczego-wybrałem-tę-platformę-do-data-governance",
+        
+          title: "Ataccama ONE — dlaczego wybrałem tę platformę do Data Governance",
+        
+        description: "Przegląd Ataccama ONE z perspektywy codziennego użytkownika — co potrafi, jak wygląda w praktyce i dla kogo się nadaje.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ataccama/";
+          
+        },
+      },{id: "post-informatica-jako-narzędzie-data-governance-przegląd-dla-praktyków",
+        
+          title: "Informatica jako narzędzie Data Governance: przegląd dla praktyków",
+        
+        description: "Przegląd platformy Informatica Data Governance — Axon, EDC, CLAIRE GPT. Co potrafi, do czego się nadaje i jak wypada na tle konkurencji.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/informatica/";
+          
+        },
+      },{id: "post-standardy-danych-czym-są-i-dlaczego-bez-nich-nie-zbudujesz-programu-dg",
+        
+          title: "Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?",
+        
+        description: "Czym są standardy danych, jak działają w praktyce i dlaczego interoperacyjność jest kluczowa — analiza na podstawie inicjatywy TransparenCEE.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dg-standars/";
+          
+        },
+      },{id: "post-które-normy-iso-stosować-w-data-governance-praktyczny-przegląd",
+        
+          title: "Które normy ISO stosować w Data Governance? Praktyczny przegląd",
+        
+        description: "Przegląd standardów ISO przydatnych w programie Data Governance — od jakości danych (ISO 8000) po bezpieczeństwo informacji (ISO 27001).",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dg-iso-standards/";
+          
+        },
+      },{id: "post-wstęp-do-data-governance",
+        
+          title: "Wstęp do Data Governance",
+        
+        description: "Od czego zacząć przygodę z zarządzaniem danymi? Kluczowe elementy, role i wyzwania — z perspektywy praktyka.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/data-governance-start/";
+          
+        },
+      },{id: "post-wstęp-do-promptingu",
+        
+          title: "Wstęp do Promptingu",
+        
+        description: "Praktyczny przewodnik po promptingu — zasady, iteracyjny rozwój, podsumowywanie, analiza sentymentu i transformacja tekstu z OpenAI API.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/guide-prompting/";
+          
+        },
+      },{id: "post-historia-wizualizacji-danych",
+        
+          title: "Historia wizualizacji danych",
+        
+        description: "Od malowideł naskalnych po Tableau — historia wizualizacji danych przez pryzmat Playfaira, Nightingale, Snowa, Minarda, Tukeya i Tufta.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/history-visualization/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-pierwszy-artykuł",
+          title: 'Pierwszy artykuł',
+          description: "",
+          section: "News",},{id: "news-opublikowałem-nowy-artykuł-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality-blog-2026-data-quality-dimensions-6-wymiarów-metryki-narzędzia-i-najczęstsze-błędy-wdrożeniowe",
+          title: 'Opublikowałem nowy artykuł: [Wymiary jakości danych — praktyczny przewodnik po Data Quality](/blog/2026/data-quality-dimensions/). 6...',
+          description: "",
+          section: "News",},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%68%65%6C%6C%6F@%73%6B%73%7A%79%6D%6F%6E.%65%75", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Szymok", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/skszymon", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/SkSzymon", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_newsletter/js/newsletter.js"></script> </body> </html>
