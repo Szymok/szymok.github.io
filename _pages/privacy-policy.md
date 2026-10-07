@@ -27,7 +27,7 @@ Dane przetwarzane są w następujących celach:
 
 ### 4. Okres przechowywania danych
 - **Newsletter**: do momentu wycofania zgody lub wypisania się, a następnie przez 6 lat wyłącznie w zakresie niezbędnym do wykazania zgody i obrony przed roszczeniami.
-- **Korespondencja**: do 2 lat od ostatniego kontaktu, a w razie zawarcia umowy — przez okres wynikający z przepisów podatkowych i rachunkowych.
+- **Korespondencja**: do 24 miesięcy od ostatniego kontaktu (dotyczy także kopii zapasowych), a w razie zawarcia umowy — przez okres wynikający z przepisów podatkowych i rachunkowych.
 - **Dane analityczne**: `[DO UZUPEŁNIENIA: okres retencji ustawiony w Umami, w tym osobno dla nagrań sesji]`.
 
 ### 5. Pliki Cookie (Ciasteczka)
