@@ -36,9 +36,9 @@ Strona wykorzystuje pliki cookie w celach analitycznych. Na stronie wdrożony je
 ### 6. Odbiorcy danych i przekazywanie poza EOG
 Dane mogą być powierzane podmiotom, które pomagają mi prowadzić stronę i wysyłkę wiadomości:
 - **Dostawca newslettera**: Loops (loops.so), USA — przetwarza adresy e-mail subskrybentów i wysyła wiadomości na podstawie umowy powierzenia przetwarzania danych. Dostawca może w przyszłości ulec zmianie (np. na własne rozwiązanie wysyłkowe); o zmianie poinformuję w tej polityce.
-- **Hosting i dostarczanie strony**: GitHub Pages (GitHub, Inc.) oraz Cloudflare, Inc. — technicznie przetwarzają ruch sieciowy (m.in. adresy IP) w celu udostępnienia strony.
+- **Hosting i dostarczanie strony**: GitHub Pages (GitHub, Inc.) oraz Cloudflare, Inc. (DNS i sieć dostarczania treści) — technicznie przetwarzają ruch sieciowy (m.in. adresy IP) w celu udostępnienia strony.
 - **Biblioteki ładowane z CDN**: m.in. jsDelivr (baner zgody na pliki cookie) — przy ładowaniu strony Twój adres IP trafia do operatora sieci dostarczania treści. `[DO UZUPEŁNIENIA: sprawdź w zakładce Network przeglądarki, czy strona ładuje zasoby z innych zewnętrznych domen (np. fonty, ikony), i wymień je.]`
-- **Dostawca poczty**: `[DO UZUPEŁNIENIA: dostawca skrzynki hello@skszymon.eu]`.
+- **Dostawca poczty**: xHosts — obsługuje skrzynkę hello@skszymon.eu, na którą trafia korespondencja.
 
 Jeżeli dostawca przetwarza dane poza Europejskim Obszarem Gospodarczym (w szczególności w USA), przekazanie odbywa się na podstawie mechanizmów zapewniających odpowiedni poziom ochrony, takich jak decyzja Komisji Europejskiej o odpowiednim stopniu ochrony (EU–US Data Privacy Framework) lub standardowe klauzule umowne. `[DO UZUPEŁNIENIA: sprawdź w umowie powierzenia (DPA) Loops, który mechanizm stosuje, i wpisz go tutaj.]`
 
