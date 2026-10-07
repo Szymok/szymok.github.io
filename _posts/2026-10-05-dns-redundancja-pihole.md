@@ -14,7 +14,7 @@ toc:
   sidebar: left
 ---
 
-# DNS z zapasem
+## DNS z zapasem
 
 Kiedy DNS w domu przestaje działać, nikt nie mówi „padł resolver". Mówi się: „internet nie działa". Telewizor nie wchodzi do aplikacji, telefon łączy się z Wi-Fi, ale nic się nie ładuje, a w homelabie kontenery jeden po drugim tracą połączenia z bazami i API.
 
