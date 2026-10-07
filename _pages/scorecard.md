@@ -21,15 +21,18 @@ Gotowy arkusz do zmierzenia jakości danych bez zakupu narzędzia. Oparty na [sz
 ## Pobierz arkusz
 
 <!--
-  [DO UZUPEŁNIENIA] Tu wstaw formularz zapisu do newslettera wybranego dostawcy
-  (np. Buttondown / MailerLite / Loops). Zasada: zapis -> mail powitalny z linkiem do pliku.
-  Plik leży pod adresem: /assets/files/data-quality-scorecard.xlsx
-  Link do pobrania daj w mailu powitalnym, nie na tej stronie, aby arkusz był „za bramką”.
+  Arkusz wysyła mail powitalny z Loops po zapisie (link do /assets/files/data-quality-scorecard.xlsx).
+  Link do pliku nie jest podany na tej stronie, aby arkusz był „za bramką”.
+  Formularz pojawia się dopiero, gdy w _config.yml ustawiono newsletter.endpoint.
 -->
 
-**`[DO UZUPEŁNIENIA: formularz zapisu do newslettera]`**
+{% if site.newsletter.enabled and site.newsletter.endpoint %}
+{% include newsletter.liquid left=true %}
+{% else %}
+**Formularz zapisu będzie dostępny wkrótce.** Do tego czasu napisz na [hello@skszymon.eu](mailto:hello@skszymon.eu?subject=Data%20Quality%20Scorecard), a odeślę arkusz.
+{% endif %}
 
-Zapisując się, dostajesz arkusz mailem oraz okazjonalne wpisy o Data Governance i Data Quality (rzadko, bez spamu). Wypisać się możesz jednym kliknięciem. Szczegóły: [polityka prywatności](/privacy-policy/).
+Podając adres e-mail, zapisujesz się do newslettera i wyrażasz zgodę na otrzymanie arkusza oraz okazjonalnych wiadomości o Data Governance i Data Quality (rzadko, bez spamu). Zgodę możesz wycofać w każdej chwili linkiem w stopce wiadomości. Administratorem danych jest Szymon Kowalewski; szczegóły w [polityce prywatności](/privacy-policy/).
 
 ## Potrzebujesz czegoś więcej?
 
