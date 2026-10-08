@@ -232,6 +232,10 @@ exclude:
   - gems/
   - migrations/
   - vendor
+  # CV is hidden on purpose (experience lives on LinkedIn). The files stay in the repo but are not published.
+  - assets/json/resume.json
+  - assets/pdf/cv_en_it_s_kowalewski.pdf
+  - assets/pdf/cv_pl_it_s_kowalewski.pdf
 keep_files:
   - CNAME
   - .nojekyll
