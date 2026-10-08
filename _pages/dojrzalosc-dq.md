@@ -24,7 +24,8 @@ Wynik liczy się w Twojej przeglądarce. Odpowiedzi nie są wysyłane na serwer 
   .dq-option input { margin-top: 0.3rem; flex: none; }
   .dq-option label { cursor: pointer; }
   .dq-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0; }
-  .dq-btn { padding: 0.6rem 1.2rem; border: 1px solid transparent; border-radius: 6px; font: inherit; font-weight: 600; cursor: pointer; background: #1f3a5f; color: #fff; }
+  .dq-btn { padding: 0.6rem 1.2rem; border: 1px solid transparent; border-radius: 6px; font: inherit; font-weight: 600; cursor: pointer; background: var(--global-theme-color, #1d4b8f); color: #fff; }
+  html[data-theme="dark"] .dq-btn:not(.dq-btn-secondary) { color: #1c1c1d; }
   .dq-btn:hover, .dq-btn:focus-visible { filter: brightness(1.15); }
   .dq-btn-secondary { background: transparent; color: inherit; border-color: color-mix(in srgb, currentColor 35%, transparent); }
   .dq-status { min-height: 1.5em; font-size: 0.95rem; opacity: 0.85; }

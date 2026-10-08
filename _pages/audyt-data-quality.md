@@ -1,11 +1,10 @@
 ---
 layout: page
 permalink: /audyt-data-quality/
-title: Audyt jakości danych (Data Quality)
-description: "Audyt jakości danych dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni. Szymon Kowalewski, Data Governance Specialist."
+title: Audyt jakości danych
+description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni. Szymon Kowalewski, Data Governance Specialist."
 nav: true
 nav_order: 2
-nav_title: oferta
 ---
 
 <div class="offer-hero">
@@ -130,6 +129,7 @@ Napisz na [hello@skszymon.eu](mailto:hello@skszymon.eu?subject=Audyt%20Data%20Qu
   .offer-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0 0; }
   .offer-btn { display: inline-block; padding: 0.6rem 1.2rem; border: 2px solid var(--global-theme-color, #4f46e5); border-radius: 6px; background: var(--global-theme-color, #4f46e5); color: #fff; font-weight: 600; text-decoration: none; }
   .offer-btn:hover, .offer-btn:focus-visible { filter: brightness(1.12); color: #fff; text-decoration: none; }
+  html[data-theme="dark"] .offer-btn:not(.offer-btn-ghost), html[data-theme="dark"] .offer-btn:not(.offer-btn-ghost):hover { color: #1c1c1d; }
   .offer-btn-ghost { background: transparent; color: var(--global-theme-color, #4f46e5); }
   .offer-btn-ghost:hover, .offer-btn-ghost:focus-visible { color: var(--global-theme-color, #4f46e5); background: color-mix(in srgb, var(--global-theme-color, #4f46e5) 10%, transparent); }
 </style>
