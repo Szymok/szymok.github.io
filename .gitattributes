@@ -1,2 +1,6 @@
 # Force LF line endings, needed for Docker to work on Windows
 *.sh text eol=lf
+
+# Self-hosted third-party files must stay byte-identical to the CDN originals,
+# otherwise their SRI hashes (integrity=...) no longer match and browsers block them.
+assets/third-party/** -text
