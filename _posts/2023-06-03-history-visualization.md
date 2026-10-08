@@ -6,6 +6,7 @@ description: Od malowideł naskalnych po Tableau — historia wizualizacji danyc
 tags: analiza-danych narzedzia historia wizualizacje visualization edukacja 
 categories: article
 giscus_comments: true
+published: false # off-topic for the site (DQ/DG, AI, homelab) and no visits in Umami; file kept, set to true to restore
 featured: false
 toc:
   sidebar: left
