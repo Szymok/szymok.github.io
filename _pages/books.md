@@ -3,6 +3,7 @@ layout: book-shelf
 title: bookshelf
 permalink: /books/
 nav: false
+published: false # biblioteczka ukryta; usuń tę linię i przywróć wpis w dropdown.md, aby ją pokazać
 collection: books
 ---
 
