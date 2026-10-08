@@ -4,8 +4,6 @@ permalink: /audyt-data-quality/
 title: Audyt Data Quality
 description: Audyt jakości danych dla firm średniej wielkości — trzy pakiety, stała cena, wynik w kilka tygodni. Szymon Kowalewski, Data Governance Specialist.
 nav: false
-# PROPOZYCJA OFERTY: ceny i terminy do zatwierdzenia. Usuń poniższą linię po akceptacji, aby strona trafiła do sitemapy.
-sitemap: false
 ---
 
 Raporty, które nie zgadzają się ze sobą. Klient w systemie pod trzema nazwami. Decyzje podejmowane na liczbach, którym nikt do końca nie ufa. Audyt Data Quality odpowiada na dwa pytania: **jak złe są Twoje dane** i **co naprawić najpierw**.
