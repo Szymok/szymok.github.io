@@ -372,8 +372,8 @@ scholar:
 # Display different badges withs stats for your publications
 # Customize badge behavior in _layouts/bib.liquid
 enable_publication_badges:
-  altmetric: true # Altmetric badge (Customization options: https://badge-docs.altmetric.com/index.html)
-  dimensions: true # Dimensions badge (Customization options: https://badge.dimensions.ai/)
+  altmetric: false # Altmetric badge (Customization options: https://badge-docs.altmetric.com/index.html); off: loads third-party scripts before consent
+  dimensions: false # Dimensions badge (Customization options: https://badge.dimensions.ai/); off: loads third-party scripts before consent
   google_scholar: true # Google Scholar badge (https://scholar.google.com/intl/en/scholar/citations.html)
   inspirehep: true # Inspire HEP badge (https://help.inspirehep.net/knowledge-base/citation-metrics/)
 
@@ -464,13 +464,13 @@ lazy_loading_images: true # enables lazy loading of images (recommended)
 enable_google_verification: false # enables google site verification
 enable_bing_verification: false # enables bing site verification
 enable_cookie_consent: false # enables GDPR-compliant cookie consent dialog (https://github.com/orestbida/cookieconsent)
-enable_masonry: true # enables automatic project cards arrangement
-enable_math: true # enables math typesetting (uses MathJax)
+enable_masonry: false # enables automatic project cards arrangement; off: the projects page is hidden, avoids third-party scripts
+enable_math: false # enables math typesetting (uses MathJax); off: no formulas on the blog, MathJax is ~250 KB from a third-party CDN
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
 enable_darkmode: true # enables switching between light/dark modes
 enable_navbar_social: true # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
-enable_medium_zoom: true # enables image zoom feature (as on medium.com)
+enable_medium_zoom: false # enables image zoom feature (as on medium.com); off: the plugin hardcodes a third-party CDN URL that cannot be self-hosted via config
 enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
@@ -495,13 +495,13 @@ third_party_libraries:
     integrity:
       css: "sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c="
     url:
-      css: "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@{{version}}/css/all.min.css"
+      css: "/assets/third-party/fontawesome/css/all.min.css" # self-hosted copy of fontawesome-free@7.2.0 (SRI-verified)
     version: "7.2.0"
   academicons:
     integrity:
       css: "sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw="
     url:
-      css: "https://cdn.jsdelivr.net/npm/academicons@{{version}}/css/academicons.min.css"
+      css: "/assets/third-party/academicons/css/academicons.min.css" # self-hosted copy of academicons@1.9.5 (SRI-verified)
     version: "1.9.5"
   chartjs:
     integrity:
@@ -617,8 +617,8 @@ third_party_libraries:
       css: "sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0="
       js: "sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw="
     url:
-      css: "https://cdn.jsdelivr.net/npm/tocbot@{{version}}/dist/tocbot.css"
-      js: "https://cdn.jsdelivr.net/npm/tocbot@{{version}}/dist/tocbot.min.js"
+      css: "/assets/third-party/tocbot/dist/tocbot.css" # self-hosted copy of tocbot@4.36.4 (SRI-verified)
+      js: "/assets/third-party/tocbot/dist/tocbot.min.js"
     version: "4.36.4"
   plotly:
     integrity:
@@ -642,13 +642,13 @@ third_party_libraries:
     integrity:
       css: "sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY="
     url:
-      css: "https://cdn.jsdelivr.net/npm/scholar-icons@{{version}}/css/scholar-icons.css"
+      css: "/assets/third-party/scholar-icons/css/scholar-icons.css" # self-hosted copy of scholar-icons@1.0.3 (SRI-verified)
     version: "1.0.3"
   vanilla-back-to-top:
     integrity:
       js: "sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg="
     url:
-      js: "https://cdn.jsdelivr.net/npm/vanilla-back-to-top@{{version}}/dist/vanilla-back-to-top.min.js"
+      js: "/assets/third-party/vanilla-back-to-top/dist/vanilla-back-to-top.min.js" # self-hosted copy of vanilla-back-to-top@7.2.1 (SRI-verified)
     version: "7.2.1"
   vanilla-cookieconsent:
     integrity:

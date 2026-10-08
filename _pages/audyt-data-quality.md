@@ -205,3 +205,13 @@ Pracuję na dostępie tylko do odczytu lub na próbkach, po podpisaniu umowy o p
 {"@type":"Question","name":"Jak ocenię, czy audyt się opłacił?","acceptedAnswer":{"@type":"Answer","text":"Dostajesz wynik wyjściowy w każdym wymiarze, liczbę reguł poniżej uzgodnionego progu i listę właścicieli z terminami. Po 90 dniach powtarzamy pomiar i porównujemy z punktem wyjścia."}}
 ]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Person","@id":"https://skszymon.eu/#szymon-kowalewski","name":"Szymon Kowalewski","jobTitle":"Data Governance Specialist","url":"https://skszymon.eu/","email":"hello@skszymon.eu","knowsAbout":["Data Quality","Data Governance","Master Data Management","Ataccama ONE"],"sameAs":["https://www.linkedin.com/in/skszymon","https://github.com/Szymok","https://x.com/SkSzymon"]},
+{"@type":"Service","@id":"https://skszymon.eu/audyt-data-quality/#service","name":"Audyt jakości danych","serviceType":"Audyt Data Quality","description":"Pomiar jakości danych w sześciu wymiarach, lista priorytetów i plan wdrożenia na 90 dni. Stała cena, raport w kilka tygodni.","url":"https://skszymon.eu/audyt-data-quality/","inLanguage":"pl","provider":{"@id":"https://skszymon.eu/#szymon-kowalewski"},"areaServed":{"@type":"Country","name":"Polska"},"offers":[
+{"@type":"Offer","name":"Mini-audyt","priceSpecification":{"@type":"PriceSpecification","minPrice":3500,"priceCurrency":"PLN","valueAddedTaxIncluded":false}},
+{"@type":"Offer","name":"Audyt standardowy","priceSpecification":{"@type":"PriceSpecification","minPrice":9000,"priceCurrency":"PLN","valueAddedTaxIncluded":false}},
+{"@type":"Offer","name":"Audyt + start wdrożenia","priceSpecification":{"@type":"PriceSpecification","minPrice":15000,"priceCurrency":"PLN","valueAddedTaxIncluded":false}}
+]}
+]}
+</script>
