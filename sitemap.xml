@@ -1,0 +1,35 @@
+---
+layout: null
+sitemap: false
+---
+{%- comment -%}
+  Własny sitemap zamiast domyślnego z jekyll-sitemap (wtyczka pomija generowanie, gdy ten plik istnieje).
+  Powód: strony archiwów (tagi, kategorie, roczniki, paginacja) i demonstracyjne strony szablonu
+  nie mają własnej wartości dla wyszukiwarki i rozmywają mapę strony.
+  Pojedyncza strona wypada z mapy także przez `sitemap: false` w jej front matter.
+{%- endcomment -%}
+{%- assign skip = "/news/,/people/,/projects/,/publications/,/repositories/,/teaching/,/tiktok-tos/,/404.html" | split: "," -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for post in site.posts %}
+  {%- if post.sitemap == false %}{% continue %}{% endif %}
+  <url>
+    <loc>{{ post.url | absolute_url | xml_escape }}</loc>
+    <lastmod>{{ post.last_modified_at | default: post.date | date_to_xmlschema }}</lastmod>
+  </url>
+{%- endfor %}
+{%- for page in site.html_pages %}
+  {%- assign u = page.url | replace: "/index.html", "/" %}
+  {%- assign parts = u | split: "/" %}
+  {%- assign is_year = false %}
+  {%- if parts.size == 3 and parts[1] == "blog" %}
+    {%- assign y = parts[2] | plus: 0 %}
+    {%- if y > 1999 %}{% assign is_year = true %}{% endif %}
+  {%- endif %}
+  {%- if page.sitemap == false or is_year or skip contains u %}{% continue %}{% endif %}
+  {%- if u contains "/_pages/" or u contains "/blog/tag/" or u contains "/blog/category/" or u contains "/blog/page/" %}{% continue %}{% endif %}
+  <url>
+    <loc>{{ u | absolute_url | xml_escape }}</loc>
+  </url>
+{%- endfor %}
+</urlset>
