@@ -11,13 +11,13 @@ profile:
   image_circular: true # crops the image to make it circular
   more_info: >
     <p>Data Governance Specialist</p>
-    <p>BEST S.A. · Trójmiasto</p>
+    <p>Trójmiasto</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
 announcements:
-  enabled: true # includes a list of news items
+  enabled: false # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
 
@@ -63,7 +63,7 @@ Wcześniej pracowałem jako Data Consultant (Hogart/Pernod Ricard), Junior Data 
   html[data-theme="dark"] .home-btn:not(.home-btn-ghost), html[data-theme="dark"] .home-btn:not(.home-btn-ghost):hover { color: #1c1c1d; }
   .home-btn-ghost { background: transparent; color: var(--global-theme-color, #1d4b8f); }
   .home-btn-ghost:hover, .home-btn-ghost:focus-visible { color: var(--global-theme-color, #1d4b8f); background: color-mix(in srgb, var(--global-theme-color, #1d4b8f) 10%, transparent); }
-  .home-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.75rem; margin: 0.75rem 0 1.5rem; }
+  .home-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 0.75rem; margin: 0.75rem 0 1.5rem; }
   .home-card { display: block; padding: 0.9rem 1rem; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); border-radius: 8px; color: inherit; text-decoration: none; }
   .home-card:hover, .home-card:focus-visible { border-color: var(--global-theme-color, #1d4b8f); text-decoration: none; }
   .home-card strong { display: block; color: var(--global-theme-color, #1d4b8f); }
