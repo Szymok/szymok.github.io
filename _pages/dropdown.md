@@ -7,6 +7,4 @@ dropdown: true
 children:
   - title: 🌱 ogród wiedzy
     permalink: /garden/
-  - title: 📚 biblioteczka
-    permalink: /books/
 ---
