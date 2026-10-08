@@ -1,0 +1,10 @@
+name: dq-profiler
+version: 0.1.1
+tag: v0.1.1
+commit: c12855ee5e482c23f2f908185d1adfb637cbcf15
+working-tree: clean
+sha256:
+42d415fb7149b628b6a158a11eab2809fabfbdbde5bcd95224ef110a62863e68  assets/index-CJm3lhD5.js
+ea15c9d51dea775b5ff449d5fc9c9ca387062b895dcdfe55d078d16499df7918  assets/index-W8nmIlE7.css
+61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66  favicon.svg
+fd2c4016a47e61069bc9882dc7cb4b8a2a893549b61a5c3fd5b00abbde25de83  index.html
