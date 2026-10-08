@@ -12,7 +12,7 @@ cleanup() {
 trap cleanup EXIT
 
 fail() {
-  echo "profiler integration check failed: $*" >&2
+  printf 'profiler integration check failed: %b\n' "$*" >&2
   exit 1
 }
 
@@ -55,14 +55,19 @@ version="${app_dir}/VERSION"
 grep -q '^working-tree: clean$' "${version}" || fail "VERSION records a build from an unclean working tree"
 grep -Eq '^tag: v[0-9]+\.[0-9]+\.[0-9]+$' "${version}" || fail "VERSION does not record a release tag"
 checked=0
+mismatches=""
 while read -r expected path; do
   [ -n "${path}" ] || continue
   [ -f "${app_dir}/${path}" ] || fail "VERSION lists ${path} but it is missing from the site"
   actual="$(sha256_of "${app_dir}/${path}")"
-  [ "${actual}" = "${expected}" ] || fail "checksum mismatch for ${path} (the built site differs from the release)"
+  if [ "${actual}" != "${expected}" ]; then
+    # Collect every difference (not only the first) with sizes, to show what the build pipeline altered.
+    mismatches="${mismatches}\n  ${path}: release ${expected:0:12}, built site ${actual:0:12} ($(wc -c <"${app_dir}/${path}" | tr -d ' ') bytes)"
+  fi
   checked=$((checked + 1))
 done < <(sed -n '/^sha256:$/,$p' "${version}" | tail -n +2)
 [ "${checked}" -gt 0 ] || fail "VERSION lists no files"
+[ -z "${mismatches}" ] || fail "the built site differs from the release:${mismatches}"
 
 # --- the descriptive page: exists, links to the app, no iframe ---
 [ -f "${landing}" ] || fail "missing ${landing}"
