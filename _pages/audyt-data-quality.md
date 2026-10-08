@@ -2,79 +2,94 @@
 layout: page
 permalink: /audyt-data-quality/
 title: Audyt Data Quality
-description: Audyt jakości danych dla firm średniej wielkości — zakres, rezultaty, przebieg i cena. Szymon Kowalewski, Data Governance Specialist.
+description: Audyt jakości danych dla firm średniej wielkości — trzy pakiety, stała cena, wynik w kilka tygodni. Szymon Kowalewski, Data Governance Specialist.
 nav: false
-# SZKIELET: usuń poniższą linię dopiero po uzupełnieniu wszystkich pól [DO UZUPEŁNIENIA]
+# PROPOZYCJA OFERTY: ceny i terminy do zatwierdzenia. Usuń poniższą linię po akceptacji, aby strona trafiła do sitemapy.
 sitemap: false
 ---
 
-> **SZKIELET STRONY.** Wszystkie fragmenty oznaczone `[DO UZUPEŁNIENIA]` wymagają Twojej decyzji. Teksty są propozycją wyjściową, nie gotową ofertą. Przed publikacją usuń ten cytat oraz `sitemap: false` z front matter.
-
 Raporty, które nie zgadzają się ze sobą. Klient w systemie pod trzema nazwami. Decyzje podejmowane na liczbach, którym nikt do końca nie ufa. Audyt Data Quality odpowiada na dwa pytania: **jak złe są Twoje dane** i **co naprawić najpierw**.
+
+Nie wiesz, od czego zacząć? Zrób 5-minutowy [test dojrzałości Data Quality](/dojrzalosc-dq/) albo pobierz [arkusz Scorecard](/scorecard/) i zmierz pierwszy zbiór samodzielnie.
 
 ## Dla kogo
 
-- Firmy `[DO UZUPEŁNIENIA: przedział wielkości, np. 50–500 osób]`, które mają dane w kilku systemach (CRM, ERP, hurtownia), ale nie mierzą ich jakości.
-- Zespoły, które planują wdrożenie narzędzia DQ lub programu Data Governance i chcą zacząć od faktów, a nie od zakupu licencji.
+- Firmy zatrudniające **50–500 osób**, które mają dane w kilku systemach (CRM, ERP, hurtownia), ale nie mierzą ich jakości.
+- Zespoły, które planują wdrożenie narzędzia Data Quality lub programu Data Governance i chcą zacząć od faktów, a nie od zakupu licencji.
 - Osoby odpowiedzialne za dane (data owner, kierownik BI, CDO), które potrzebują argumentów dla zarządu.
+
+## Trzy pakiety
+
+| | **Mini-audyt** | **Audyt standardowy** | **Audyt + start wdrożenia** |
+|---|---|---|---|
+| Dla kogo | pierwszy pomiar jednego obszaru | cała firma lub dział, kilka systemów | firma gotowa wdrażać od razu |
+| Zakres danych | 1 zbiór / system | do 3 zbiorów | do 3 zbiorów |
+| Reguły jakości | do 10 | do 20 | do 20 + konfiguracja pierwszych |
+| Scorecard w 6 wymiarach | tak | tak | tak |
+| Lista priorytetów | tak | tak | tak |
+| Warsztat z właścicielami danych | — | tak (2 h) | tak (2 h) |
+| Plan wdrożenia na 90 dni | skrót | pełny | pełny |
+| Rekomendacja narzędziowa | — | tak | tak |
+| Podsumowanie dla zarządu (1 strona) | tak | tak | tak |
+| Wsparcie po audycie | — | — | 2 sesje po 90 min |
+| Czas realizacji | 2–3 tygodnie | 4–6 tygodni | 6–8 tygodni |
+| **Cena netto** | **od 3 500 zł** | **od 9 000 zł** | **od 15 000 zł** |
+
+Cena jest stała i ustalana przed startem na podstawie liczby systemów i dostępnych danych. Nie rozliczam godzin ani nie przedłużam pracy bez Twojej zgody.
+
+**Pilotaż.** Dla dwóch pierwszych firm cena jest niższa o 30% w zamian za zgodę na anonimowe studium przypadku (bez nazwy firmy, bez danych) i krótką opinię po zakończeniu. Zapytaj o dostępność.
 
 ## Co dostajesz
 
-`[DO UZUPEŁNIENIA: potwierdź lub zmień listę rezultatów]`
-
 1. **Scorecard jakości danych** — pomiar w sześciu wymiarach ([dokładność, kompletność, spójność, aktualność, unikalność, zgodność formatu](/blog/2026/data-quality-dimensions/)) dla wybranych zbiorów.
-2. **Lista priorytetów** — 10 najważniejszych reguł jakości z progami akceptacji i proponowanymi właścicielami.
-3. **Plan wdrożenia na 90 dni** — kolejność działań, role (data owner, data steward) i szacunek pracochłonności.
-4. **Rekomendacja narzędziowa** — co wystarczy zrobić w istniejącym stosie, a gdzie sensowne jest dedykowane narzędzie (niezależnie od dostawcy).
+2. **Lista priorytetów** — najważniejsze reguły jakości z progami akceptacji i proponowanymi właścicielami.
+3. **Plan wdrożenia** — kolejność działań, role (data owner, data steward) i szacunek pracochłonności.
+4. **Rekomendacja narzędziowa** (pakiety Standard i Start) — co wystarczy zrobić w istniejącym stosie, a gdzie sensowne jest dedykowane narzędzie, niezależnie od dostawcy.
 5. **Podsumowanie dla zarządu** — jedna strona: stan, ryzyka, koszt bezczynności, proponowane kroki.
 
 ## Jak to wygląda
 
-`[DO UZUPEŁNIENIA: dopasuj czas trwania i liczbę spotkań]`
-
 | Etap | Co się dzieje | Czas |
 |------|---------------|------|
-| 1. Rozmowa wstępna | Cele, systemy, wybór 2–3 zbiorów do audytu | `[np. 60 min, bezpłatnie]` |
-| 2. Dostęp i profilowanie | Przegląd struktur i próbek danych, pomiar metryk | `[np. 3–5 dni]` |
-| 3. Warsztat z właścicielami danych | Weryfikacja wyników, ustalenie progów i odpowiedzialności | `[np. 2 h]` |
-| 4. Raport i prezentacja | Scorecard, priorytety, plan 90 dni | `[np. 3 dni]` |
+| 1. Rozmowa wstępna | Cele, systemy, wybór zbiorów do audytu; bezpłatnie | 45–60 min |
+| 2. Umowa i dostęp | Umowa o poufności, dostęp tylko do odczytu lub próbki danych | 3–5 dni |
+| 3. Profilowanie i pomiar | Przegląd struktur, pomiar metryk, szkic reguł | 1–2 tygodnie |
+| 4. Warsztat z właścicielami danych | Weryfikacja wyników, ustalenie progów i odpowiedzialności | 2 h |
+| 5. Raport i prezentacja | Scorecard, priorytety, plan 90 dni | 1 tydzień |
+
+Prowadzę audyty równolegle z pracą etatową, dlatego terminy podaję w tygodniach, a nie dniach roboczych. Dzięki temu są realne.
 
 ## Zakres i granice
 
-**W zakresie:** `[DO UZUPEŁNIENIA, np. do 3 zbiorów danych, do 10 reguł, jeden raport końcowy]`.
+**W zakresie:** pomiar jakości wybranych zbiorów, reguły, progi, scorecard, rekomendacje i plan wdrożenia. Raport końcowy w formie dokumentu i prezentacji.
 
-**Poza zakresem:** `[DO UZUPEŁNIENIA, np. wdrożenie narzędzia, naprawa danych w systemach źródłowych, utrzymanie]`. Wdrożenie reguł i monitoring można zamówić osobno.
-
-## Cena
-
-`[DO UZUPEŁNIENIA: stała cena lub widełki, np. „od X zł netto za pakiet standardowy”]`
-
-Cena jest stała i ustalana przed startem. Nie rozliczam godzin ani nie przedłużam pracy bez Twojej zgody.
+**Poza zakresem:** wdrożenie narzędzia, naprawa danych w systemach źródłowych oraz stałe utrzymanie i monitoring. Można je zamówić osobno po audycie.
 
 ## Dane i poufność
 
 - Pracuję na dostępie tylko do odczytu i na próbkach, jeśli to wystarczy do celu audytu.
-- Przed startem podpisujemy umowę o zachowaniu poufności `[DO UZUPEŁNIENIA: potwierdź model, np. NDA / klauzula w umowie]`.
+- Przed startem podpisujemy umowę o zachowaniu poufności.
 - Dane osobowe przetwarzam wyłącznie na podstawie umowy powierzenia, jeśli ich zakres tego wymaga.
+- Wyniki i dane nie opuszczają Twojego środowiska, o ile nie uzgodnimy inaczej.
 
 ## Kim jestem
 
 Jestem Data Governance Specialist, na co dzień zarządzam obszarem Data Governance i Data Quality oraz pracuję z platformą Ataccama ONE: wdrażam reguły jakości, katalog danych i procesy Master Data Management. Wcześniej pracowałem jako Data Consultant i Data Engineer. Piszę o tym na blogu — zacznij od [wymiarów jakości danych](/blog/2026/data-quality-dimensions/) lub [wyboru platformy Data Governance](/blog/2025/ataccama/).
 
-`[DO UZUPEŁNIENIA: 1–2 zdania o konkretnych wynikach z wdrożeń, jeśli możesz je ujawnić (liczby, branża). Nie wpisuj niczego, czego nie możesz udokumentować.]`
+<!-- Dodaj tu 1–2 zdania o konkretnych wynikach z wdrożeń, jeśli możesz je ujawnić (liczby, branża). Nie wpisuj niczego, czego nie możesz udokumentować. -->
 
 ## Najczęstsze pytania
 
 **Czy muszę mieć narzędzie Data Quality?** Nie. Audyt działa na istniejących źródłach i zapytaniach. Rekomendacja narzędzia jest jednym z rezultatów, nie warunkiem.
 
-**Jak długo trwa audyt?** `[DO UZUPEŁNIENIA, np. ok. 2–3 tygodnie od startu do raportu]`.
-
 **Co jeśli wyniki będą złe?** To normalne — większość organizacji ma dane gorsze, niż zakłada. Celem jest ustalenie, co naprawić najpierw, a nie ocena ludzi.
 
-**Czy pomożesz we wdrożeniu?** `[DO UZUPEŁNIENIA: tak/nie i na jakich zasadach]`.
+**Czy pomożesz we wdrożeniu?** Tak, jako osobne zlecenie po audycie albo w pakiecie "Audyt + start wdrożenia". Zakres wyceniam indywidualnie.
+
+**Czy możemy zacząć od mini-audytu i rozszerzyć go później?** Tak. Cena mini-audytu jest zaliczana na poczet audytu standardowego, jeśli zdecydujesz się na niego w ciągu 60 dni.
+
+**Dlaczego od 3 500 zł?** Cena obejmuje 16–20 godzin pracy: profilowanie, reguły, scorecard i raport. Dokładną wycenę podaję po rozmowie wstępnej.
 
 ## Umów rozmowę
 
-Napisz na [hello@skszymon.eu](mailto:hello@skszymon.eu?subject=Audyt%20Data%20Quality) z krótkim opisem: jakie systemy, jaki problem, jaki termin. Odpowiadam `[DO UZUPEŁNIENIA: np. w ciągu 2 dni roboczych]`.
-
-Na start możesz też pobrać [arkusz Data Quality Scorecard](/scorecard/) i zrobić pierwszy pomiar samodzielnie.
+Napisz na [hello@skszymon.eu](mailto:hello@skszymon.eu?subject=Audyt%20Data%20Quality) z krótkim opisem: jakie systemy, jaki problem, jaki termin. Odpowiadam w ciągu 2 dni roboczych.

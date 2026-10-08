@@ -208,6 +208,8 @@ W kolejnych artykułach planuję zagłębić się w praktyczne aspekty **Master 
 > 🌱 Więcej pojęć z zakresu Data Engineering, Data Quality i AI znajdziesz w moim [Ogrodzie Wiedzy](/garden/).
 
 > 📊 **Do pobrania:** [Data Quality Scorecard (Excel)](/scorecard/) — arkusz z regułami, progami i semaforem opisanymi w tym artykule.
+>
+> 🧭 **Sprawdź, gdzie jesteś:** [test dojrzałości Data Quality](/dojrzalosc-dq/) (12 pytań, 5 minut).
 
 ---
 
