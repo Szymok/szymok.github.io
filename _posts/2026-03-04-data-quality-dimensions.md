@@ -11,8 +11,6 @@ toc:
   sidebar: left
 ---
 
-# Wymiary jakości danych: praktyczny przewodnik po Data Quality
-
 Data Governance to nie tylko polityki i standardy - to przede wszystkim **jakość danych**, na których opieramy decyzje biznesowe. W tym artykule zagłębiam się w praktyczne aspekty Data Quality: od sześciu kluczowych wymiarów, przez mierzenie jakości, po konkretne strategie wdrożeniowe.
 
 ---

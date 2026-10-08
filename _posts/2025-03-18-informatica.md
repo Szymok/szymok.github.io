@@ -11,7 +11,7 @@ toc:
   sidebar: left
 ---
 
-# Informatica jako narzędzie Data Governance
+## Informatica jako narzędzie Data Governance
 
 W [poprzednich artykułach](/blog/2024/data-governance-start/) pisałem o fundamentach Data Governance — o ludziach, procesach i dopiero potem o technologii. Ten post dotyczy właśnie tej trzeciej warstwy: **konkretnego narzędzia**. Informatica to jeden z najdłużej obecnych graczy na rynku zarządzania danymi, więc warto wiedzieć, co oferuje.
 

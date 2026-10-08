@@ -30,4 +30,6 @@ Specjalizuję się w `zarządzaniu danymi` i `jakości danych`, pomagając organ
 
 Na tym blogu będę pisał głównie o **AI**, **Data Governance & Quality** oraz **self-hostingu**. Chcę dzielić się tu swoimi doświadczeniami, dokumentując drogowskazy w świecie danych, automatyzacji oraz hostowania własnych usług.
 
+Dłuższe omówienia znajdziesz na [blogu](/blog/), a moje notatki robocze z Data Governance, Data Quality i AI zbieram w [ogrodzie wiedzy](/garden/). Dobry punkt startowy: [wymiary jakości danych](/blog/2026/data-quality-dimensions/).
+
 Wcześniej pracowałem jako Data Consultant (Hogart/Pernod Ricard), Junior Data Engineer (No Fluff Jobs) oraz Data Scout (Statscore). Jestem absolwentem `Informatyki i Ekonometrii` na Uniwersytecie Gdańskim.

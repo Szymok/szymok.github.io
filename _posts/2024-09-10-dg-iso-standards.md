@@ -11,7 +11,7 @@ toc:
   sidebar: left
 ---
 
-# Które normy ISO stosować w Data Governance?
+## Które normy ISO stosować w Data Governance?
 
 Standardy ISO mogą brzmieć jak biurokratyczny koszmar, ale w programie Data Governance pełnią realną funkcję — dają **audytowalny punkt odniesienia** dla regulatorów, zarządu i partnerów biznesowych. Zamiast wymyślać koło od nowa, możesz oprzeć się na sprawdzonych frameworkach.
 

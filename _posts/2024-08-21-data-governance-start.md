@@ -11,7 +11,7 @@ toc:
   sidebar: left
 ---
 
-# Wstęp do Data Governance — od czego zacząć?
+## Wstęp do Data Governance — od czego zacząć?
 
 Kiedy zaczynałem swoją drogę w Data Governance, największym zaskoczeniem było to, jak mało ten temat dotyczy technologii, a jak bardzo — **ludzi i procesów**. Zarządzanie danymi to nie kolejne narzędzie IT — to zmiana sposobu myślenia o danych w całej organizacji.
 

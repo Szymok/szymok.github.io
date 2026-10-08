@@ -11,7 +11,7 @@ contact_note: >
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Szymon Kowalewski — Data Governance Specialist. Blog o AI, Data Governance/Quality oraz self-hostingu.
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+  <a href="/garden/">Ogród wiedzy</a> · Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
 keywords: data governance, data quality, ai, sztuczna inteligencja, zarządzanie danymi, ataccama, self-hosting, selfhosting, etl, data engineering # add your own keywords or leave empty
 lang: pl # the language of your site (for example: en, fr, cn, ru, etc.)
@@ -99,7 +99,7 @@ max_width: 930px
 # see https://schema.org/docs/faq.html for more information
 serve_og_meta: true # Include Open Graph meta tags in the HTML head
 serve_schema_org: true # Include Schema.org in the HTML head
-og_image: assets/img/prof_pic.jpg # The site-wide (default for all links) Open Graph preview image
+og_image: /assets/img/prof_pic.jpg # The site-wide (default for all links) Open Graph preview image
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
@@ -284,6 +284,14 @@ plugins:
 defaults:
   - scope:
       path: "assets"
+    values:
+      sitemap: false
+  - scope:
+      type: "news"
+    values:
+      sitemap: false
+  - scope:
+      type: "books"
     values:
       sitemap: false
   - scope:
