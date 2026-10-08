@@ -19,6 +19,18 @@ nav_order: 2
 ## Co dostajesz
 
 <div class="offer-grid">
+  <div class="offer-card">
+    <h3>Mini-audyt</h3>
+    <p class="offer-price">od 3 500 zł <span>netto</span></p>
+    <p class="offer-meta">2–3 tygodnie · 1 zbiór lub system</p>
+    <ul>
+      <li>Scorecard w 6 wymiarach</li>
+      <li>do 10 reguł jakości</li>
+      <li>lista priorytetów</li>
+      <li>skrócony plan na 90 dni</li>
+      <li>podsumowanie dla zarządu (1 strona)</li>
+    </ul>
+  </div>
   <div class="offer-card offer-card-main">
     <p class="offer-card-badge">najczęściej wybierany</p>
     <h3>Audyt standardowy</h3>
@@ -29,18 +41,6 @@ nav_order: 2
       <li>do 20 reguł jakości z progami</li>
       <li>warsztat z właścicielami danych (2 h)</li>
       <li>pełny plan na 90 dni i rekomendacja narzędzi</li>
-      <li>podsumowanie dla zarządu (1 strona)</li>
-    </ul>
-  </div>
-  <div class="offer-card">
-    <h3>Mini-audyt</h3>
-    <p class="offer-price">od 3 500 zł <span>netto</span></p>
-    <p class="offer-meta">2–3 tygodnie · 1 zbiór lub system</p>
-    <ul>
-      <li>Scorecard w 6 wymiarach</li>
-      <li>do 10 reguł jakości</li>
-      <li>lista priorytetów</li>
-      <li>skrócony plan na 90 dni</li>
       <li>podsumowanie dla zarządu (1 strona)</li>
     </ul>
   </div>
