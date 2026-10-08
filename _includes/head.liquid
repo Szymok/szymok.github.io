@@ -159,8 +159,8 @@
 {% endif %}
 
 <!-- Polish GDPR Cookie Consent -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.css">
-<script defer src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
+<link rel="stylesheet" href="{{ '/assets/third-party/cookieconsent/dist/cookieconsent.css' | relative_url }}">
+<script defer src="{{ '/assets/third-party/cookieconsent/dist/cookieconsent.umd.js' | relative_url }}"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   var checkCC = setInterval(function () {
