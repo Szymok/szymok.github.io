@@ -92,5 +92,35 @@ jobs:
       - name: Run CSS minify integration test 🎨
         run: bash test/integration_css_minify.sh
 
+  # Its own job on purpose: the job above stops at the style-contract lint (the site keeps local overrides),
+  # so a test placed there would never run. This guard must run on every change.
+  profiler-integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby 💎
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.5"
+          bundler-cache: true
+
+      - name: Setup Python 🐍
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Setup Node 🧰
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install build prerequisites 🔧
+        run: |
+          sudo apt-get update && sudo apt-get install -y imagemagick
+          pip3 install --upgrade nbconvert
+
       - name: Run DQ Profiler integration test 🛡️
         run: bash test/integration_profiler.sh
