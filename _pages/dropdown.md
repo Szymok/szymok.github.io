@@ -9,4 +9,6 @@ children:
     permalink: /garden/
   - title: 🧭 test dojrzałości DQ
     permalink: /dojrzalosc-dq/
+  - title: 📊 profil danych CSV
+    permalink: /narzedzia/profil-danych/
 ---

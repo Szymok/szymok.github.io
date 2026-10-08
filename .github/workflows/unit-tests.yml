@@ -91,3 +91,6 @@ jobs:
 
       - name: Run CSS minify integration test 🎨
         run: bash test/integration_css_minify.sh
+
+      - name: Run DQ Profiler integration test 🛡️
+        run: bash test/integration_profiler.sh
