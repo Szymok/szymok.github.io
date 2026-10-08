@@ -2,7 +2,7 @@
 layout: page
 permalink: /dojrzalosc-dq/
 title: Test dojrzałości Data Quality
-description: Bezpłatny test dojrzałości Data Quality: 12 pytań, 5 minut, wynik w 6 obszarach i wskazówki, od czego zacząć. Szymon Kowalewski.
+description: "Bezpłatny test dojrzałości Data Quality: 12 pytań, 5 minut, wynik w 6 obszarach i wskazówki, od czego zacząć. Szymon Kowalewski."
 nav: false
 ---
 
