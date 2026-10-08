@@ -86,6 +86,11 @@
   <link rel="shortcut icon" href="{{ site.icon | prepend: '/assets/img/' | relative_url | bust_file_cache}}">
 {% endif %}
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
+<style>
+  /* Akcent strony: granat (tryb jasny) i bursztyn (tryb ciemny). Nadpisuje zmienne motywu z main.css. */
+  :root { --global-theme-color: #1d4b8f; --global-hover-color: #1d4b8f; }
+  html[data-theme="dark"] { --global-theme-color: #f0b429; --global-hover-color: #f0b429; }
+</style>
 {% if page.layout == 'cv' and site.plugins contains 'al_folio_cv' and site.al_folio.features.cv.enabled != false %}
   <link rel="stylesheet" href="{{ '/assets/css/al-folio-cv.css' | relative_url | bust_file_cache }}">
 {% endif %}
