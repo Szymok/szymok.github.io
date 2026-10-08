@@ -4,3 +4,7 @@
 # Self-hosted third-party files must stay byte-identical to the CDN originals,
 # otherwise their SRI hashes (integrity=...) no longer match and browsers block them.
 assets/third-party/** -text
+
+# Self-hosted build of the DQ Profiler (github.com/Szymok/dq-profiler). Its VERSION file records a SHA-256
+# for every file, and test/integration_profiler.sh checks them, so git must never touch the line endings.
+assets/tools/dq-profiler/** -text
