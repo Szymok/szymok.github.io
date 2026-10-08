@@ -19,3 +19,6 @@ vendor
 # garden is built from Szymok/garden inside deploy.yml, never committed here
 garden/
 garden-src/
+
+# Session-end snapshot written by the Claude Code hook into the working directory
+**/.claude/session-end.md
