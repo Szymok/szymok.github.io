@@ -125,7 +125,7 @@ blog_name: skupienie danych # blog_name will be displayed in your blog page
 blog_description: o AI, Data Governance/Quality oraz self-hostingu
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
-future: true # allow posts with future dates to be published
+future: false # posts appear on their date; deploy.yml rebuilds daily so dated posts go live without a push
 
 # Pagination
 pagination:
@@ -469,6 +469,12 @@ lazy_loading_images: true # enables lazy loading of images (recommended)
 # -----------------------------------------------------------------------------
 # Optional Features
 # -----------------------------------------------------------------------------
+# Index of feature switches (each is defined where it is documented):
+#   search_enabled, back_to_top, enable_darkmode, enable_progressbar   (top-level flags)
+#   newsletter.enabled, related_blog_posts.enabled, pagination.enabled  (blocks)
+#   enable_cookie_consent, enable_math, enable_masonry, enable_medium_zoom (flags below)
+#   al_folio.features.cv.enabled, al_folio.features.distill.enabled      (unused pages: CV is unpublished)
+#   per post: giscus_comments, toc, images.lightbox2                     (front matter)
 
 enable_google_verification: false # enables google site verification
 enable_bing_verification: false # enables bing site verification

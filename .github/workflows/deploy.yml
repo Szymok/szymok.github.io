@@ -55,6 +55,10 @@ on:
       - "!docs/FAQ.md"
       - "!docs/INSTALL.md"
       - "!README.md"
+  schedule:
+    # Daily rebuild so posts dated today (future: false in _config.yml) go live without a push.
+    # Post dates carry no timezone, so the CI clock (UTC) decides: 08:05 UTC is just after an 08:00 post.
+    - cron: "5 8 * * *"
   workflow_dispatch:
 
 permissions:
