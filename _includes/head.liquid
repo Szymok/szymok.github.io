@@ -90,6 +90,8 @@
   /* Akcent strony: granat (tryb jasny) i bursztyn (tryb ciemny). Nadpisuje zmienne motywu z main.css. */
   :root { --global-theme-color: #1d4b8f; --global-hover-color: #1d4b8f; }
   html[data-theme="dark"] { --global-theme-color: #f0b429; --global-hover-color: #f0b429; }
+  /* Linki w treści są podkreślone: sam kolor akcentu nie odróżnia ich od tekstu (WCAG 1.4.1). Linki z klasą (przyciski, karty, menu) bez zmian. */
+  article :is(p, li, td, dd, blockquote) a:not([class]) { text-decoration: underline; text-underline-offset: 0.15em; }
 </style>
 {% if page.layout == 'cv' and site.plugins contains 'al_folio_cv' and site.al_folio.features.cv.enabled != false %}
   <link rel="stylesheet" href="{{ '/assets/css/al-folio-cv.css' | relative_url | bust_file_cache }}">

@@ -302,7 +302,12 @@ defaults:
       path: ""
     values:
       images:
-        lightbox2: true
+        lightbox2: false # off by default: its stylesheet would block rendering on every page
+  - scope:
+      type: "posts"
+    values:
+      images:
+        lightbox2: true # click-to-zoom only where posts have images
 
 sass:
   style: compressed
@@ -505,7 +510,7 @@ third_party_libraries:
     integrity:
       css: "sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw="
     url:
-      css: "/assets/third-party/academicons/css/academicons.min.css" # self-hosted copy of academicons@1.9.5 (SRI-verified)
+      css: "" # not loaded: no academic icons on the site (al_icons skips libraries with an empty url)
     version: "1.9.5"
   chartjs:
     integrity:
@@ -646,7 +651,7 @@ third_party_libraries:
     integrity:
       css: "sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY="
     url:
-      css: "/assets/third-party/scholar-icons/css/scholar-icons.css" # self-hosted copy of scholar-icons@1.0.3 (SRI-verified)
+      css: "" # not loaded: no scholar icons on the site (al_icons skips libraries with an empty url)
     version: "1.0.3"
   vanilla-back-to-top:
     integrity:
