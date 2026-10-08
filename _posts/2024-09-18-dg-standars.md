@@ -11,8 +11,6 @@ toc:
   sidebar: left
 ---
 
-# Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?
-
 Kiedy mówię „standardy danych", większość ludzi wyobraża sobie dokumenty ISO leżące gdzieś na serwerze. W rzeczywistości standardy danych to coś dużo bardziej fundamentalnego — to **umowy między ludźmi i systemami co do tego, jak dane powinny wyglądać**, żeby można było nimi się wymieniać, analizować je i ufać im.
 
 Ten artykuł bazuje na analizie przygotowanej w ramach inicjatywy [TransparenCEE](https://transparencee.org/), której celem jest wzmocnienie sektora technologii obywatelskiej w Europie Środkowej i Wschodniej.

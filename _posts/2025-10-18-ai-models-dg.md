@@ -11,7 +11,7 @@ toc:
   sidebar: left
 ---
 
-# AI w Data Governance: jak sztuczna inteligencja zmienia zasady gry
+## AI w Data Governance: jak sztuczna inteligencja zmienia zasady gry
 
 Zwykle mówimy, że „dane to paliwo AI". Ale jest też druga strona medalu — **dane mogą być hamulcem bezpieczeństwa i dźwignią regulacyjną**. Ten post bazuje na pracy [*„Towards Data Governance of Frontier AI Models"*](https://arxiv.org/abs/2412.03824v2) z arXiv i moich własnych obserwacjach z codziennej pracy w Data Governance.
 

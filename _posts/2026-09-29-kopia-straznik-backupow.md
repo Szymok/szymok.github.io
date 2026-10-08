@@ -13,7 +13,7 @@ toc:
   sidebar: left
 ---
 
-# Backup, który sam mówi, czy działa
+## Backup, który sam mówi, czy działa
 
 Przez rok mój homelab nie miał żadnego backupu. Dwie maszyny wirtualne z Dockerem, kilkadziesiąt kontenerów, NAS z ZFS-em — i zero kopii poza samą redundancją dysków. Wiedziałem, że to źle. Wiedziałem też, dlaczego nic z tym nie robię: nie bałem się braku backupu. Bałem się backupu, który **wygląda**, jakby działał.
 
