@@ -80,8 +80,15 @@ if grep -q 'data-umami-event' "${landing}"; then
 fi
 
 # --- the tool is reachable from the pages that are meant to lead to it ---
+# The navbar links to the tool on every page, so a bare "contains the link" check would still pass after the page's
+# own link was removed. Count occurrences and require more than a page that only has the navbar entry.
+count_links() {
+  grep -o 'href="/narzedzia/profil-danych/"' "$1" | wc -l | tr -d ' '
+}
+baseline="$(count_links "${policy}")"
+[ "${baseline}" -ge 1 ] || fail "the navbar no longer links to the tool"
 for page in audyt-data-quality scorecard; do
-  grep -q 'href="/narzedzia/profil-danych/"' "${tmp_site}/${page}/index.html" || fail "${page} page does not link to the tool"
+  [ "$(count_links "${tmp_site}/${page}/index.html")" -gt "${baseline}" ] || fail "${page} page has no link of its own to the tool"
 done
 
 # --- sitemap: the landing page is listed, the app is not ---
