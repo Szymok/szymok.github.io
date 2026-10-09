@@ -79,6 +79,11 @@ if grep -q 'data-umami-event' "${landing}"; then
   fail "landing page carries tool-specific analytics events"
 fi
 
+# --- the tool is reachable from the pages that are meant to lead to it ---
+for page in audyt-data-quality scorecard; do
+  grep -q 'href="/narzedzia/profil-danych/"' "${tmp_site}/${page}/index.html" || fail "${page} page does not link to the tool"
+done
+
 # --- sitemap: the landing page is listed, the app is not ---
 grep -q 'narzedzia/profil-danych' "${sitemap}" || fail "landing page missing from the sitemap"
 if grep -q 'tools/dq-profiler' "${sitemap}"; then

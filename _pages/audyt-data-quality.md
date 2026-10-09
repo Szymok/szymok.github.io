@@ -115,7 +115,8 @@ Jestem Data Governance Specialist. Na co dzień zarządzam obszarem Data Governa
 - [blog o Data Governance i Data Quality](/blog/), np. [wybór platformy Ataccama](/blog/2025/ataccama/),
 - [ogród wiedzy](/garden/) z notatkami roboczymi,
 - [test dojrzałości DQ](/dojrzalosc-dq/) z wynikiem w 6 obszarach,
-- [arkusz Scorecard](/scorecard/) do samodzielnego pomiaru pierwszego zbioru.
+- [arkusz Scorecard](/scorecard/) do samodzielnego pomiaru pierwszego zbioru,
+- [profil pliku CSV](/narzedzia/profil-danych/): narzędzie liczące kompletność, unikalność i ważność w Twojej przeglądarce, bez wysyłania pliku.
 
 <!-- Dodaj tu 1–2 zdania o konkretnych wynikach z wdrożeń, jeśli możesz je ujawnić (liczby, branża). Nie wpisuj niczego, czego nie możesz udokumentować. -->
 
