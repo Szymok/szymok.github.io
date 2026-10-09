@@ -38,4 +38,6 @@ Podając adres e-mail, zapisujesz się do newslettera i wyrażasz zgodę na otrz
 
 Nie wiesz, od czego zacząć? Zrób 5-minutowy [test dojrzałości Data Quality](/dojrzalosc-dq/).
 
+Masz dane w pliku CSV? [Policz kompletność, unikalność i ważność w przeglądarce](/narzedzia/profil-danych/) i przenieś wynik do arkusza. Plik nie jest wysyłany na serwer.
+
 Arkusz mierzy. Jeśli chcesz wiedzieć, **co naprawić najpierw** i jak to wdrożyć, sprawdź [audyt Data Quality](/audyt-data-quality/).

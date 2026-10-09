@@ -169,5 +169,6 @@ FROM wynik;
 ## Co dalej
 
 - Wpisz wynik do [arkusza Scorecard](/scorecard/) i porównaj z kolejnymi wymiarami.
+- Nie masz bazy pod ręką, tylko plik CSV? Policz kompletność, unikalność i ważność w [narzędziu DQ Profiler](/narzedzia/profil-danych/). Działa w przeglądarce, a plik nie jest nigdzie wysyłany. Po ustawieniu tych samych pól wymaganych co wyżej (NIP tylko dla firm) dostaniesz te same liczby, a plik z przykładowymi danymi znajdziesz na stronie narzędzia.
 - Sprawdź w [teście dojrzałości Data Quality](/dojrzalosc-dq/) (12 pytań, 5 minut), czy w firmie ktoś w ogóle odpowiada za takie pomiary.
 - Jeśli wyniki Cię zaskoczyły i potrzebujesz pełnego pomiaru w sześciu wymiarach z planem naprawy, zobacz [audyt jakości danych](/audyt-data-quality/).
