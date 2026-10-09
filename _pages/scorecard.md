@@ -4,8 +4,6 @@ permalink: /scorecard/
 title: Data Quality Scorecard
 description: Darmowy arkusz Excel do mierzenia jakości danych w sześciu wymiarach — reguły, progi, semafor i podsumowanie. Szymon Kowalewski.
 nav: false
-# SZKIELET: usuń poniższą linię po podpięciu formularza zapisu i weryfikacji arkusza
-sitemap: false
 ---
 
 Gotowy arkusz do zmierzenia jakości danych bez zakupu narzędzia. Oparty na [sześciu wymiarach jakości danych](/blog/2026/data-quality-dimensions/): dokładność, kompletność, spójność, aktualność, unikalność i zgodność formatu.
@@ -17,6 +15,8 @@ Gotowy arkusz do zmierzenia jakości danych bez zakupu narzędzia. Oparty na [sz
 - **Wymiary** — definicje, wzory metryk i wskazówki pomiarowe.
 - **Instrukcja** — jak zacząć od 10 krytycznych reguł.
 - Cztery przykładowe reguły (NIP, e-mail, duplikaty, spójność CRM/ERP), które wystarczy nadpisać własnymi.
+
+Wyniki liczą się po otwarciu pliku w Excelu. Jeśli w podglądzie (np. w poczcie) komórki z wynikiem są puste, otwórz arkusz w Excelu.
 
 ## Pobierz arkusz
 
@@ -38,6 +38,6 @@ Podając adres e-mail, zapisujesz się do newslettera i wyrażasz zgodę na otrz
 
 Nie wiesz, od czego zacząć? Zrób 5-minutowy [test dojrzałości Data Quality](/dojrzalosc-dq/).
 
-Masz dane w pliku CSV? [Policz kompletność, unikalność i ważność w przeglądarce](/narzedzia/profil-danych/) i przenieś wynik do arkusza. Plik nie jest wysyłany na serwer.
+Masz dane w pliku CSV? [Policz kompletność, unikalność i ważność w przeglądarce](/narzedzia/profil-danych/) i przenieś wynik do arkusza (ważność odpowiada tu wymiarowi „Zgodność formatu"). Plik nie jest wysyłany na serwer.
 
 Arkusz mierzy. Jeśli chcesz wiedzieć, **co naprawić najpierw** i jak to wdrożyć, sprawdź [audyt Data Quality](/audyt-data-quality/).
