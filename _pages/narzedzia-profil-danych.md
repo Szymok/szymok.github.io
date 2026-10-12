@@ -49,7 +49,7 @@ Nie masz pod ręką pliku? Pobierz [klienci-przyklad.csv]({{ '/assets/files/klie
 
 ## Co dalej
 
-- Wpisz wyniki do [arkusza Scorecard](/scorecard/) i porównaj z pozostałymi wymiarami.
+- Wpisz wyniki do [arkusza Scorecard](/scorecard/) i porównaj z pozostałymi wymiarami. Wymiary raportu odpowiadają wymiarom arkusza: kompletność to „Kompletność", unikalność to „Unikalność", a ważność to „Zgodność formatu". Arkusz potrzebuje liczby rekordów, a raport podaje je w opisach wymiarów (np. „niepoprawne wartości: 4 z 33 sprawdzonych").
 - Sprawdź w [teście dojrzałości Data Quality](/dojrzalosc-dq/) (12 pytań, 5 minut), czy w firmie ktoś odpowiada za takie pomiary.
 - Jeśli potrzebujesz pełnego pomiaru w sześciu wymiarach z planem naprawy, zobacz [audyt jakości danych](/audyt-data-quality/).
 
