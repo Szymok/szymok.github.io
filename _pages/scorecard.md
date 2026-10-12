@@ -32,7 +32,7 @@ Gotowy arkusz do zmierzenia jakości danych bez zakupu narzędzia. Oparty na [sz
 **Formularz zapisu będzie dostępny wkrótce.** Do tego czasu napisz na [hello@skszymon.eu](mailto:hello@skszymon.eu?subject=Data%20Quality%20Scorecard), a odeślę arkusz.
 {% endif %}
 
-Podając adres e-mail, zapisujesz się do newslettera i wyrażasz zgodę na otrzymanie arkusza oraz okazjonalnych wiadomości o Data Governance i Data Quality (rzadko, bez spamu). Zgodę możesz wycofać w każdej chwili linkiem w stopce wiadomości. Administratorem danych jest Szymon Kowalewski; szczegóły w [polityce prywatności](/privacy-policy/).
+Podając adres e-mail, zapisujesz się do newslettera i wyrażasz zgodę na otrzymanie arkusza oraz okazjonalnych wiadomości o Data Governance i Data Quality (rzadko, bez spamu). Najpierw potwierdzisz adres w mailu, a wiadomości mierzą otwarcia i kliknięcia (statystyki). Zgodę możesz wycofać w każdej chwili linkiem w stopce wiadomości. Administratorem danych jest Szymon Kowalewski; szczegóły w [polityce prywatności](/privacy-policy/).
 
 ## Potrzebujesz czegoś więcej?
 
