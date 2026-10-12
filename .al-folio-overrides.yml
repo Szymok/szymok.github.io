@@ -13,7 +13,7 @@ overrides:
     gem_version: 1.0.11
     upstream_path: _includes/newsletter.liquid
     upstream_sha256: 9c36dd5d9fe12681cdab99550eb19fe0285e4f00c0790c1505471c99e254a5c4
-    local_sha256: fdd5069d755a0691ea446e33e07004a1f9ceef13c69795e0a0ee65e8e996d242
+    local_sha256: b17478bc49fdb4745b90cdb50a510434f39f0c52b061aef034e947bece68f189
     acknowledged_at: '2026-10-12'
   _includes/plugins/al_newsletter_form_center.liquid:
     owner: al_folio_core

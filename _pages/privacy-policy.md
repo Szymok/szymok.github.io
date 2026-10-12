@@ -22,6 +22,7 @@ Dane przetwarzane są w następujących celach:
 ### 3. Newsletter — jak to działa
 - Zapis wymaga potwierdzenia adresu e-mail (wiadomość z linkiem potwierdzającym).
 - Każda wiadomość zawiera link do wypisania się. Możesz też napisać na hello@skszymon.eu. Wypisanie lub wycofanie zgody nie wpływa na zgodność z prawem przetwarzania sprzed wycofania.
+- Wiadomości zawierają mechanizmy pomiaru: niewidoczny piksel (otwarcie wiadomości) i linki przekierowujące przez serwer dostawcy (kliknięcia). Dostawca rejestruje, czy i kiedy wiadomość została otwarta oraz które linki kliknięto. Używam tego wyłącznie do statystyk (które tematy czytasz) i do usuwania z listy osób, które od dawna nie czytają. Podstawą jest Twoja zgoda na newsletter; jeśli nie chcesz pomiaru, wyłącz w programie pocztowym automatyczne ładowanie obrazków albo wypisz się. Dane pomiarowe przechowuję tak długo jak adres w newsletterze.
 - Wiadomości mają charakter informacyjny i edukacyjny. Nie sprzedaję ani nie udostępniam listy adresów nikomu.
 
 ### 4. Okres przechowywania danych
