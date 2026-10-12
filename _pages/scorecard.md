@@ -27,7 +27,7 @@ Gotowy arkusz do zmierzenia jakości danych bez zakupu narzędzia. Oparty na [sz
 -->
 
 {% if site.newsletter.enabled and site.newsletter.endpoint %}
-{% include newsletter.liquid left=true %}
+{% include newsletter.liquid left=true no_consent=true %}
 {% else %}
 **Formularz zapisu będzie dostępny wkrótce.** Do tego czasu napisz na [hello@skszymon.eu](mailto:hello@skszymon.eu?subject=Data%20Quality%20Scorecard), a odeślę arkusz.
 {% endif %}

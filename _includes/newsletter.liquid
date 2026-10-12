@@ -16,6 +16,9 @@
       type="email"
       placeholder="user@example.com"
       required=""
+      {% unless include.no_consent %}
+        aria-describedby="newsletter-consent"
+      {% endunless %}
     >
 
     <button
@@ -57,6 +60,18 @@
   >
     &larr; Wróć
   </button>
+
+  {% unless include.no_consent %}
+    <p
+      id="newsletter-consent"
+      class="newsletter-consent"
+      style="font-size: 0.85rem; margin-top: 0.5rem; text-align: {% if include.left %}left{% elsif include.right %}right{% else %}center{% endif %}"
+    >
+      Zapisując się, zgadzasz się na otrzymywanie newslettera o Data Quality, Data Governance i AI (rzadko, bez spamu). Administratorem danych jest
+      Szymon Kowalewski, wysyłkę obsługuje Loops. Zgodę wycofasz linkiem w każdej wiadomości. Szczegóły w
+      <a href="{{ '/privacy-policy/' | relative_url }}">polityce prywatności</a>.
+    </p>
+  {% endunless %}
 </div>
 
 <noscript>
