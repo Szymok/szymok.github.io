@@ -1,0 +1,405 @@
+<!DOCTYPE html> <html lang="pl"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Kompletność danych w SQL: 5 zapytań do uruchomienia dziś | Szymon Kowalewski </title> <meta name="author" content="Szymon Kowalewski"> <meta name="description" content="Jak zmierzyć jakość danych w SQL bez dodatkowych narzędzi: 5 zapytań do kompletności, od NULL-i po wynik z semaforem do scorecardu. Dane przykładowe do pobrania."> <meta name="keywords" content="data governance, data quality, ai, sztuczna inteligencja, zarządzanie danymi, ataccama, self-hosting, selfhosting, etl, data engineering"> <meta property="og:site_name" content="Szymon Kowalewski"> <meta property="og:type" content="article"> <meta property="og:title" content="Szymon Kowalewski | Kompletność danych w SQL: 5 zapytań do uruchomienia dziś"> <meta property="og:url" content="https://skszymon.eu/blog/2026/kompletnosc-danych-sql/"> <meta property="og:description" content="Jak zmierzyć jakość danych w SQL bez dodatkowych narzędzi: 5 zapytań do kompletności, od NULL-i po wynik z semaforem do scorecardu. Dane przykładowe do pobrania."> <meta property="og:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <meta property="og:locale" content="pl"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Kompletność danych w SQL: 5 zapytań do uruchomienia dziś"> <meta name="twitter:description" content="Jak zmierzyć jakość danych w SQL bez dodatkowych narzędzi: 5 zapytań do kompletności, od NULL-i po wynik z semaforem do scorecardu. Dane przykładowe do pobrania."> <meta name="twitter:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Szymon Kowalewski"
+        },
+        "url": "https://skszymon.eu/blog/2026/kompletnosc-danych-sql/",
+        "@type": "BlogPosting",
+        "description": "Jak zmierzyć jakość danych w SQL bez dodatkowych narzędzi: 5 zapytań do kompletności, od NULL-i po wynik z semaforem do scorecardu. Dane przykładowe do pobrania.",
+        "headline": "Kompletność danych w SQL: 5 zapytań do uruchomienia dziś",
+        
+        "sameAs": ["https://github.com/Szymok","https://www.linkedin.com/in/skszymon","https://twitter.com/SkSzymon"],
+        
+        "name": "Szymon Kowalewski",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="/assets/third-party/tocbot/dist/tocbot.css" integrity="sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/third-party/fontawesome/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/fonts/roboto/roboto.css"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <style>
+  /* Akcent strony: granat (tryb jasny) i bursztyn (tryb ciemny). Nadpisuje zmienne motywu z main.css. */
+  :root { --global-theme-color: #1d4b8f; --global-hover-color: #1d4b8f; }
+  html[data-theme="dark"] { --global-theme-color: #f0b429; --global-hover-color: #f0b429; }
+  /* Linki w treści są podkreślone: sam kolor akcentu nie odróżnia ich od tekstu (WCAG 1.4.1). Linki z klasą (przyciski, karty, menu) bez zmian. */
+  article :is(p, li, td, dd, blockquote) a:not([class]) { text-decoration: underline; text-underline-offset: 0.15em; }
+</style> <link rel="canonical" href="https://skszymon.eu/blog/2026/kompletnosc-danych-sql/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_img_tools/css/lightbox2-adapter.css"> <link rel="stylesheet" href="/assets/third-party/cookieconsent/dist/cookieconsent.css"> <script defer src="/assets/third-party/cookieconsent/dist/cookieconsent.umd.js"></script> <script>
+document.addEventListener("DOMContentLoaded", function () {
+  var checkCC = setInterval(function () {
+    if (window.CookieConsent) {
+      clearInterval(checkCC);
+      window.CookieConsent.run({
+        categories: {
+          necessary: { enabled: true, readOnly: true },
+          analytics: {}
+        },
+        language: {
+          default: "pl",
+          translations: {
+            pl: {
+              consentModal: {
+                title: "Używamy ciasteczek 🍪",
+                description: "Ta strona używa plików cookie w celu analizy ruchu i optymalizacji działania (w tym, dla części odwiedzin, zapisu przebiegu sesji z maskowaniem pól formularzy). Możesz zaakceptować wszystkie ciasteczka lub zarządzać indywidualnymi preferencjami.",
+                acceptAllBtn: "Akceptuj wszystkie",
+                acceptNecessaryBtn: "Odrzuć wszystkie",
+                showPreferencesBtn: "Zarządzaj ustawieniami"
+              },
+              preferencesModal: {
+                title: "Preferencje plików cookie",
+                acceptAllBtn: "Akceptuj wszystkie",
+                acceptNecessaryBtn: "Odrzuć wszystkie",
+                savePreferencesBtn: "Zapisz wybrane",
+                closeIconLabel: "Zamknij",
+                sections: [
+                  {
+                    title: "Użycie plików cookie",
+                    description: "Używamy plików cookie w celu zapewnienia prawidłowego działania strony oraz analizowania ruchu analitycznego."
+                  },
+                  {
+                    title: "Niezbędne pliki cookie",
+                    description: "Te pliki cookie są wymagane do poprawnego działania witryny.",
+                    linkedCategory: "necessary"
+                  },
+                  {
+                    title: "Analityczne pliki cookie",
+                    description: "Te pliki cookie pozwalają nam mierzyć ruch na stronie oraz, dla części odwiedzin, rejestrować przebieg sesji (przewijanie i kliknięcia, z maskowaniem pól formularzy) w celu ulepszania treści i użyteczności strony.",
+                    linkedCategory: "analytics"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      });
+    }
+  }, 100);
+});
+</script> <script type="text/plain" data-category="analytics" async defer data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986" src="https://umami.skszymon.eu/script.js"> </script> <script type="text/plain" data-category="analytics" async defer src="https://umami.skszymon.eu/recorder.js" data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="300000"> </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Szymon</span> Kowalewski </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/audyt-data-quality/">audyt jakości danych </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">więcej </a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/garden/">🌱 ogród wiedzy</a> <a class="dropdown-item " href="/dojrzalosc-dq/">🧭 test dojrzałości DQ</a> <a class="dropdown-item " href="/narzedzia/profil-danych/">📊 profil danych CSV</a> </div> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top toc toc-sidebar" aria-label="Table of contents" data-toc-collapse="expanded" data-toc-collapse-depth=""></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Kompletność danych w SQL: 5 zapytań do uruchomienia dziś</h1> <p class="post-meta"> Created on October 13, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/data-quality"> <i class="fa-solid fa-hashtag fa-sm"></i> data-quality</a>   <a href="/blog/tag/sql"> <i class="fa-solid fa-hashtag fa-sm"></i> sql</a>   <a href="/blog/tag/kompletnosc-danych"> <i class="fa-solid fa-hashtag fa-sm"></i> kompletnosc-danych</a>   <a href="/blog/tag/scorecard"> <i class="fa-solid fa-hashtag fa-sm"></i> scorecard</a>   ·   <a href="/blog/category/data-governance"> <i class="fa-solid fa-tag fa-sm"></i> data-governance</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Jak zmierzyć jakość danych, gdy nie masz narzędzia do Data Quality ani czasu na wdrożenie? Zacznij od <strong>kompletności</strong>, czyli od pytania, ile wymaganych wartości faktycznie jest w tabeli. Poniżej pięć zapytań SQL do pomiaru kompletności danych, które uruchomisz jeszcze dziś na własnej tabeli. Idą od najprostszego (NULL-e) do jednego wyniku z semaforem, który wstawisz do <a href="/scorecard/">arkusza Scorecard</a>. Kompletność to jeden z sześciu wymiarów opisanych w artykule <a href="/blog/2026/data-quality-dimensions/">Wymiary jakości danych</a>.</p> <h2 id="dane-przykładowe">Dane przykładowe</h2> <p>Tabela <code class="language-plaintext highlighter-rouge">klienci</code> ma 12 wymyślonych rekordów. Za wymagane uznajemy: nazwę, e-mail, telefon i miasto. NIP jest wymagany tylko dla firm. Wartości <code class="language-plaintext highlighter-rouge">NULL</code>, <code class="language-plaintext highlighter-rouge">''</code> (pusty tekst) i <code class="language-plaintext highlighter-rouge">' '</code> (spacja) są zapisane tak, jak w bazie.</p> <table> <thead> <tr> <th>id</th> <th>nazwa</th> <th>typ</th> <th>nip</th> <th>email</th> <th>telefon</th> <th>miasto</th> <th>data_utworzenia</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>Alfa Sp. z o.o.</td> <td>firma</td> <td>7010000001</td> <td>biuro@alfa.example</td> <td>221234567</td> <td>Warszawa</td> <td>2025-01-10</td> </tr> <tr> <td>2</td> <td>Beta SA</td> <td>firma</td> <td>NULL</td> <td>kontakt@beta.example</td> <td>+48 600 100 200</td> <td>Kraków</td> <td>2025-02-03</td> </tr> <tr> <td>3</td> <td>Gamma</td> <td>firma</td> <td><code class="language-plaintext highlighter-rouge">''</code></td> <td>info@gamma.example</td> <td>NULL</td> <td>Gdańsk</td> <td>2025-02-15</td> </tr> <tr> <td>4</td> <td>Jan Kowalski</td> <td>osoba</td> <td>NULL</td> <td>jan.k@example.com</td> <td>501 222 333</td> <td>Łódź</td> <td>2025-03-01</td> </tr> <tr> <td>5</td> <td>Anna Nowak</td> <td>osoba</td> <td>NULL</td> <td>n/d</td> <td>502 333 444</td> <td>NULL</td> <td>2025-03-09</td> </tr> <tr> <td>6</td> <td>Delta Sp. z o.o.</td> <td>firma</td> <td>brak</td> <td>-</td> <td><code class="language-plaintext highlighter-rouge">''</code></td> <td>Poznań</td> <td>2025-04-20</td> </tr> <tr> <td>7</td> <td>Epsilon Sp. z o.o.</td> <td>firma</td> <td>7010000003</td> <td>epsilon@epsilon.example</td> <td>123456789</td> <td>Rzeszów</td> <td>2025-04-28</td> </tr> <tr> <td>8</td> <td>Anna Wiśniewska</td> <td>osoba</td> <td>NULL</td> <td>a.wisniewska@example.com</td> <td><code class="language-plaintext highlighter-rouge">' '</code></td> <td>Wrocław</td> <td>2025-05-11</td> </tr> <tr> <td>9</td> <td>Zeta Sp. z o.o.</td> <td>firma</td> <td>7010000004</td> <td>zeta@zeta.example</td> <td>123456780</td> <td>Szczecin</td> <td>2025-06-02</td> </tr> <tr> <td>10</td> <td>Eta</td> <td>firma</td> <td>—</td> <td>NULL</td> <td>-</td> <td>Lublin</td> <td>2025-07-14</td> </tr> <tr> <td>11</td> <td>Piotr Zieliński</td> <td>osoba</td> <td>NULL</td> <td>piotr.z@example.com</td> <td>503 444 555</td> <td>Katowice</td> <td>2025-08-30</td> </tr> <tr> <td>12</td> <td>Theta SA</td> <td>firma</td> <td>7010000007</td> <td>theta@theta.example</td> <td>224445566</td> <td>NULL</td> <td>2025-09-18</td> </tr> </tbody> </table> <p>Cały skrypt (tabela, dane i wszystkie zapytania) pobierzesz tutaj: <a href="/assets/files/kompletnosc-danych.sql">kompletnosc-danych.sql</a>. Sprawdziłem go w SQLite. Zapytania używają standardowych funkcji, ale w PostgreSQL, MySQL czy SQL Server mogą wymagać drobnych zmian składni.</p> <h2 id="1-ile-jest-null-i-w-kolumnie">1. Ile jest NULL-i w kolumnie</h2> <p><code class="language-plaintext highlighter-rouge">COUNT(kolumna)</code> liczy tylko wartości różne od <code class="language-plaintext highlighter-rouge">NULL</code>, więc iloraz z <code class="language-plaintext highlighter-rouge">COUNT(*)</code> daje odsetek wypełnienia.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>                                    <span class="k">AS</span> <span class="n">wiersze</span><span class="p">,</span>
+       <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="o">*</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">nip</span><span class="p">)</span>     <span class="o">/</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">nip_proc</span><span class="p">,</span>
+       <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="o">*</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>   <span class="o">/</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">email_proc</span><span class="p">,</span>
+       <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="o">*</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">telefon</span><span class="p">)</span> <span class="o">/</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">telefon_proc</span><span class="p">,</span>
+       <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="o">*</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">miasto</span><span class="p">)</span>  <span class="o">/</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">miasto_proc</span>
+<span class="k">FROM</span> <span class="n">klienci</span><span class="p">;</span>
+</code></pre></div></div> <table> <thead> <tr> <th>wiersze</th> <th>nip_proc</th> <th>email_proc</th> <th>telefon_proc</th> <th>miasto_proc</th> </tr> </thead> <tbody> <tr> <td>12</td> <td>58.3</td> <td>91.7</td> <td>91.7</td> <td>83.3</td> </tr> </tbody> </table> <p>E-mail i telefon wyglądają dobrze (91,7%). To pułapka, bo <code class="language-plaintext highlighter-rouge">NULL</code> nie jest jedynym sposobem, w jaki w bazie pojawia się brak.</p> <h2 id="2-puste-teksty-i-wartości-zastępcze">2. Puste teksty i wartości zastępcze</h2> <p>W prawdziwych danych brak ma wiele postaci: pusty tekst, spacja, <code class="language-plaintext highlighter-rouge">n/d</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">brak</code>. Zanim je zliczysz, sprawdź, jakie wartości zastępcze faktycznie występują w kolumnie (najczęstsze bardzo krótkie wartości):</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">LOWER</span><span class="p">(</span><span class="k">TRIM</span><span class="p">(</span><span class="n">email</span><span class="p">))</span> <span class="k">AS</span> <span class="n">wartosc</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">ile</span>
+<span class="k">FROM</span> <span class="n">klienci</span>
+<span class="k">WHERE</span> <span class="n">email</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">AND</span> <span class="k">LENGTH</span><span class="p">(</span><span class="k">TRIM</span><span class="p">(</span><span class="n">email</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">6</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">LOWER</span><span class="p">(</span><span class="k">TRIM</span><span class="p">(</span><span class="n">email</span><span class="p">))</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ile</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></div> <p>Wynik pokazuje <code class="language-plaintext highlighter-rouge">n/d</code> i <code class="language-plaintext highlighter-rouge">-</code>. Listę z własnej bazy wpisz do widoku, który oznacza każde pole jako wypełnione (1) albo nie (0):</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">klienci_oceny</span> <span class="k">AS</span>
+<span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">data_utworzenia</span><span class="p">,</span>
+       <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">LOWER</span><span class="p">(</span><span class="k">TRIM</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">nip</span><span class="p">,</span>   <span class="s1">''</span><span class="p">)))</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="s1">'--'</span><span class="p">,</span> <span class="s1">'---'</span><span class="p">,</span> <span class="s1">'n/d'</span><span class="p">,</span> <span class="s1">'n/a'</span><span class="p">,</span> <span class="s1">'brak'</span><span class="p">)</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">ELSE</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">nip_ok</span><span class="p">,</span>
+       <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">LOWER</span><span class="p">(</span><span class="k">TRIM</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="s1">''</span><span class="p">)))</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="s1">'--'</span><span class="p">,</span> <span class="s1">'---'</span><span class="p">,</span> <span class="s1">'n/d'</span><span class="p">,</span> <span class="s1">'n/a'</span><span class="p">,</span> <span class="s1">'brak'</span><span class="p">)</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">ELSE</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">email_ok</span>
+       <span class="c1">-- ... analogicznie dla nazwy, telefonu i miasta (pełny skrypt w pliku)</span>
+<span class="k">FROM</span> <span class="n">klienci</span><span class="p">;</span>
+</code></pre></div></div> <p>Ten sam pomiar na widoku (<code class="language-plaintext highlighter-rouge">SUM(email_ok)</code> zamiast <code class="language-plaintext highlighter-rouge">COUNT(email)</code> itd.) daje inne liczby:</p> <table> <thead> <tr> <th>kolumna</th> <th>tylko NULL</th> <th>z wartościami zastępczymi</th> </tr> </thead> <tbody> <tr> <td>nip</td> <td>58,3%</td> <td><strong>33,3%</strong></td> </tr> <tr> <td>email</td> <td>91,7%</td> <td><strong>75,0%</strong></td> </tr> <tr> <td>telefon</td> <td>91,7%</td> <td><strong>66,7%</strong></td> </tr> <tr> <td>miasto</td> <td>83,3%</td> <td>83,3%</td> </tr> </tbody> </table> <p>Telefon spadł o 25 punktów procentowych. Ta różnica jest typowa: pomiar samych <code class="language-plaintext highlighter-rouge">NULL</code>-i zwykle zawyża kompletność, a odsetek zależy od tego, jak uczciwie zdefiniujesz brak.</p> <h2 id="3-kompletność-warunkowa">3. Kompletność warunkowa</h2> <p>Nie każde pole jest wymagane zawsze. NIP dotyczy firm, osoby go nie mają, więc liczenie go dla całej tabeli zaniża wynik.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>                                 <span class="k">AS</span> <span class="n">firmy</span><span class="p">,</span>
+       <span class="k">SUM</span><span class="p">(</span><span class="n">nip_ok</span><span class="p">)</span>                              <span class="k">AS</span> <span class="n">firmy_z_nip</span><span class="p">,</span>
+       <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="o">*</span> <span class="k">SUM</span><span class="p">(</span><span class="n">nip_ok</span><span class="p">)</span> <span class="o">/</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">nip_proc_firmy</span>
+<span class="k">FROM</span> <span class="n">klienci_oceny</span>
+<span class="k">WHERE</span> <span class="n">typ</span> <span class="o">=</span> <span class="s1">'firma'</span><span class="p">;</span>
+</code></pre></div></div> <table> <thead> <tr> <th>firmy</th> <th>firmy_z_nip</th> <th>nip_proc_firmy</th> </tr> </thead> <tbody> <tr> <td>8</td> <td>4</td> <td>50.0</td> </tr> </tbody> </table> <p>Rzeczywista kompletność NIP wśród firm to 50%, a nie 33,3%. Reguła „NIP wymagany, gdy typ = firma” jest właśnie regułą jakości, którą ktoś musi zdefiniować i zaakceptować.</p> <h2 id="4-trend-w-czasie">4. Trend w czasie</h2> <p>Jeden wynik nie mówi, czy problem trwa od zawsze, czy pojawił się po zmianie formularza lub integracji. Zapytanie grupuje rekordy według miesiąca utworzenia i liczy te, w których wszystkie pola wymagane są wypełnione:</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">SUBSTR</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">data_utworzenia</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">AS</span> <span class="n">miesiac</span><span class="p">,</span>
+       <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>                                           <span class="k">AS</span> <span class="n">rekordy</span><span class="p">,</span>
+       <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">nazwa_ok</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">email_ok</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">telefon_ok</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">AND</span> <span class="n">miasto_ok</span> <span class="o">=</span> <span class="mi">1</span>
+                 <span class="k">AND</span> <span class="p">(</span><span class="n">typ</span> <span class="o">&lt;&gt;</span> <span class="s1">'firma'</span> <span class="k">OR</span> <span class="n">nip_ok</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">kompletne</span>
+<span class="k">FROM</span> <span class="n">klienci_oceny</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">SUBSTR</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">data_utworzenia</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">miesiac</span><span class="p">;</span>
+</code></pre></div></div> <table> <thead> <tr> <th>miesiac</th> <th>rekordy</th> <th>kompletne</th> </tr> </thead> <tbody> <tr> <td>2025-01</td> <td>1</td> <td>1</td> </tr> <tr> <td>2025-02</td> <td>2</td> <td>0</td> </tr> <tr> <td>2025-03</td> <td>2</td> <td>1</td> </tr> <tr> <td>2025-04</td> <td>2</td> <td>1</td> </tr> <tr> <td>2025-05</td> <td>1</td> <td>0</td> </tr> <tr> <td>2025-06</td> <td>1</td> <td>1</td> </tr> <tr> <td>2025-07</td> <td>1</td> <td>0</td> </tr> <tr> <td>2025-08</td> <td>1</td> <td>1</td> </tr> <tr> <td>2025-09</td> <td>1</td> <td>0</td> </tr> </tbody> </table> <p>Na 12 rekordach to tylko ilustracja. Na prawdziwej tabeli taki szereg pozwala wskazać miesiąc, w którym kompletność spadła, i zapytać, co się wtedy zmieniło.</p> <h2 id="5-jeden-wynik-do-scorecardu">5. Jeden wynik do scorecardu</h2> <p>Na koniec dwa pomiary w jednym: odsetek wypełnionych pól wymaganych oraz semafor z progami z <a href="/scorecard/">arkusza Scorecard</a> (zielony od 95%, żółty 85-95%, czerwony poniżej 85%).</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="n">pola</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span>
+           <span class="mi">4</span> <span class="o">+</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">typ</span> <span class="o">=</span> <span class="s1">'firma'</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">wymagane</span><span class="p">,</span>
+           <span class="n">nazwa_ok</span> <span class="o">+</span> <span class="n">email_ok</span> <span class="o">+</span> <span class="n">telefon_ok</span> <span class="o">+</span> <span class="n">miasto_ok</span>
+             <span class="o">+</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">typ</span> <span class="o">=</span> <span class="s1">'firma'</span> <span class="k">THEN</span> <span class="n">nip_ok</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">wypelnione</span>
+    <span class="k">FROM</span> <span class="n">klienci_oceny</span>
+<span class="p">),</span> <span class="n">wynik</span> <span class="k">AS</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="p">.</span><span class="mi">0</span> <span class="o">*</span> <span class="k">SUM</span><span class="p">(</span><span class="n">wypelnione</span><span class="p">)</span> <span class="o">/</span> <span class="k">SUM</span><span class="p">(</span><span class="n">wymagane</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">kompletnosc_proc</span>
+    <span class="k">FROM</span> <span class="n">pola</span>
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">kompletnosc_proc</span><span class="p">,</span>
+       <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">kompletnosc_proc</span> <span class="o">&gt;=</span> <span class="mi">95</span> <span class="k">THEN</span> <span class="s1">'zielony'</span>
+            <span class="k">WHEN</span> <span class="n">kompletnosc_proc</span> <span class="o">&gt;=</span> <span class="mi">85</span> <span class="k">THEN</span> <span class="s1">'zolty'</span>
+            <span class="k">ELSE</span> <span class="s1">'czerwony'</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">semafor</span>
+<span class="k">FROM</span> <span class="n">wynik</span><span class="p">;</span>
+</code></pre></div></div> <table> <thead> <tr> <th>kompletnosc_proc</th> <th>semafor</th> </tr> </thead> <tbody> <tr> <td>76.8</td> <td>czerwony</td> </tr> </tbody> </table> <p>43 z 56 wymaganych pól jest wypełnionych (76,8%). Surowsza miara, odsetek w pełni kompletnych rekordów, wynosi 5 z 12, czyli 41,7%. Która miara jest właściwa, zależy od tego, do czego dane służą. Dla wysyłki faktur liczy się komplet pól, dla statystyk wystarczy odsetek wypełnienia.</p> <h2 id="czego-te-zapytania-nie-powiedzą">Czego te zapytania nie powiedzą</h2> <ul> <li> <strong>Kompletne nie znaczy poprawne.</strong> NIP <code class="language-plaintext highlighter-rouge">7010000001</code> jest wypełniony, ale nie wiadomo, czy ma poprawną sumę kontrolną. E-mail bez <code class="language-plaintext highlighter-rouge">@</code> też liczy się jako wypełniony. To już wymiary zgodności formatu i dokładności.</li> <li> <strong>Lista pól wymaganych i progi to decyzja biznesowa</strong>, nie analityka SQL. Kto ją zatwierdza, kto odpowiada za naprawę i jaki próg jest akceptowalny, to pytania z obszaru Data Governance. Bez właściciela danych wynik 76,8% jest tylko liczbą.</li> <li> <strong>Dwa pomiary kompletności mogą się mocno różnić</strong> (tu 76,8% i 41,7%). Zapisz, której używasz i dlaczego, żeby wynik dało się powtórzyć za kwartał.</li> </ul> <h2 id="co-dalej">Co dalej</h2> <ul> <li>Wpisz wynik do <a href="/scorecard/">arkusza Scorecard</a> i porównaj z kolejnymi wymiarami.</li> <li>Nie masz bazy pod ręką, tylko plik CSV? Policz kompletność, unikalność i ważność w <a href="/narzedzia/profil-danych/">narzędziu DQ Profiler</a>. Działa w przeglądarce, a plik nie jest nigdzie wysyłany. Po ustawieniu tych samych pól wymaganych co wyżej (NIP tylko dla firm) dostaniesz te same liczby, a plik z przykładowymi danymi znajdziesz na stronie narzędzia.</li> <li>Sprawdź w <a href="/dojrzalosc-dq/">teście dojrzałości Data Quality</a> (12 pytań, 5 minut), czy w firmie ktoś w ogóle odpowiada za takie pomiary.</li> <li>Jeśli wyniki Cię zaskoczyły i potrzebujesz pełnego pomiaru w sześciu wymiarach z planem naprawy, zobacz <a href="/audyt-data-quality/">audyt jakości danych</a>.</li> </ul> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/dns-redundancja-pihole/">DNS z zapasem: replika Pi-hole, synchronizacja jednokierunkowa i test awarii w homelabie</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/kopia-straznik-backupow/">Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/data-quality-dimensions/">Wymiary jakości danych: praktyczny przewodnik po Data Quality</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/ai-models-dg/">AI w Data Governance: szanse, wyzwania i praktyczne zastosowania</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/ataccama/">Ataccama ONE: przegląd platformy do Data Governance z perspektywy użytkownika</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/informatica/">Informatica jako narzędzie Data Governance: przegląd dla praktyków</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dg-standars/">Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dg-iso-standards/">Które normy ISO stosować w Data Governance? Praktyczny przegląd</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/data-governance-start/">Wstęp do Data Governance</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2023/guide-prompting/">Wstęp do Promptingu</a> </li> </ul> <p class="mb-2" style="margin-top: 1.5rem !important">Subscribe to be notified of future articles:</p> <div class="newsletter-form-container"> <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/cmuy6r04i0cbe0jzzzpxl742z" method="POST" style="justify-content: flex-start"> <input class="newsletter-form-input" name="newsletter-form-input" type="email" placeholder="user@example.com" required="" aria-describedby="newsletter-consent"> <button type="submit" class="newsletter-form-button" style="justify-content: flex-start"> Zapisz się </button> <button type="button" class="newsletter-loading-button" style="justify-content: flex-start"> Proszę czekać... </button> </form> <div class="newsletter-success" style="justify-content: flex-start"> <p class="newsletter-success-message">Zapisano pomyślnie! 🎉</p> </div> <div class="newsletter-error" style="justify-content: flex-start"> <p class="newsletter-error-message">Ups! Coś poszło nie tak, spróbuj ponownie.</p> </div> <button class="newsletter-back-button" type="button" onmouseout='this.style.textDecoration="none"' onmouseover='this.style.textDecoration="underline"'> ← Wróć </button> <p id="newsletter-consent" class="newsletter-consent" style="font-size: 0.85rem; margin-top: 0.5rem; text-align: left"> Zapisując się, zgadzasz się na otrzymywanie newslettera o Data Quality, Data Governance i AI (rzadko, bez spamu). Administratorem danych jest Szymon Kowalewski, wysyłkę obsługuje Loops. Najpierw potwierdzisz adres w mailu. Wiadomości mierzą otwarcia i kliknięcia (statystyki). Zgodę wycofasz linkiem w każdej wiadomości. Szczegóły w <a href="/privacy-policy/">polityce prywatności</a>. </p> </div> <noscript> <style>
+    .newsletter-form-container {
+      display: none;
+    }
+  </style> </noscript> <div id="giscus_thread" style="max-width: 930px; margin: 0 auto;"> <br> <script>
+    (function setupGiscus() {
+      function determineGiscusTheme() {
+        var theme = localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "system";
+if (theme === "dark") return "dark";
+if (theme === "light") return "light";
+var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+return prefersDark ? "dark" : "light";
+
+      }
+
+      var giscusTheme = determineGiscusTheme();
+      var attrs = {
+        src: "https://giscus.app/client.js",
+        "data-repo": "Szymok/szymok.github.io",
+        "data-repo-id": "R_kgDOOBrl3Q",
+        "data-category": "Announcements",
+        "data-category-id": "DIC_kwDOOBrl3c4DHW0N",
+        "data-mapping": "pathname",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "pl",
+        crossorigin: "anonymous",
+        async: true
+      };
+
+      var giscusScript = document.createElement("script");
+      Object.entries(attrs).forEach(function(entry) { giscusScript.setAttribute(entry[0], entry[1]); });
+      var host = document.getElementById("giscus_thread");
+      if (host) host.appendChild(giscusScript);
+    })();
+  </script> <noscript> Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Szymon Kowalewski. <a href="/garden/">Ogród wiedzy</a> · Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <a href="https://skszymon.eu/privacy-policy/">Impressum</a>. Last updated: October 13, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script defer src="/assets/third-party/tocbot/dist/tocbot.min.js" integrity="sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw=" crossorigin="anonymous"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="/assets/al_img_tools/js/lightbox2-adapter.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="/assets/third-party/vanilla-back-to-top/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-audyt-jakości-danych",
+          title: "audyt jakości danych",
+          description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni. Szymon Kowalewski, Data Governance Specialist.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/audyt-data-quality/";
+          },
+        },{id: "dropdown-ogród-wiedzy",
+              title: "🌱 ogród wiedzy",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/garden/";
+              },
+            },{id: "dropdown-test-dojrzałości-dq",
+              title: "🧭 test dojrzałości DQ",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/dojrzalosc-dq/";
+              },
+            },{id: "dropdown-profil-danych-csv",
+              title: "📊 profil danych CSV",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/narzedzia/profil-danych/";
+              },
+            },{id: "post-kompletność-danych-w-sql-5-zapytań-do-uruchomienia-dziś",
+        
+          title: "Kompletność danych w SQL: 5 zapytań do uruchomienia dziś",
+        
+        description: "Jak zmierzyć jakość danych w SQL bez dodatkowych narzędzi: 5 zapytań do kompletności, od NULL-i po wynik z semaforem do scorecardu. Dane przykładowe do pobrania.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kompletnosc-danych-sql/";
+          
+        },
+      },{id: "post-dns-z-zapasem-replika-pi-hole-synchronizacja-jednokierunkowa-i-test-awarii-w-homelabie",
+        
+          title: "DNS z zapasem: replika Pi-hole, synchronizacja jednokierunkowa i test awarii w homelabie",
+        
+        description: "Jak wyeliminowałem pojedynczy punkt awarii DNS w homelabie drugim Pi-hole i selektywną synchronizacją, jak przetestowałem awarię i jakie trzy pułapki wyszły po drodze. Case study replikacji jednokierunkowej z wnioskami dla Data Governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dns-redundancja-pihole/";
+          
+        },
+      },{id: "post-backup-który-sam-mówi-czy-działa-kopia-n8n-jako-data-observability-w-homelabie",
+        
+          title: "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w...",
+        
+        description: "Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kopia-straznik-backupow/";
+          
+        },
+      },{id: "post-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality",
+        
+          title: "Wymiary jakości danych: praktyczny przewodnik po Data Quality",
+        
+        description: "6 wymiarów jakości danych, metryki, praktyczne wdrożenie i narzędzia - wszystko, co musisz wiedzieć o Data Quality w kontekście Data Governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/data-quality-dimensions/";
+          
+        },
+      },{id: "post-ai-w-data-governance-szanse-wyzwania-i-praktyczne-zastosowania",
+        
+          title: "AI w Data Governance: szanse, wyzwania i praktyczne zastosowania",
+        
+        description: "Jak AI zmienia zarządzanie danymi? Od automatycznej klasyfikacji PII po frontier data governance — analiza na podstawie pracy z arXiv.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ai-models-dg/";
+          
+        },
+      },{id: "post-ataccama-one-przegląd-platformy-do-data-governance-z-perspektywy-użytkownika",
+        
+          title: "Ataccama ONE: przegląd platformy do Data Governance z perspektywy użytkownika",
+        
+        description: "Przegląd Ataccama ONE z perspektywy użytkownika: co potrafi w Data Quality, katalogu danych i glosariuszu, dla kogo ma sens i jakie ma ograniczenia.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ataccama/";
+          
+        },
+      },{id: "post-informatica-jako-narzędzie-data-governance-przegląd-dla-praktyków",
+        
+          title: "Informatica jako narzędzie Data Governance: przegląd dla praktyków",
+        
+        description: "Przegląd platformy Informatica Data Governance — Axon, EDC, CLAIRE GPT. Co potrafi, do czego się nadaje i jak wypada na tle konkurencji.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/informatica/";
+          
+        },
+      },{id: "post-standardy-danych-czym-są-i-dlaczego-bez-nich-nie-zbudujesz-programu-dg",
+        
+          title: "Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?",
+        
+        description: "Czym są standardy danych, jak działają w praktyce i dlaczego interoperacyjność jest kluczowa — analiza na podstawie inicjatywy TransparenCEE.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dg-standars/";
+          
+        },
+      },{id: "post-które-normy-iso-stosować-w-data-governance-praktyczny-przegląd",
+        
+          title: "Które normy ISO stosować w Data Governance? Praktyczny przegląd",
+        
+        description: "Przegląd standardów ISO przydatnych w programie Data Governance — od jakości danych (ISO 8000) po bezpieczeństwo informacji (ISO 27001).",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dg-iso-standards/";
+          
+        },
+      },{id: "post-wstęp-do-data-governance",
+        
+          title: "Wstęp do Data Governance",
+        
+        description: "Od czego zacząć przygodę z zarządzaniem danymi? Kluczowe elementy, role i wyzwania — z perspektywy praktyka.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/data-governance-start/";
+          
+        },
+      },{id: "post-wstęp-do-promptingu",
+        
+          title: "Wstęp do Promptingu",
+        
+        description: "Praktyczny przewodnik po promptingu — zasady, iteracyjny rozwój, podsumowywanie, analiza sentymentu i transformacja tekstu z OpenAI API.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/guide-prompting/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%68%65%6C%6C%6F@%73%6B%73%7A%79%6D%6F%6E.%65%75", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Szymok", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/skszymon", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/SkSzymon", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_newsletter/js/newsletter.js"></script> </body> </html>
