@@ -65,12 +65,12 @@ Po wdrożeniu porównałem oba serwery: te same 26 list, około 762 tysięcy dom
 
 Zatrzymałem kontener primary na 35 sekund i mierzyłem z komputera:
 
-| Moment | Czas odpowiedzi |
-|---|---|
-| Pierwsze zapytanie po zatrzymaniu | około 1,4 s (klient czeka na timeout primary) |
-| Kolejne zapytania | około 0,27 s (klient trzyma się repliki) |
-| Domena reklamowa | zablokowana, tak jak przy primary |
-| Kontenery na drugim hoście | dalej łączą się z usługami, odpowiedzi HTTP 200 |
+| Moment                            | Czas odpowiedzi                                 |
+| --------------------------------- | ----------------------------------------------- |
+| Pierwsze zapytanie po zatrzymaniu | około 1,4 s (klient czeka na timeout primary)   |
+| Kolejne zapytania                 | około 0,27 s (klient trzyma się repliki)        |
+| Domena reklamowa                  | zablokowana, tak jak przy primary               |
+| Kontenery na drugim hoście        | dalej łączą się z usługami, odpowiedzi HTTP 200 |
 
 Efekt widoczny dla użytkownika to jedno zauważalne opóźnienie na początku, a potem nic. To dokładnie to, o co mi chodziło.
 
@@ -108,11 +108,11 @@ Przy przeglądzie rekordów znalazłem CNAME wskazujący na nazwę z literówką
 
 Nie planowałem tego wpisu jako ćwiczenia z zarządzania danymi. Ale replika DNS z jednokierunkową synchronizacją to w małej skali dokładnie ten problem, który spotykam w pracy.
 
-**Jedno źródło prawdy i wyznaczone miejsce edycji.** Reguła „zmiany tylko na primary" to odpowiednik *system of record*. Bez niej dwa systemy zaczynają się rozjeżdżać, a nikt nie wie, który jest właściwy. W firmach ta zasada często istnieje w slajdach, a nie w konfiguracji. Tu wymusza ją sama synchronizacja: ręczna zmiana na replice zniknie w ciągu godziny.
+**Jedno źródło prawdy i wyznaczone miejsce edycji.** Reguła „zmiany tylko na primary" to odpowiednik _system of record_. Bez niej dwa systemy zaczynają się rozjeżdżać, a nikt nie wie, który jest właściwy. W firmach ta zasada często istnieje w slajdach, a nie w konfiguracji. Tu wymusza ją sama synchronizacja: ręczna zmiana na replice zniknie w ciągu godziny.
 
-**Selektywna replikacja to decyzja o zakresie.** Nie synchronizuję ustawień specyficznych dla hosta. W governance nazwalibyśmy to określeniem, które atrybuty są *master data*, a które lokalne. Zsynchronizowanie wszystkiego wygląda na bezpieczniejsze, ale przeniosłoby konfigurację jednego hosta na drugi.
+**Selektywna replikacja to decyzja o zakresie.** Nie synchronizuję ustawień specyficznych dla hosta. W governance nazwalibyśmy to określeniem, które atrybuty są _master data_, a które lokalne. Zsynchronizowanie wszystkiego wygląda na bezpieczniejsze, ale przeniosłoby konfigurację jednego hosta na drugi.
 
-**Zgodność nie równa się poprawność.** Literówka w CNAME pokazuje, że kontrola *consistency* (oba serwery mają to samo) nie zastąpi kontroli *validity* (rekord wskazuje na coś, co istnieje). To ta sama różnica, którą widać w [wymiarach jakości danych](/blog/2026/data-quality-dimensions/).
+**Zgodność nie równa się poprawność.** Literówka w CNAME pokazuje, że kontrola _consistency_ (oba serwery mają to samo) nie zastąpi kontroli _validity_ (rekord wskazuje na coś, co istnieje). To ta sama różnica, którą widać w [wymiarach jakości danych](/blog/2026/data-quality-dimensions/).
 
 **Test odtworzenia jest częścią kontroli.** Przy [backupach](/blog/2026/kopia-straznik-backupow/) pisałem, że kopia bez odtworzenia to nie backup. Tu jest to samo: replika, którą sprawdzam tylko wtedy, gdy wszystko działa, jest niesprawdzona. Test awarii ujawnił problem z hasłem, którego nie pokazałby żaden monitoring stanu ustalonego.
 
@@ -128,4 +128,4 @@ Nie twierdzę, że homelab uczy governance lepiej niż praca. Twierdzę, że te 
 - Dodać do porannego raportu prostą kontrolę: czy oba serwery odpowiadają i czy liczba domen na liście zgadza się na obu.
 - Zastanowić się nad regularnym, automatycznym testem przełączenia zamiast jednorazowego ręcznego.
 
-Jeśli masz w domu jeden DNS, zacznij od jednego pytania: *co się stanie, kiedy go zrestartuję w środku wieczoru?* Odpowiedź zwykle motywuje szybciej niż każdy artykuł.
+Jeśli masz w domu jeden DNS, zacznij od jednego pytania: _co się stanie, kiedy go zrestartuję w środku wieczoru?_ Odpowiedź zwykle motywuje szybciej niż każdy artykuł.

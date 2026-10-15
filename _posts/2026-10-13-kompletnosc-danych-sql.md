@@ -16,20 +16,20 @@ Jak zmierzyć jakość danych, gdy nie masz narzędzia do Data Quality ani czasu
 
 Tabela `klienci` ma 12 wymyślonych rekordów. Za wymagane uznajemy: nazwę, e-mail, telefon i miasto. NIP jest wymagany tylko dla firm. Wartości `NULL`, `''` (pusty tekst) i `' '` (spacja) są zapisane tak, jak w bazie.
 
-| id | nazwa | typ | nip | email | telefon | miasto | data_utworzenia |
-|---|---|---|---|---|---|---|---|
-| 1 | Alfa Sp. z o.o. | firma | 7010000001 | biuro@alfa.example | 221234567 | Warszawa | 2025-01-10 |
-| 2 | Beta SA | firma | NULL | kontakt@beta.example | +48 600 100 200 | Kraków | 2025-02-03 |
-| 3 | Gamma | firma | `''` | info@gamma.example | NULL | Gdańsk | 2025-02-15 |
-| 4 | Jan Kowalski | osoba | NULL | jan.k@example.com | 501 222 333 | Łódź | 2025-03-01 |
-| 5 | Anna Nowak | osoba | NULL | n/d | 502 333 444 | NULL | 2025-03-09 |
-| 6 | Delta Sp. z o.o. | firma | brak | - | `''` | Poznań | 2025-04-20 |
-| 7 | Epsilon Sp. z o.o. | firma | 7010000003 | epsilon@epsilon.example | 123456789 | Rzeszów | 2025-04-28 |
-| 8 | Anna Wiśniewska | osoba | NULL | a.wisniewska@example.com | `' '` | Wrocław | 2025-05-11 |
-| 9 | Zeta Sp. z o.o. | firma | 7010000004 | zeta@zeta.example | 123456780 | Szczecin | 2025-06-02 |
-| 10 | Eta | firma | --- | NULL | - | Lublin | 2025-07-14 |
-| 11 | Piotr Zieliński | osoba | NULL | piotr.z@example.com | 503 444 555 | Katowice | 2025-08-30 |
-| 12 | Theta SA | firma | 7010000007 | theta@theta.example | 224445566 | NULL | 2025-09-18 |
+| id  | nazwa              | typ   | nip        | email                    | telefon         | miasto   | data_utworzenia |
+| --- | ------------------ | ----- | ---------- | ------------------------ | --------------- | -------- | --------------- |
+| 1   | Alfa Sp. z o.o.    | firma | 7010000001 | biuro@alfa.example       | 221234567       | Warszawa | 2025-01-10      |
+| 2   | Beta SA            | firma | NULL       | kontakt@beta.example     | +48 600 100 200 | Kraków   | 2025-02-03      |
+| 3   | Gamma              | firma | `''`       | info@gamma.example       | NULL            | Gdańsk   | 2025-02-15      |
+| 4   | Jan Kowalski       | osoba | NULL       | jan.k@example.com        | 501 222 333     | Łódź     | 2025-03-01      |
+| 5   | Anna Nowak         | osoba | NULL       | n/d                      | 502 333 444     | NULL     | 2025-03-09      |
+| 6   | Delta Sp. z o.o.   | firma | brak       | -                        | `''`            | Poznań   | 2025-04-20      |
+| 7   | Epsilon Sp. z o.o. | firma | 7010000003 | epsilon@epsilon.example  | 123456789       | Rzeszów  | 2025-04-28      |
+| 8   | Anna Wiśniewska    | osoba | NULL       | a.wisniewska@example.com | `' '`           | Wrocław  | 2025-05-11      |
+| 9   | Zeta Sp. z o.o.    | firma | 7010000004 | zeta@zeta.example        | 123456780       | Szczecin | 2025-06-02      |
+| 10  | Eta                | firma | ---        | NULL                     | -               | Lublin   | 2025-07-14      |
+| 11  | Piotr Zieliński    | osoba | NULL       | piotr.z@example.com      | 503 444 555     | Katowice | 2025-08-30      |
+| 12  | Theta SA           | firma | 7010000007 | theta@theta.example      | 224445566       | NULL     | 2025-09-18      |
 
 Cały skrypt (tabela, dane i wszystkie zapytania) pobierzesz tutaj: [kompletnosc-danych.sql](/assets/files/kompletnosc-danych.sql). Sprawdziłem go w SQLite. Zapytania używają standardowych funkcji, ale w PostgreSQL, MySQL czy SQL Server mogą wymagać drobnych zmian składni.
 
@@ -47,8 +47,8 @@ FROM klienci;
 ```
 
 | wiersze | nip_proc | email_proc | telefon_proc | miasto_proc |
-|---|---|---|---|---|
-| 12 | 58.3 | 91.7 | 91.7 | 83.3 |
+| ------- | -------- | ---------- | ------------ | ----------- |
+| 12      | 58.3     | 91.7       | 91.7         | 83.3        |
 
 E-mail i telefon wyglądają dobrze (91,7%). To pułapka, bo `NULL` nie jest jedynym sposobem, w jaki w bazie pojawia się brak.
 
@@ -78,11 +78,11 @@ FROM klienci;
 Ten sam pomiar na widoku (`SUM(email_ok)` zamiast `COUNT(email)` itd.) daje inne liczby:
 
 | kolumna | tylko NULL | z wartościami zastępczymi |
-|---|---|---|
-| nip | 58,3% | **33,3%** |
-| email | 91,7% | **75,0%** |
-| telefon | 91,7% | **66,7%** |
-| miasto | 83,3% | 83,3% |
+| ------- | ---------- | ------------------------- |
+| nip     | 58,3%      | **33,3%**                 |
+| email   | 91,7%      | **75,0%**                 |
+| telefon | 91,7%      | **66,7%**                 |
+| miasto  | 83,3%      | 83,3%                     |
 
 Telefon spadł o 25 punktów procentowych. Ta różnica jest typowa: pomiar samych `NULL`-i zwykle zawyża kompletność, a odsetek zależy od tego, jak uczciwie zdefiniujesz brak.
 
@@ -99,8 +99,8 @@ WHERE typ = 'firma';
 ```
 
 | firmy | firmy_z_nip | nip_proc_firmy |
-|---|---|---|
-| 8 | 4 | 50.0 |
+| ----- | ----------- | -------------- |
+| 8     | 4           | 50.0           |
 
 Rzeczywista kompletność NIP wśród firm to 50%, a nie 33,3%. Reguła „NIP wymagany, gdy typ = firma" jest właśnie regułą jakości, którą ktoś musi zdefiniować i zaakceptować.
 
@@ -119,16 +119,16 @@ ORDER BY miesiac;
 ```
 
 | miesiac | rekordy | kompletne |
-|---|---|---|
-| 2025-01 | 1 | 1 |
-| 2025-02 | 2 | 0 |
-| 2025-03 | 2 | 1 |
-| 2025-04 | 2 | 1 |
-| 2025-05 | 1 | 0 |
-| 2025-06 | 1 | 1 |
-| 2025-07 | 1 | 0 |
-| 2025-08 | 1 | 1 |
-| 2025-09 | 1 | 0 |
+| ------- | ------- | --------- |
+| 2025-01 | 1       | 1         |
+| 2025-02 | 2       | 0         |
+| 2025-03 | 2       | 1         |
+| 2025-04 | 2       | 1         |
+| 2025-05 | 1       | 0         |
+| 2025-06 | 1       | 1         |
+| 2025-07 | 1       | 0         |
+| 2025-08 | 1       | 1         |
+| 2025-09 | 1       | 0         |
 
 Na 12 rekordach to tylko ilustracja. Na prawdziwej tabeli taki szereg pozwala wskazać miesiąc, w którym kompletność spadła, i zapytać, co się wtedy zmieniło.
 
@@ -154,9 +154,9 @@ SELECT kompletnosc_proc,
 FROM wynik;
 ```
 
-| kompletnosc_proc | semafor |
-|---|---|
-| 76.8 | czerwony |
+| kompletnosc_proc | semafor  |
+| ---------------- | -------- |
+| 76.8             | czerwony |
 
 43 z 56 wymaganych pól jest wypełnionych (76,8%). Surowsza miara, odsetek w pełni kompletnych rekordów, wynosi 5 z 12, czyli 41,7%. Która miara jest właściwa, zależy od tego, do czego dane służą. Dla wysyłki faktur liczy się komplet pól, dla statystyk wystarczy odsetek wypełnienia.
 

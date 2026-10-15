@@ -21,11 +21,11 @@ Ten post jest początkiem serii, w której chcę pokazać Data Governance z pers
 
 ## Co tak naprawdę oznacza Data Governance?
 
-Według [DAMA International](https://www.dama.org/cpages/body-of-knowledge), Data Governance to *„sprawowanie władzy, kontroli i wspólnego podejmowania decyzji dotyczących zarządzania zasobami danych"*. Brzmi akademicko, ale w praktyce sprowadza się do prostego pytania: **kto jest odpowiedzialny za dane i jak zapewniamy, że są wiarygodne?**
+Według [DAMA International](https://www.dama.org/cpages/body-of-knowledge), Data Governance to _„sprawowanie władzy, kontroli i wspólnego podejmowania decyzji dotyczących zarządzania zasobami danych"_. Brzmi akademicko, ale w praktyce sprowadza się do prostego pytania: **kto jest odpowiedzialny za dane i jak zapewniamy, że są wiarygodne?**
 
 Wiele organizacji traktuje dane jako „rzecz IT". Dział IT odpowiada za serwery i bazy danych, więc chyba odpowiada też za „dane"? To fundamentalny błąd. Dane to **zasób biznesowy** — analogicznie jak finanse (których nie zarządza dział IT, tylko CFO).
 
-> *„Data Governance is about behavior — creating the organizational behaviors around how data is managed."*  
+> _„Data Governance is about behavior — creating the organizational behaviors around how data is managed."_  
 > — [John Ladley, „Data Governance: How to Design, Deploy, and Sustain an Effective Data Governance Program"](https://www.amazon.com/Data-Governance-Design-Deploy-Sustain/dp/0124158293)
 
 ---
@@ -110,8 +110,8 @@ W następnych postach w tej serii zajmę się konkretnymi frameworkami i standar
 
 ### Źródła i dalsze lektury
 
-- DAMA International, [*DMBOK2: Data Management Body of Knowledge*](https://www.dama.org/cpages/body-of-knowledge), 2017
-- John Ladley, [*Data Governance: How to Design, Deploy, and Sustain an Effective Data Governance Program*](https://www.amazon.com/Data-Governance-Design-Deploy-Sustain/dp/0124158293), 2nd Edition, 2019
-- Data Governance Institute, [*The DGI Data Governance Framework*](https://datagovernance.com/the-data-governance-basics/)
-- ISO/IEC 38505-1:2017, [*Information technology — Governance of IT — Governance of data*](https://www.iso.org/standard/56639.html)
-- Gartner, [*Data Governance Definition*](https://www.gartner.com/en/information-technology/glossary/data-governance)
+- DAMA International, [_DMBOK2: Data Management Body of Knowledge_](https://www.dama.org/cpages/body-of-knowledge), 2017
+- John Ladley, [_Data Governance: How to Design, Deploy, and Sustain an Effective Data Governance Program_](https://www.amazon.com/Data-Governance-Design-Deploy-Sustain/dp/0124158293), 2nd Edition, 2019
+- Data Governance Institute, [_The DGI Data Governance Framework_](https://datagovernance.com/the-data-governance-basics/)
+- ISO/IEC 38505-1:2017, [_Information technology — Governance of IT — Governance of data_](https://www.iso.org/standard/56639.html)
+- Gartner, [_Data Governance Definition_](https://www.gartner.com/en/information-technology/glossary/data-governance)

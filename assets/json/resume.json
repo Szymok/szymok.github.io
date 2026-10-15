@@ -66,13 +66,7 @@
       "startDate": "2023-03-01",
       "endDate": "2023-06-30",
       "summary": "Opracowywanie i wdrażanie przepływów danych, mając na celu optymalizację i usprawnienie procesów analitycznych w firmie. Projektowanie i implementacja dwóch aplikacji bazodanowych (ekstrakcja i transformacje danych) i aplikacji Business Intelligence w narzędziu Qlik. Współpraca z zespołem biznesowym w celu zrozumienia ich potrzeb i dostosowania aplikacji do spełnienia konkretnych wymagań biznesowych. Monitorowanie i optymalizacja wydajności baz danych oraz aplikacji, co przyczyniło się do znaczącej poprawy efektywności procesów analitycznych.",
-      "highlights": [
-        "Qlik Sense",
-        "PostgreSQL",
-        "data engineering",
-        "data modeling",
-        "data warehousing"
-      ]
+      "highlights": ["Qlik Sense", "PostgreSQL", "data engineering", "data modeling", "data warehousing"]
     },
     {
       "name": "No Fluff Jobs",
@@ -81,13 +75,7 @@
       "startDate": "2021-08-01",
       "endDate": "2023-02-28",
       "summary": "Web Scraping i automatyzacja codziennych zadań w Pythonie. Budowanie przepływów danych przy pomocy dbt, Python, Hevo, Snowflake. Opomiarowanie produktu - określanie celu i zasięgu, analiza i interpretacja wyników oraz wdrożenie (GA, GTM, Google Optimize)",
-      "highlights": [
-        "data pipelines",
-        "web scraping",
-        "data engineering",
-        "data modeling",
-        "data warehousing"
-      ]
+      "highlights": ["data pipelines", "web scraping", "data engineering", "data modeling", "data warehousing"]
     },
     {
       "name": "No Fluff Jobs",
@@ -96,12 +84,7 @@
       "startDate": "2020-08-01",
       "endDate": "2021-07-31",
       "summary": "Budowa Dashboardów KPI w Tableau dla działów Sales i Marketing. Tworzenie podstawowych modeli uczenia maszynowego dot. wyników sprzedaży oraz klasyfikacji klientów. Analiza danych sprzedażowych i produktowych.",
-      "highlights": [
-        "data visualization",
-        "data analysis",
-        "machine learning",
-        "BI"
-      ]
+      "highlights": ["data visualization", "data analysis", "machine learning", "BI"]
     },
     {
       "name": "Statscore",
@@ -110,10 +93,7 @@
       "startDate": "2016-06-01",
       "endDate": "2022-10-28",
       "summary": "Tworzenie w czasie rzeczywistym graficznej relacji meczowej. Budowanie baz danych statystycznych. Analiza dużych zbiorów danych dot. aktualnej sytuacji na boisku",
-      "highlights": [
-        "data analysis",
-        "databases"
-      ]
+      "highlights": ["data analysis", "databases"]
     }
   ],
   "volunteer": [
@@ -125,9 +105,7 @@
       "startDate": "2019-10-01",
       "endDate": "2021-01-01",
       "summary": "Bylem członkiem koła naukowego informatyki L!der. Od października 2019 do stycznia 2021 pełniłem rolę koordynatora ds. IT. Udział z zespołem w Imagine Cup oraz konkursach uczelnianych..",
-      "highlights": [
-        "3. miejsce w konkursie Startuj do START'upu"
-      ]
+      "highlights": ["3. miejsce w konkursie Startuj do START'upu"]
     }
   ],
   "education": [
@@ -139,9 +117,7 @@
       "startDate": "2021-09-01",
       "endDate": "2023-07-01",
       "score": "4,5",
-      "courses": [
-        "Model ML/DL dot. predykcji widełek wynagrodzeniach w ofertach pracy - praca magisterska"
-      ]
+      "courses": ["Model ML/DL dot. predykcji widełek wynagrodzeniach w ofertach pracy - praca magisterska"]
     },
     {
       "institution": "Uniwersytet Gdański",
@@ -151,9 +127,7 @@
       "startDate": "2018-09-01",
       "endDate": "2021-07-01",
       "score": "4,5",
-      "courses": [
-        "Zastosowanie algorytmów uczenia maszynowego na przykładzie NCAA i AZS - praca licencjacka"
-      ]
+      "courses": ["Zastosowanie algorytmów uczenia maszynowego na przykładzie NCAA i AZS - praca licencjacka"]
     }
   ],
   "certificates": [
@@ -230,39 +204,22 @@
     {
       "name": "Data Science",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Machine Learning",
-        "Data Engineering",
-        "Statistical Models"
-      ]
+      "keywords": ["Machine Learning", "Data Engineering", "Statistical Models"]
     },
     {
       "name": "Data Stats",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "La Liga History",
-        "Sports Analytics",
-        "Historical Sports Data"
-      ]
+      "keywords": ["La Liga History", "Sports Analytics", "Historical Sports Data"]
     },
     {
       "name": "Artificial Intelligence",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Machine Learning",
-        "Natural Language Processing",
-        "Generative AI"
-      ]
+      "keywords": ["Machine Learning", "Natural Language Processing", "Generative AI"]
     },
     {
       "name": "Self-Hosting",
       "icon": "fa-solid fa-tag",
-      "keywords": [
-        "Docker",
-        "Data Privacy",
-        "Open Source Solutions",
-        "Local LLMs"
-      ]
+      "keywords": ["Docker", "Data Privacy", "Open Source Solutions", "Local LLMs"]
     }
   ],
   "references": [],
@@ -270,12 +227,7 @@
     {
       "name": "bAIka - AI Stories",
       "summary": "Projekt wykorzystujący sztuczną inteligencję do tworzenia spersonalizowanych opowieści i narracji.",
-      "highlights": [
-        "Natural Language Generation",
-        "Interactive Storytelling",
-        "User Customization",
-        "Polish Language Support"
-      ],
+      "highlights": ["Natural Language Generation", "Interactive Storytelling", "User Customization", "Polish Language Support"],
       "startDate": "2024-01-01",
       "endDate": "Present",
       "url": "https://baika.skszymon.com"
@@ -297,13 +249,7 @@
     {
       "name": "Polish Job Market Scraper",
       "summary": "Zautomatyzowane narzędzie, które scrapuje i analizuje oferty pracy z polskiego rynku, ze szczególnym uwzględnieniem stanowisk z zakresu inżynierii danych i data science. Projekt pomaga śledzić trendy rynkowe, zakresy wynagrodzeń i wymagane umiejętności w polskiej branży technologicznej.",
-      "highlights": [
-        "Web Scraping",
-        "Data Engineering",
-        "Market Analysis",
-        "Automated Reporting",
-        "Skills Gap Analysis"
-      ],
+      "highlights": ["Web Scraping", "Data Engineering", "Market Analysis", "Automated Reporting", "Skills Gap Analysis"],
       "startDate": "2022-09-01",
       "endDate": "Present",
       "url": ""

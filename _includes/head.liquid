@@ -88,10 +88,19 @@
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
 <style>
   /* Akcent strony: granat (tryb jasny) i bursztyn (tryb ciemny). Nadpisuje zmienne motywu z main.css. */
-  :root { --global-theme-color: #1d4b8f; --global-hover-color: #1d4b8f; }
-  html[data-theme="dark"] { --global-theme-color: #f0b429; --global-hover-color: #f0b429; }
+  :root {
+    --global-theme-color: #1d4b8f;
+    --global-hover-color: #1d4b8f;
+  }
+  html[data-theme='dark'] {
+    --global-theme-color: #f0b429;
+    --global-hover-color: #f0b429;
+  }
   /* Linki w treści są podkreślone: sam kolor akcentu nie odróżnia ich od tekstu (WCAG 1.4.1). Linki z klasą (przyciski, karty, menu) bez zmian. */
-  article :is(p, li, td, dd, blockquote) a:not([class]) { text-decoration: underline; text-underline-offset: 0.15em; }
+  article :is(p, li, td, dd, blockquote) a:not([class]) {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
 </style>
 {% if page.layout == 'cv' and site.plugins contains 'al_folio_cv' and site.al_folio.features.cv.enabled != false %}
   <link rel="stylesheet" href="{{ '/assets/css/al-folio-cv.css' | relative_url | bust_file_cache }}">
@@ -164,68 +173,77 @@
 <link rel="stylesheet" href="{{ '/assets/third-party/cookieconsent/dist/cookieconsent.css' | relative_url }}">
 <script defer src="{{ '/assets/third-party/cookieconsent/dist/cookieconsent.umd.js' | relative_url }}"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  var checkCC = setInterval(function () {
-    if (window.CookieConsent) {
-      clearInterval(checkCC);
-      window.CookieConsent.run({
-        categories: {
-          necessary: { enabled: true, readOnly: true },
-          analytics: {}
-        },
-        language: {
-          default: "pl",
-          translations: {
-            pl: {
-              consentModal: {
-                title: "Używamy ciasteczek 🍪",
-                description: "Ta strona używa plików cookie w celu analizy ruchu i optymalizacji działania (w tym, dla części odwiedzin, zapisu przebiegu sesji z maskowaniem pól formularzy). Możesz zaakceptować wszystkie ciasteczka lub zarządzać indywidualnymi preferencjami.",
-                acceptAllBtn: "Akceptuj wszystkie",
-                acceptNecessaryBtn: "Odrzuć wszystkie",
-                showPreferencesBtn: "Zarządzaj ustawieniami"
+  document.addEventListener('DOMContentLoaded', function () {
+    var checkCC = setInterval(function () {
+      if (window.CookieConsent) {
+        clearInterval(checkCC);
+        window.CookieConsent.run({
+          categories: {
+            necessary: { enabled: true, readOnly: true },
+            analytics: {},
+          },
+          language: {
+            default: 'pl',
+            translations: {
+              pl: {
+                consentModal: {
+                  title: 'Używamy ciasteczek 🍪',
+                  description:
+                    'Ta strona używa plików cookie w celu analizy ruchu i optymalizacji działania (w tym, dla części odwiedzin, zapisu przebiegu sesji z maskowaniem pól formularzy). Możesz zaakceptować wszystkie ciasteczka lub zarządzać indywidualnymi preferencjami.',
+                  acceptAllBtn: 'Akceptuj wszystkie',
+                  acceptNecessaryBtn: 'Odrzuć wszystkie',
+                  showPreferencesBtn: 'Zarządzaj ustawieniami',
+                },
+                preferencesModal: {
+                  title: 'Preferencje plików cookie',
+                  acceptAllBtn: 'Akceptuj wszystkie',
+                  acceptNecessaryBtn: 'Odrzuć wszystkie',
+                  savePreferencesBtn: 'Zapisz wybrane',
+                  closeIconLabel: 'Zamknij',
+                  sections: [
+                    {
+                      title: 'Użycie plików cookie',
+                      description: 'Używamy plików cookie w celu zapewnienia prawidłowego działania strony oraz analizowania ruchu analitycznego.',
+                    },
+                    {
+                      title: 'Niezbędne pliki cookie',
+                      description: 'Te pliki cookie są wymagane do poprawnego działania witryny.',
+                      linkedCategory: 'necessary',
+                    },
+                    {
+                      title: 'Analityczne pliki cookie',
+                      description:
+                        'Te pliki cookie pozwalają nam mierzyć ruch na stronie oraz, dla części odwiedzin, rejestrować przebieg sesji (przewijanie i kliknięcia, z maskowaniem pól formularzy) w celu ulepszania treści i użyteczności strony.',
+                      linkedCategory: 'analytics',
+                    },
+                  ],
+                },
               },
-              preferencesModal: {
-                title: "Preferencje plików cookie",
-                acceptAllBtn: "Akceptuj wszystkie",
-                acceptNecessaryBtn: "Odrzuć wszystkie",
-                savePreferencesBtn: "Zapisz wybrane",
-                closeIconLabel: "Zamknij",
-                sections: [
-                  {
-                    title: "Użycie plików cookie",
-                    description: "Używamy plików cookie w celu zapewnienia prawidłowego działania strony oraz analizowania ruchu analitycznego."
-                  },
-                  {
-                    title: "Niezbędne pliki cookie",
-                    description: "Te pliki cookie są wymagane do poprawnego działania witryny.",
-                    linkedCategory: "necessary"
-                  },
-                  {
-                    title: "Analityczne pliki cookie",
-                    description: "Te pliki cookie pozwalają nam mierzyć ruch na stronie oraz, dla części odwiedzin, rejestrować przebieg sesji (przewijanie i kliknięcia, z maskowaniem pól formularzy) w celu ulepszania treści i użyteczności strony.",
-                    linkedCategory: "analytics"
-                  }
-                ]
-              }
-            }
-          }
-        }
-      });
-    }
-  }, 100);
-});
+            },
+          },
+        });
+      }
+    }, 100);
+  });
 </script>
 
-<script type="text/plain" data-category="analytics" async defer
+<script
+  type="text/plain"
+  data-category="analytics"
+  async
+  defer
   data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986"
-  src="https://umami.skszymon.eu/script.js">
-</script>
+  src="https://umami.skszymon.eu/script.js"
+></script>
 
-<script type="text/plain" data-category="analytics" async defer
+<script
+  type="text/plain"
+  data-category="analytics"
+  async
+  defer
   src="https://umami.skszymon.eu/recorder.js"
   data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986"
   data-sample-rate="0.15"
   data-mask-level="moderate"
-  data-max-duration="300000">
-</script>
-
+  data-max-duration="300000"
+></script>

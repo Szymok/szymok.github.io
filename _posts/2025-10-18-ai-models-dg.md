@@ -13,7 +13,7 @@ toc:
 
 ## AI w Data Governance: jak sztuczna inteligencja zmienia zasady gry
 
-Zwykle mówimy, że „dane to paliwo AI". Ale jest też druga strona medalu — **dane mogą być hamulcem bezpieczeństwa i dźwignią regulacyjną**. Ten post bazuje na pracy [*„Towards Data Governance of Frontier AI Models"*](https://arxiv.org/abs/2412.03824v2) z arXiv i moich własnych obserwacjach z codziennej pracy w Data Governance.
+Zwykle mówimy, że „dane to paliwo AI". Ale jest też druga strona medalu — **dane mogą być hamulcem bezpieczeństwa i dźwignią regulacyjną**. Ten post bazuje na pracy [_„Towards Data Governance of Frontier AI Models"_](https://arxiv.org/abs/2412.03824v2) z arXiv i moich własnych obserwacjach z codziennej pracy w Data Governance.
 
 Teza jest prosta: governance danych powinno stać się **trzecim filarem** obok mocy obliczeniowej (compute governance) i ewaluacji modeli (model evaluations).
 
@@ -25,13 +25,13 @@ Do niedawna Data Governance było w dużej mierze procesem manualnym — ręczne
 
 ### Automatyczna klasyfikacja danych
 
-Wyobraź sobie tysiące tabel i kolumn w hurtowni danych. Które zawierają PII (dane osobowe)? Które są danymi finansowymi? Modele NLP potrafią „przeczytać" metadane, przykładowe wartości i nazwy kolumn, a następnie automatycznie otagować: *„PESEL"*, *„adres e-mail"*, *„numer konta bankowego"*.
+Wyobraź sobie tysiące tabel i kolumn w hurtowni danych. Które zawierają PII (dane osobowe)? Które są danymi finansowymi? Modele NLP potrafią „przeczytać" metadane, przykładowe wartości i nazwy kolumn, a następnie automatycznie otagować: _„PESEL"_, _„adres e-mail"_, _„numer konta bankowego"_.
 
 To fundament każdej strategii DG — i zadanie, które ręcznie wymagałoby setek godzin pracy. Narzędzia takie jak [Ataccama ONE](/blog/2025/ataccama/) czy [Informatica CLAIRE](/blog/2025/informatica/) wykorzystują AI do tego celu.
 
 ### Inteligentne monitorowanie anomalii
 
-Zamiast sztywnych reguł (*„alert, jeśli pole jest puste"*), AI analizuje wzorce zachowań. Jeśli w poniedziałek zawsze ładujemy 10k rekordów, a dziś pojawiło się 500 — to anomalia. Jeśli pracownik z działu marketingu nagle pobiera masowo dane klientów o 3 nad ranem — to potencjalny incydent.
+Zamiast sztywnych reguł (_„alert, jeśli pole jest puste"_), AI analizuje wzorce zachowań. Jeśli w poniedziałek zawsze ładujemy 10k rekordów, a dziś pojawiło się 500 — to anomalia. Jeśli pracownik z działu marketingu nagle pobiera masowo dane klientów o 3 nad ranem — to potencjalny incydent.
 
 Narzędzia z kategorii **data observability** (np. [Monte Carlo](https://www.montecarlodata.com/), [Bigeye](https://www.bigeye.com/)) bazują właśnie na tym podejściu.
 
@@ -60,6 +60,7 @@ Jeśli historyczne dane bankowe pokazują, że kobiety częściej dostawały odm
 ### Zarządzanie cyklem życia
 
 Pytania z zakresu DG, które dotyczą AI:
+
 - Kto ma dostęp do zbiorów treningowych?
 - Jak zarządzamy promptami i odpowiedziami w modelach GenAI?
 - Gdzie przechowujemy fine-tuned modele i jak wersjonujemy dane treningowe?
@@ -73,13 +74,14 @@ Praca [Toward Data Governance of Frontier AI Models](https://arxiv.org/abs/2412.
 
 Autorzy argumentują, że dane mają unikalne cechy, które komplikują tradycyjne podejście do governance:
 
-| Cecha danych | Implikacja dla governance |
-|:---|:---|
-| **Non-rivalry** — wielu użytkowników może korzystać jednocześnie | Trudno ograniczyć dostęp po udostępnieniu |
-| **Replicability** — łatwo kopiować | Trudno kontrolować rozprzestrzenianie |
-| **Composability** — dane można łączyć | Nieszkodliwe zbiory mogą stać się niebezpieczne po połączeniu |
+| Cecha danych                                                     | Implikacja dla governance                                     |
+| :--------------------------------------------------------------- | :------------------------------------------------------------ |
+| **Non-rivalry** — wielu użytkowników może korzystać jednocześnie | Trudno ograniczyć dostęp po udostępnieniu                     |
+| **Replicability** — łatwo kopiować                               | Trudno kontrolować rozprzestrzenianie                         |
+| **Composability** — dane można łączyć                            | Nieszkodliwe zbiory mogą stać się niebezpieczne po połączeniu |
 
 Proponowane mechanizmy:
+
 - **Canary tokens** — cyfrowe „pułapki" osadzone w danych, wykrywające nieautoryzowane użycie
 - **Obowiązkowe raportowanie** — twórcy modeli muszą udokumentować, jakie dane wykorzystali
 - **Proaktywne filtrowanie** — AI samo monitoruje zbiory treningowe pod kątem szkodliwych treści
@@ -88,13 +90,14 @@ Proponowane mechanizmy:
 
 ## Explainable AI (XAI) — klucz do zaufania
 
-Największy problem z AI w governance to **„czarna skrzynka"** — nie wiemy, *jak* model podjął decyzję. To podkopuje:
+Największy problem z AI w governance to **„czarna skrzynka"** — nie wiemy, _jak_ model podjął decyzję. To podkopuje:
 
 - **Zaufanie** — zarząd nie zaakceptuje decyzji, której nie rozumie
 - **Odpowiedzialność** — kogo obarczyć, gdy model się myli?
 - **Compliance** — [RODO art. 22](https://gdpr.eu/article-22-automated-individual-decision-making/) daje osobom prawo do wyjaśnienia decyzji zautomatyzowanych
 
 Dlatego rosnące znaczenie ma [Explainable AI (XAI)](https://www.ibm.com/topics/explainable-ai):
+
 - SHAP (SHapley Additive exPlanations) — wyjaśnia wkład każdej cechy w predykcję
 - LIME (Local Interpretable Model-agnostic Explanations) — lokalne wyjaśnienia dla pojedynczych przypadków
 - Model Cards (Google) — standaryzowana dokumentacja modeli AI
@@ -116,21 +119,22 @@ Wdrożenie AI do DG to nie projekt na jeden weekend. Realistyczny plan gry:
 ## Podsumowanie
 
 AI zmienia Data Governance z dwóch stron:
+
 - **AI jako narzędzie DG** — automatyzuje klasyfikację, monitoring, lineage i jakość
 - **DG dla AI** — zapewnia jakość danych treningowych, neutralizuje bias, dokumentuje provenance
 
 Największe wyzwanie to nie technologia, a **zaufanie** — do modeli, do danych i do procesów. Kluczem jest Explainable AI, solidne polityki i stopniowe wdrażanie.
 
-> *„AI is not a magic wand for data governance — it's a powerful amplifier. If your data governance is good, AI makes it great. If it's bad, AI makes the problems worse, faster."*
+> _„AI is not a magic wand for data governance — it's a powerful amplifier. If your data governance is good, AI makes it great. If it's bad, AI makes the problems worse, faster."_
 
 ---
 
 ### Źródła i dalsze lektury
 
-- [*Towards Data Governance of Frontier AI Models*](https://arxiv.org/abs/2412.03824v2), arXiv, 2024
-- MIT Sloan, [*The Quest for AI Quality*](https://sloanreview.mit.edu/article/the-quest-for-ai-quality/)
-- IBM, [*Explainable AI*](https://www.ibm.com/topics/explainable-ai)
-- IBM, [*AI Fairness 360*](https://aif360.mybluemix.net/)
-- GDPR, [*Article 22 — Automated Decision-Making*](https://gdpr.eu/article-22-automated-individual-decision-making/)
-- Monte Carlo Data, [*Data Observability Platform*](https://www.montecarlodata.com/)
-- Google, [*Model Cards for Model Reporting*](https://modelcards.withgoogle.com/)
+- [_Towards Data Governance of Frontier AI Models_](https://arxiv.org/abs/2412.03824v2), arXiv, 2024
+- MIT Sloan, [_The Quest for AI Quality_](https://sloanreview.mit.edu/article/the-quest-for-ai-quality/)
+- IBM, [_Explainable AI_](https://www.ibm.com/topics/explainable-ai)
+- IBM, [_AI Fairness 360_](https://aif360.mybluemix.net/)
+- GDPR, [_Article 22 — Automated Decision-Making_](https://gdpr.eu/article-22-automated-individual-decision-making/)
+- Monte Carlo Data, [_Data Observability Platform_](https://www.montecarlodata.com/)
+- Google, [_Model Cards for Model Reporting_](https://modelcards.withgoogle.com/)
