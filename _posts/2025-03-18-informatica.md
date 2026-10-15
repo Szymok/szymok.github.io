@@ -24,6 +24,7 @@ W [poprzednich artykułach](/blog/2024/data-governance-start/) pisałem o fundam
 [Informatica](https://www.informatica.com/) to firma założona w 1993 roku w Stanach Zjednoczonych. Przez lata zbudowała szerokie portfolio narzędzi do integracji danych. Ich flagowy produkt — **Informatica PowerCenter** — przez dekady był synonimem ETL (Extract, Transform, Load) w korporacjach.
 
 Dziś portfolio Informatica obejmuje:
+
 - ETL/ELT i integrację danych
 - Maskowanie danych
 - Jakość danych
@@ -53,7 +54,7 @@ Platforma umożliwia definiowanie polityk DG (reguły jakości, klasyfikacja, ko
 
 ### Data Lineage i analiza wpływu
 
-Śledzenie przepływu danych między systemami. Pozwala odpowiedzieć na pytanie: *„jeśli zmienię definicję pola X w systemie źródłowym, jakie raporty i procesy to zepsuje?"* — kluczowe przy zarządzaniu zmianą.
+Śledzenie przepływu danych między systemami. Pozwala odpowiedzieć na pytanie: _„jeśli zmienię definicję pola X w systemie źródłowym, jakie raporty i procesy to zepsuje?"_ — kluczowe przy zarządzaniu zmianą.
 
 ### Zarządzanie jakością danych
 
@@ -68,6 +69,7 @@ Profilowanie, czyszczenie i monitoring jakości danych w jednym narzędziu. Info
 [Axon](https://www.informatica.com/products/data-governance/axon-data-governance.html) to narzędzie klasy enterprise, stworzone z myślą o **użytkownikach biznesowych**. Jego celem jest upowszechnienie wiedzy o danych w całej organizacji — nie tylko wśród inżynierów danych, ale też wśród menedżerów, analityków i specjalistów compliance.
 
 Axon łączy:
+
 - Glosariusz biznesowy
 - Mapowanie odpowiedzialności (kto jest ownerem jakich danych)
 - Workflow zarządzania danymi (zgłoszenia, zatwierdzenia, eskalacje)
@@ -84,7 +86,7 @@ W odróżnieniu od biznesowej perspektywy Axona, [EDC](https://www.informatica.c
 
 Informatica niedawno wprowadziła [CLAIRE GPT](https://www.informatica.com/platform/claire-ai.html) — model językowy połączony z metadanymi w platformie IDMC (Intelligent Data Management Cloud).
 
-W praktyce oznacza to, że możesz **zapytać w naturalnym języku** o swoje dane: *„Które tabele zawierają dane klientów z Europy?"* lub *„Pokaż mi lineage pola 'revenue' w raporcie kwartalnym."*
+W praktyce oznacza to, że możesz **zapytać w naturalnym języku** o swoje dane: _„Które tabele zawierają dane klientów z Europy?"_ lub _„Pokaż mi lineage pola 'revenue' w raporcie kwartalnym."_
 
 To interesujący kierunek — ale jeszcze wczesny. Informatica obiecuje, że CLAIRE GPT będzie rozbijać złożone zadania DG na mniejsze kroki i sugerować rekomendacje. Zobaczymy, jak to zadziała w produkcyjnych wdrożeniach.
 
@@ -92,14 +94,14 @@ To interesujący kierunek — ale jeszcze wczesny. Informatica obiecuje, że CLA
 
 ## Jak Informatica wypada na tle konkurencji?
 
-| Aspekt | Informatica | Ataccama | Collibra |
-|--------|-------------|----------|----------|
-| **Siła** | Najszerszy ekosystem, głęboka integracja ETL | Zintegrowany DQ + DG + MDM w jednej platformie | Najlepszy Business Glossary i governance workflow |
-| **Słabość** | Kompleksowość, wyższy próg wejścia | Mniejszy ekosystem partnerski | Słabszy moduł Data Quality |
-| **Dla kogo** | Duże korporacje z istniejącym stackiem Informatica | Firmy szukające all-in-one | Organizacje stawiające na governance-first |
-| **Pricing** | Enterprise (premium) | Bardziej elastyczny | Enterprise (premium) |
+| Aspekt       | Informatica                                        | Ataccama                                       | Collibra                                          |
+| ------------ | -------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------- |
+| **Siła**     | Najszerszy ekosystem, głęboka integracja ETL       | Zintegrowany DQ + DG + MDM w jednej platformie | Najlepszy Business Glossary i governance workflow |
+| **Słabość**  | Kompleksowość, wyższy próg wejścia                 | Mniejszy ekosystem partnerski                  | Słabszy moduł Data Quality                        |
+| **Dla kogo** | Duże korporacje z istniejącym stackiem Informatica | Firmy szukające all-in-one                     | Organizacje stawiające na governance-first        |
+| **Pricing**  | Enterprise (premium)                               | Bardziej elastyczny                            | Enterprise (premium)                              |
 
-*Źródło: własna analiza na podstawie [Gartner Peer Insights](https://www.gartner.com/reviews/market/data-quality-solutions) i doświadczeń praktycznych.*
+_Źródło: własna analiza na podstawie [Gartner Peer Insights](https://www.gartner.com/reviews/market/data-quality-solutions) i doświadczeń praktycznych._
 
 ---
 
@@ -124,9 +126,9 @@ Ale narzędzie to nie jest srebrną kulą. Bez jasnych procesów, zdefiniowanych
 
 ### Źródła i dalsze lektury
 
-- Informatica, [*Data Governance Platform*](https://www.informatica.com/products/data-governance.html)
-- Informatica, [*Axon Data Governance*](https://www.informatica.com/products/data-governance/axon-data-governance.html)
-- Informatica, [*Enterprise Data Catalog*](https://www.informatica.com/products/data-catalog/enterprise-data-catalog.html)
-- Informatica, [*CLAIRE AI*](https://www.informatica.com/platform/claire-ai.html)
-- Gartner, [*Magic Quadrant for Data Integration Tools*](https://www.informatica.com/resources/articles/gartner-magic-quadrant-data-integration.html)
-- Gartner, [*Peer Insights — Data Quality Solutions*](https://www.gartner.com/reviews/market/data-quality-solutions)
+- Informatica, [_Data Governance Platform_](https://www.informatica.com/products/data-governance.html)
+- Informatica, [_Axon Data Governance_](https://www.informatica.com/products/data-governance/axon-data-governance.html)
+- Informatica, [_Enterprise Data Catalog_](https://www.informatica.com/products/data-catalog/enterprise-data-catalog.html)
+- Informatica, [_CLAIRE AI_](https://www.informatica.com/platform/claire-ai.html)
+- Gartner, [_Magic Quadrant for Data Integration Tools_](https://www.informatica.com/resources/articles/gartner-magic-quadrant-data-integration.html)
+- Gartner, [_Peer Insights — Data Quality Solutions_](https://www.gartner.com/reviews/market/data-quality-solutions)

@@ -38,21 +38,24 @@ Interoperacyjność to zdolność różnych systemów do wymiany standaryzowanyc
 ### Przykłady tego samego rekordu w różnych formatach
 
 **JSON** (preferowany w nowoczesnych API i narzędziach analitycznych):
+
 ```json
 {
-  "author": {"given_name": "Krzysztof", "family_name": "Madejski"},
+  "author": { "given_name": "Krzysztof", "family_name": "Madejski" },
   "title": "Standardy danych: Czym są i dlaczego są ważne?",
   "date_of_final_accept": "2016-01-29"
 }
 ```
 
 **CSV** (uniwersalny, ale płaski — nie obsługuje zagnieżdżeń):
+
 ```
 author_given_name, author_family_name, title, date_of_final_accept
 Krzysztof, Madejski, Standardy danych: Czym są i dlaczego są ważne?, 2016-01-29
 ```
 
 **XML** (nadal popularny w administracji publicznej i sektorze finansowym):
+
 ```xml
 <thesis>
   <author>
@@ -74,14 +77,14 @@ Gdybym ogłosił „Kowalewski Data Standard 1.0", prawdopodobnie nikt by tego n
 
 Według [World Wide Web Consortium (W3C)](https://www.w3.org/standards/), otwarty standard powinien spełniać te kryteria:
 
-| Kryterium | Opis |
-|-----------|------|
+| Kryterium         | Opis                                                   |
+| ----------------- | ------------------------------------------------------ |
 | **Przejrzystość** | Proces tworzenia jest publiczny, decyzje dokumentowane |
-| **Relewancja** | Standard wynika z realnych potrzeb rynkowych |
-| **Otwartość** | Każdy może w nim uczestniczyć |
-| **Bezstronność** | Proces decyzyjny jest sprawiedliwy |
-| **Dostępność** | Bezpłatny dostęp do specyfikacji |
-| **Utrzymanie** | Ciągłe testowanie i aktualizacja |
+| **Relewancja**    | Standard wynika z realnych potrzeb rynkowych           |
+| **Otwartość**     | Każdy może w nim uczestniczyć                          |
+| **Bezstronność**  | Proces decyzyjny jest sprawiedliwy                     |
+| **Dostępność**    | Bezpłatny dostęp do specyfikacji                       |
+| **Utrzymanie**    | Ciągłe testowanie i aktualizacja                       |
 
 Dobrym przykładem jest [ISO 3166](https://www.iso.org/iso-3166-country-codes.html) — standard kodów krajów, który jest niewidoczny, ale wszechobecny. Każdy formularz online, który prosi o wybór kraju, prawdopodobnie korzysta z tego standardu.
 
@@ -124,6 +127,7 @@ Wdrożenie standardów to nie jednorazowe działanie, ale **ciągły proces nego
 Standardy danych to fundament, na którym budujemy interoperacyjność, jakość i zaufanie do danych. Bez nich program DG jest jak budynek bez fundamentów — może stoi, ale przy pierwszym wstrząsie się zawali.
 
 Kluczowe wnioski:
+
 - Standard to nie dokument — to **umowa społeczna** między użytkownikami danych
 - Format danych (JSON, CSV, XML) ma znaczenie — wybieraj świadomie
 - Otwartość standardu decyduje o jego adopcji
@@ -133,9 +137,9 @@ Kluczowe wnioski:
 
 ### Źródła i dalsze lektury
 
-- TransparenCEE, [*Data Standards Initiative*](https://transparencee.org/)
-- W3C, [*Web Standards*](https://www.w3.org/standards/)
-- Tim Berners-Lee, [*5 Star Open Data*](https://5stardata.info/en/)
-- ISO 3166, [*Country Codes*](https://www.iso.org/iso-3166-country-codes.html)
-- OpenAPI Initiative, [*OpenAPI Specification*](https://www.openapis.org/)
-- XBRL International, [*eXtensible Business Reporting Language*](https://www.xbrl.org/)
+- TransparenCEE, [_Data Standards Initiative_](https://transparencee.org/)
+- W3C, [_Web Standards_](https://www.w3.org/standards/)
+- Tim Berners-Lee, [_5 Star Open Data_](https://5stardata.info/en/)
+- ISO 3166, [_Country Codes_](https://www.iso.org/iso-3166-country-codes.html)
+- OpenAPI Initiative, [_OpenAPI Specification_](https://www.openapis.org/)
+- XBRL International, [_eXtensible Business Reporting Language_](https://www.xbrl.org/)

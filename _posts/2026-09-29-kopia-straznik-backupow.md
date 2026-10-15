@@ -17,7 +17,7 @@ toc:
 
 Przez rok mój homelab nie miał żadnego backupu. Dwie maszyny wirtualne z Dockerem, kilkadziesiąt kontenerów, NAS z ZFS-em — i zero kopii poza samą redundancją dysków. Wiedziałem, że to źle. Wiedziałem też, dlaczego nic z tym nie robię: nie bałem się braku backupu. Bałem się backupu, który **wygląda**, jakby działał.
 
-W pracy zajmuję się Data Governance i jakością danych. Tam podstawową zasadą jest: *jeśli nie mierzysz, to nie wiesz*. Ten artykuł to case study przeniesienia tej zasady na własny sprzęt — od pierwszego snapshotu Kopii po workflow w n8n, który co rano ocenia 14 źródeł backupu i mówi, które z nich są nieaktualne, niekompletne lub uszkodzone.
+W pracy zajmuję się Data Governance i jakością danych. Tam podstawową zasadą jest: _jeśli nie mierzysz, to nie wiesz_. Ten artykuł to case study przeniesienia tej zasady na własny sprzęt — od pierwszego snapshotu Kopii po workflow w n8n, który co rano ocenia 14 źródeł backupu i mówi, które z nich są nieaktualne, niekompletne lub uszkodzone.
 
 ---
 
@@ -58,12 +58,12 @@ flowchart LR
 
 Cztery warstwy, każda z innym celem:
 
-| Warstwa | Co chroni | Narzędzie | Kiedy |
-|---|---|---|---|
-| Snapshot ZFS + Kopia | dane aplikacji na NAS-ie (spójny obraz) | `zfs snapshot` → Kopia | 02:55 → 03:00 |
-| Klienci Kopii na VM | wolumeny Dockera, configi, zrzuty baz | Kopia CLI, cron | 02:30 → 03:00/03:15 |
-| Off-site | całe repozytorium Kopii | `kopia repository sync-to rclone` | 05:00 |
-| vzdump | pełne VM (odtworzenie po padzie dysku) | Proxmox → NFS na NAS | 02:00 |
+| Warstwa              | Co chroni                               | Narzędzie                         | Kiedy               |
+| -------------------- | --------------------------------------- | --------------------------------- | ------------------- |
+| Snapshot ZFS + Kopia | dane aplikacji na NAS-ie (spójny obraz) | `zfs snapshot` → Kopia            | 02:55 → 03:00       |
+| Klienci Kopii na VM  | wolumeny Dockera, configi, zrzuty baz   | Kopia CLI, cron                   | 02:30 → 03:00/03:15 |
+| Off-site             | całe repozytorium Kopii                 | `kopia repository sync-to rclone` | 05:00               |
+| vzdump               | pełne VM (odtworzenie po padzie dysku)  | Proxmox → NFS na NAS              | 02:00               |
 
 Retencja jako polityka Kopii: 7 dziennych, 4 tygodniowe, 6 miesięcznych; zdjęcia (250 GB) skromniej — 3/2/3 i bez kompresji, bo JPEG-ów i tak nie ściśniesz.
 
@@ -119,17 +119,17 @@ Zanim uznałem system za wdrożony: `qmrestore` całej VM z NFS-a do nowego ID (
 
 Nie pisałem tego jako ćwiczenia z governance. Ale kiedy spojrzałem na gotowy system, zobaczyłem w nim jeden do jednego rzeczy, które robię zawodowo.
 
-**Progi Strażnika to wymiary jakości danych.** Wiek snapshotu = *timeliness*. Minimalny rozmiar i liczba plików = *completeness*. Zero błędów w snapshocie = *validity*. Zgodność liczby źródeł z listą oczekiwanych = *consistency* między „co powinno być" a „co jest". Pisałem [o sześciu wymiarach DQ](/blog/2026/data-quality-dimensions/) pół roku temu; tu są te same wymiary zastosowane do metadanych backupu.
+**Progi Strażnika to wymiary jakości danych.** Wiek snapshotu = _timeliness_. Minimalny rozmiar i liczba plików = _completeness_. Zero błędów w snapshocie = _validity_. Zgodność liczby źródeł z listą oczekiwanych = _consistency_ między „co powinno być" a „co jest". Pisałem [o sześciu wymiarach DQ](/blog/2026/data-quality-dimensions/) pół roku temu; tu są te same wymiary zastosowane do metadanych backupu.
 
-**Polityka bez kontroli to dokument.** Retencja 7/4/6 w Kopii to polityka. Strażnik to kontrola. W firmie nazwałbym to *data quality rule* podpiętą pod *data policy* — i dokładnie tak samo jak w firmie, bez kontroli polityka rozjeżdża się cicho (patrz: strefa czasowa).
+**Polityka bez kontroli to dokument.** Retencja 7/4/6 w Kopii to polityka. Strażnik to kontrola. W firmie nazwałbym to _data quality rule_ podpiętą pod _data policy_ — i dokładnie tak samo jak w firmie, bez kontroli polityka rozjeżdża się cicho (patrz: strefa czasowa).
 
 **Progi per źródło, nie globalne.** Reguła „backup musi mieć ≥ 1 GB" jest bez sensu dla eksportu dokumentów (400 MB) i dla zdjęć (250 GB). W DQ to banał: progi kompletności ustala właściciel danych, nie zespół platformy. W homelabie właścicielem jestem ja, ale zasada jest ta sama — próg wynika ze znajomości danych.
 
-**Brak danych to najgroźniejszy stan danych.** Najważniejsza reguła Strażnika — „źródła nie ma na liście = crit" — to odpowiednik kontroli *„tabela nie została załadowana"*, którą wiele zespołów pomija, bo sprawdzają jakość tylko tego, co przyszło.
+**Brak danych to najgroźniejszy stan danych.** Najważniejsza reguła Strażnika — „źródła nie ma na liście = crit" — to odpowiednik kontroli _„tabela nie została załadowana"_, którą wiele zespołów pomija, bo sprawdzają jakość tylko tego, co przyszło.
 
-**Fałszywe alarmy zabijają kontrolę.** Trzy z czterech pułapek powyżej to fałszywe pozytywy. Każdy z nich obniżał zaufanie do całego systemu. W governance mówi się o *alert fatigue*; w domu nazywa się to „wyciszyłem kanał na Discordzie".
+**Fałszywe alarmy zabijają kontrolę.** Trzy z czterech pułapek powyżej to fałszywe pozytywy. Każdy z nich obniżał zaufanie do całego systemu. W governance mówi się o _alert fatigue_; w domu nazywa się to „wyciszyłem kanał na Discordzie".
 
-**Źródło prawdy trzeba nazwać.** Zrzut logiczny bazy, nie katalog z plikami. Zapisane wprost. To jest *system of record* w skali jednego człowieka.
+**Źródło prawdy trzeba nazwać.** Zrzut logiczny bazy, nie katalog z plikami. Zapisane wprost. To jest _system of record_ w skali jednego człowieka.
 
 Nie twierdzę, że homelab uczy governance lepiej niż praca. Twierdzę, że **te same zasady działają w obu skalach** — a w domu widzisz konsekwencje ich łamania w tydzień, nie w kwartał.
 
@@ -141,4 +141,4 @@ Nie twierdzę, że homelab uczy governance lepiej niż praca. Twierdzę, że **t
 - Automatyczny test odtworzenia losowego pliku z off-site raz w miesiącu — zamiast polegać na tym, że przypomnę sobie za rok.
 - Backup komputera domowego chodzi raz w tygodniu z progiem 192 h. To za rzadko dla dokumentów; do zmiany.
 
-Jeśli masz w homelabie backup, którego nie sprawdza nic poza Tobą — zacznij od jednego pytania zadawanego codziennie automatycznie: *ile godzin ma ostatni snapshot?* Reszta progów dojdzie sama.
+Jeśli masz w homelabie backup, którego nie sprawdza nic poza Tobą — zacznij od jednego pytania zadawanego codziennie automatycznie: _ile godzin ma ostatni snapshot?_ Reszta progów dojdzie sama.

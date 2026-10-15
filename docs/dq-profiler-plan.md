@@ -18,6 +18,7 @@ Narzędzie ma być **dowodem kompetencji**, nie zamiennikiem audytu. Mierzy to, 
 ## Zakres
 
 ### MVP (wersja 0.1)
+
 - Wczytanie CSV (separator wykrywany, UTF-8 i Windows-1250, nagłówek).
 - Profil kolumn: typ wnioskowany, % pustych (NULL, pusty tekst, spacje, wartości zastępcze `n/d`, `-`, `brak`), liczba wartości unikalnych, min/max dla liczb i dat.
 - Wymiary: **kompletność**, **unikalność** (duplikaty wierszy i klucza), **ważność** (format: e-mail, NIP z sumą kontrolną, kod pocztowy, data, zakres).
@@ -25,11 +26,13 @@ Narzędzie ma być **dowodem kompetencji**, nie zamiennikiem audytu. Mierzy to, 
 - Eksport raportu: HTML do pobrania i JSON.
 
 ### Wersja 0.2
+
 - Własne reguły w YAML (ten sam schemat co `football-dq`, patrz niżej).
 - Kompletność warunkowa („NIP wymagany, gdy typ = firma").
 - Spójność między polami i aktualność (daty z przyszłości, przeterminowane).
 
 ### Poza zakresem
+
 Łączenie z bazami, wysyłanie na serwer, konta użytkowników, profilowanie wielu plików naraz, Excel `.xlsx` (dopiero po wersji 0.2), automatyczne naprawianie danych.
 
 ## Relacja z football-dq
@@ -43,12 +46,12 @@ Sprawdziłem repozytorium `C:\Dev\Repos\football-dq`:
 
 ## Architektura (alternatywy)
 
-| Opcja | Opis | Za | Przeciw |
-|---|---|---|---|
-| **A. Czysty JS/TypeScript** (rekomendowana na MVP) | Własny parser CSV w strumieniu i silnik reguł w TS | mały bundle (dziesiątki KB), pełna kontrola, prosta analiza prywatności | własny parser CSV, ograniczenie rozmiaru pliku (praktycznie do kilkudziesięciu MB) |
-| **B. DuckDB-WASM** | Reguły tłumaczone na SQL, wykonywane w przeglądarce | duże pliki, SQL gratis, reguły = zapytania z wpisu #1 | wasm ok. kilku MB do samodzielnego hostowania, wolniejszy start |
-| **C. Rust → WASM** | Silnik reguł w Rust, reuse z `crates/core` | jedna implementacja dla CLI, API i przeglądarki | cięższy łańcuch narzędzi, ryzyko rozjechania z planem Rust w `football-dq` |
-| **D. Pyodide** | Python w przeglądarce, reuse kodu | zero przepisywania | kilkanaście MB, wolny start, kod i tak związany z SQLAlchemy |
+| Opcja                                              | Opis                                                | Za                                                                      | Przeciw                                                                            |
+| -------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **A. Czysty JS/TypeScript** (rekomendowana na MVP) | Własny parser CSV w strumieniu i silnik reguł w TS  | mały bundle (dziesiątki KB), pełna kontrola, prosta analiza prywatności | własny parser CSV, ograniczenie rozmiaru pliku (praktycznie do kilkudziesięciu MB) |
+| **B. DuckDB-WASM**                                 | Reguły tłumaczone na SQL, wykonywane w przeglądarce | duże pliki, SQL gratis, reguły = zapytania z wpisu #1                   | wasm ok. kilku MB do samodzielnego hostowania, wolniejszy start                    |
+| **C. Rust → WASM**                                 | Silnik reguł w Rust, reuse z `crates/core`          | jedna implementacja dla CLI, API i przeglądarki                         | cięższy łańcuch narzędzi, ryzyko rozjechania z planem Rust w `football-dq`         |
+| **D. Pyodide**                                     | Python w przeglądarce, reuse kodu                   | zero przepisywania                                                      | kilkanaście MB, wolny start, kod i tak związany z SQLAlchemy                       |
 
 **Rekomendacja:** A dla MVP i 0.2. Opcja B jako 0.3, jeśli użytkownicy będą potrzebowali plików większych niż limit (decyzja po danych z Umami, nie z założeń). Opcja C tylko wtedy, gdy silnik reguł w Rust powstanie i tak.
 
@@ -64,16 +67,16 @@ Sprawdziłem repozytorium `C:\Dev\Repos\football-dq`:
 
 ## Etapy i szacunek
 
-| Etap | Zakres | Czas |
-|---|---|---|
-| 0. Szkielet | repo, Vite/TS, CI, lint, licencja | 0,5 dnia |
-| 1. Parser | CSV w strumieniu, separator, kodowanie, testy na plikach brzegowych | 1 dzień |
-| 2. Profil kolumn | typy, braki, unikalność | 1 dzień |
-| 3. Reguły ważności | e-mail, NIP (suma kontrolna), kod pocztowy, data, zakresy | 1 dzień |
-| 4. Raport | semafor, wymiary, eksport HTML i JSON | 1 dzień |
-| 5. Integracja ze stroną | strona, polityka prywatności, SRI, linki, zdarzenia | 0,5 dnia |
-| 6. Test sieci i dostępność | Playwright (brak żądań z danymi), klawiatura, kontrast, telefon | 0,5 dnia |
-| **Razem MVP** | | **ok. 5–6 dni roboczych** |
+| Etap                       | Zakres                                                              | Czas                      |
+| -------------------------- | ------------------------------------------------------------------- | ------------------------- |
+| 0. Szkielet                | repo, Vite/TS, CI, lint, licencja                                   | 0,5 dnia                  |
+| 1. Parser                  | CSV w strumieniu, separator, kodowanie, testy na plikach brzegowych | 1 dzień                   |
+| 2. Profil kolumn           | typy, braki, unikalność                                             | 1 dzień                   |
+| 3. Reguły ważności         | e-mail, NIP (suma kontrolna), kod pocztowy, data, zakresy           | 1 dzień                   |
+| 4. Raport                  | semafor, wymiary, eksport HTML i JSON                               | 1 dzień                   |
+| 5. Integracja ze stroną    | strona, polityka prywatności, SRI, linki, zdarzenia                 | 0,5 dnia                  |
+| 6. Test sieci i dostępność | Playwright (brak żądań z danymi), klawiatura, kontrast, telefon     | 0,5 dnia                  |
+| **Razem MVP**              |                                                                     | **ok. 5–6 dni roboczych** |
 
 Wersja 0.2 (YAML, warunkowa kompletność): kolejne 2–3 dni.
 
@@ -88,15 +91,15 @@ Wersja 0.2 (YAML, warunkowa kompletność): kolejne 2–3 dni.
 
 ## Pre-mortem: co może pójść źle
 
-| Ryzyko | Skutek | Środek zaradczy |
-|---|---|---|
-| Użytkownik wrzuca dane osobowe i czuje obawę | brak zaufania | komunikat nad polem pliku, dowód w zakładce Network, kod otwarty |
+| Ryzyko                                                 | Skutek                              | Środek zaradczy                                                         |
+| ------------------------------------------------------ | ----------------------------------- | ----------------------------------------------------------------------- |
+| Użytkownik wrzuca dane osobowe i czuje obawę           | brak zaufania                       | komunikat nad polem pliku, dowód w zakładce Network, kod otwarty        |
 | Kodowanie Windows-1250 i różne separatory psują profil | błędne wyniki, utrata wiarygodności | zestaw plików brzegowych w testach, ręczny wybór separatora i kodowania |
-| Narzędzie zastępuje audyt w oczach klienta | mniej zapytań | wniosek końcowy w raporcie i jawna lista tego, czego nie mierzy |
-| Duży plik zawiesza kartę | zła pierwsza ocena | strumieniowanie, Web Worker, limit i komunikat |
-| Samodzielne utrzymanie rozjeżdża się z ofertą | dług | wersjonowanie bundle, jeden właściciel, changelog |
-| Ruch na stronie jest minimalny | narzędzie nikogo nie znajdzie | dystrybucja: wpis #1 jako lejek, post na LinkedIn przy premierze |
-| Zawartość NIP/PESEL w przykładach | ryzyko prawne | tylko dane syntetyczne, bez rzeczywistych numerów |
+| Narzędzie zastępuje audyt w oczach klienta             | mniej zapytań                       | wniosek końcowy w raporcie i jawna lista tego, czego nie mierzy         |
+| Duży plik zawiesza kartę                               | zła pierwsza ocena                  | strumieniowanie, Web Worker, limit i komunikat                          |
+| Samodzielne utrzymanie rozjeżdża się z ofertą          | dług                                | wersjonowanie bundle, jeden właściciel, changelog                       |
+| Ruch na stronie jest minimalny                         | narzędzie nikogo nie znajdzie       | dystrybucja: wpis #1 jako lejek, post na LinkedIn przy premierze        |
+| Zawartość NIP/PESEL w przykładach                      | ryzyko prawne                       | tylko dane syntetyczne, bez rzeczywistych numerów                       |
 
 ## Pytania otwarte
 
