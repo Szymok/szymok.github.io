@@ -61,6 +61,8 @@ jobs:
 
       - name: Prepare baseline worktree (v0.16.3) 🧱
         run: |
+          # The fork does not carry upstream release tags, so fetch the baseline tag from upstream al-folio.
+          git fetch --no-tags https://github.com/alshedivat/al-folio.git tag v0.16.3
           git worktree add ../al-folio-baseline v0.16.3
           (cd ../al-folio-baseline && bundle install && npm ci)
 

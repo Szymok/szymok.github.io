@@ -61,9 +61,29 @@ if (/gem 'al_math',\s*:git =>/.test(gemfile)) {
   failures.push("`Gemfile` must not use git-branch pin for `al_math`; use released gem version.");
 }
 
+// Local overrides of gem-owned files are allowed when they are tracked in `.al-folio-overrides.yml`
+// (see `bundle exec al-folio upgrade overrides audit`). Anything else under a forbidden path still fails.
+const trackedOverrides = new Set();
+if (exists(".al-folio-overrides.yml")) {
+  for (const match of read(".al-folio-overrides.yml").matchAll(/^ {2}(\S[^\s:]*):\s*$/gm)) {
+    trackedOverrides.add(match[1]);
+  }
+}
+
+const listFiles = (relPath) => {
+  const absPath = path.join(root, relPath);
+  if (!fs.statSync(absPath).isDirectory()) return [relPath];
+  return fs.readdirSync(absPath).flatMap((entry) => listFiles(`${relPath}/${entry}`));
+};
+
 for (const forbiddenPath of ["_includes", "_layouts", "_sass", "_scripts", "assets/tailwind", "tailwind.config.js", "assets/webfonts"]) {
-  if (exists(forbiddenPath)) {
-    failures.push(`Starter must not own core component path \`${forbiddenPath}\`; move ownership to the corresponding gem.`);
+  if (!exists(forbiddenPath)) continue;
+  const untracked = listFiles(forbiddenPath).filter((file) => !trackedOverrides.has(file));
+  if (untracked.length > 0) {
+    failures.push(
+      `Starter must not own core component path \`${forbiddenPath}\`; move ownership to the corresponding gem ` +
+        `or record the override in \`.al-folio-overrides.yml\` (untracked: ${untracked.join(", ")}).`
+    );
   }
 }
 
