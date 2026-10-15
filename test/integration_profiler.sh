@@ -80,15 +80,18 @@ if grep -q 'data-umami-event' "${landing}"; then
 fi
 
 # --- the tool is reachable from the pages that are meant to lead to it ---
-# The navbar links to the tool on every page, so a bare "contains the link" check would still pass after the page's
-# own link was removed. Count occurrences and require more than a page that only has the navbar entry.
-count_links() {
-  grep -o 'href="/narzedzia/profil-danych/"' "$1" | wc -l | tr -d ' '
-}
-baseline="$(count_links "${policy}")"
-[ "${baseline}" -ge 1 ] || fail "the navbar no longer links to the tool"
+# The navbar links to the tools index (/narzedzia/) on every page, and the index lists the profiler.
+# The pages that lead to the tool must carry a link of their own.
+tools_index="${tmp_site}/narzedzia/index.html"
+[ -f "${tools_index}" ] || fail "missing ${tools_index}"
+grep -q 'href="/narzedzia/"' "${policy}" || fail "the navbar no longer links to the tools tab"
+grep -q 'href="/narzedzia/profil-danych/"' "${tools_index}" || fail "the tools tab does not list the profiler"
+grep -q 'href="/narzedzia/ataccama/"' "${tools_index}" || fail "the tools tab does not list the Ataccama page"
+ataccama_page="${tmp_site}/narzedzia/ataccama/index.html"
+[ -f "${ataccama_page}" ] || fail "missing ${ataccama_page}"
+grep -q 'href="/blog/2025/ataccama/"' "${ataccama_page}" || fail "the Ataccama page does not list the Ataccama post"
 for page in audyt-data-quality scorecard; do
-  [ "$(count_links "${tmp_site}/${page}/index.html")" -gt "${baseline}" ] || fail "${page} page has no link of its own to the tool"
+  grep -q 'href="/narzedzia/profil-danych/"' "${tmp_site}/${page}/index.html" || fail "${page} page has no link of its own to the tool"
 done
 
 # --- sitemap: the landing page is listed, the app is not ---

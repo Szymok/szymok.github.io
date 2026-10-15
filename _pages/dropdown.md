@@ -2,13 +2,11 @@
 layout: page
 title: więcej
 nav: true
-nav_order: 4
+nav_order: 5
 dropdown: true
 children:
   - title: 🌱 ogród wiedzy
     permalink: /garden/
   - title: 🧭 test dojrzałości DQ
     permalink: /dojrzalosc-dq/
-  - title: 📊 profil danych CSV
-    permalink: /narzedzia/profil-danych/
 ---
