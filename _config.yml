@@ -179,6 +179,9 @@ newsletter:
 collections:
   books:
     output: false # biblioteczka ukryta (wpisy w _books zostają w repo)
+  dq_tools:
+    output: true # strony narzędzi DQ/DG (/narzedzia/<narzędzie>/), posty filtrowane po tagu
+    permalink: /narzedzia/:name/
   news:
     defaults:
       layout: post
