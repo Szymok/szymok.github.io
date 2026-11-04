@@ -349,8 +349,8 @@ jekyll-archives:
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
 
-display_tags: ["ai", "dg", "prompt", "dq"] # these tags will be displayed on the front page of your blog
-display_categories: ["sztuczna inteligencja", "data governance", "data quality", "homelab"] # these categories will be displayed on the front page of your blog
+display_tags: ["data-quality", "data-governance", "sql", "ai", "homelab"] # shown on the blog page; every entry must be a tag used by at least one post, otherwise its archive page does not exist (checked by test/visual/site.spec.js)
+display_categories: ["data governance", "homelab", "prompt engineering"] # shown on the blog page; every entry must be a category used by at least one post
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
