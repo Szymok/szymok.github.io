@@ -2,7 +2,7 @@
 layout: post
 title: "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"
 date: 2026-09-29 22:00:00
-description: Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance.
+description: "Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami."
 tags: [homelab, backup, kopia, n8n, zfs, data-quality, observability]
 categories: [homelab]
 giscus_comments: true
