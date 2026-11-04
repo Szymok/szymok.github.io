@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="pl"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie | Szymon Kowalewski </title> <meta name="author" content="Szymon Kowalewski"> <meta name="description" content="Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance."> <meta name="keywords" content="data governance, data quality, ai, sztuczna inteligencja, zarządzanie danymi, ataccama, self-hosting, selfhosting, etl, data engineering"> <meta property="og:site_name" content="Szymon Kowalewski"> <meta property="og:type" content="article"> <meta property="og:title" content="Szymon Kowalewski | Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"> <meta property="og:url" content="https://skszymon.eu/blog/2026/kopia-straznik-backupow/"> <meta property="og:description" content="Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance."> <meta property="og:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <meta property="og:locale" content="pl"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"> <meta name="twitter:description" content="Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance."> <meta name="twitter:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="pl"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie | Szymon Kowalewski </title> <meta name="author" content="Szymon Kowalewski"> <meta name="description" content="Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami."> <meta name="keywords" content="data governance, data quality, ai, sztuczna inteligencja, zarządzanie danymi, ataccama, self-hosting, selfhosting, etl, data engineering"> <meta property="og:site_name" content="Szymon Kowalewski"> <meta property="og:type" content="article"> <meta property="og:title" content="Szymon Kowalewski | Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"> <meta property="og:url" content="https://skszymon.eu/blog/2026/kopia-straznik-backupow/"> <meta property="og:description" content="Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami."> <meta property="og:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <meta property="og:locale" content="pl"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie"> <meta name="twitter:description" content="Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami."> <meta name="twitter:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -7,7 +7,7 @@
         },
         "url": "https://skszymon.eu/blog/2026/kopia-straznik-backupow/",
         "@type": "BlogPosting",
-        "description": "Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance.",
+        "description": "Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami.",
         "headline": "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie",
         
         "sameAs": ["https://github.com/Szymok","https://www.linkedin.com/in/skszymon","https://twitter.com/SkSzymon"],
@@ -167,7 +167,7 @@ ninja.data = [{
           },
         },{id: "nav-audyt-jakości-danych",
           title: "audyt jakości danych",
-          description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni. Szymon Kowalewski, Data Governance Specialist.",
+          description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/audyt-data-quality/";
@@ -219,7 +219,7 @@ ninja.data = [{
         
           title: "DNS z zapasem: replika Pi-hole, synchronizacja jednokierunkowa i test awarii w homelabie",
         
-        description: "Jak wyeliminowałem pojedynczy punkt awarii DNS w homelabie drugim Pi-hole i selektywną synchronizacją, jak przetestowałem awarię i jakie trzy pułapki wyszły po drodze. Case study replikacji jednokierunkowej z wnioskami dla Data Governance.",
+        description: "Jak wyeliminowałem pojedynczy punkt awarii DNS w homelabie drugim Pi-hole: selektywna synchronizacja, test awarii i trzy pułapki. Wnioski dla Data Governance.",
         section: "Posts",
         handler: () => {
           
@@ -230,7 +230,7 @@ ninja.data = [{
         
           title: "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w...",
         
-        description: "Jak zbudowałem w homelabie backup 3-2-1 na Kopii ze zrzutami baz i off-site, a potem Strażnika w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami dla governance.",
+        description: "Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami.",
         section: "Posts",
         handler: () => {
           
