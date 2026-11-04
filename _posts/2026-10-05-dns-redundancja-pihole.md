@@ -3,7 +3,7 @@ layout: post
 title: "DNS z zapasem: replika Pi-hole, synchronizacja jednokierunkowa i test awarii w homelabie"
 date: 2026-10-05 18:00:00
 published: true
-description: Jak wyeliminowałem pojedynczy punkt awarii DNS w homelabie drugim Pi-hole i selektywną synchronizacją, jak przetestowałem awarię i jakie trzy pułapki wyszły po drodze. Case study replikacji jednokierunkowej z wnioskami dla Data Governance.
+description: "Jak wyeliminowałem pojedynczy punkt awarii DNS w homelabie drugim Pi-hole: selektywna synchronizacja, test awarii i trzy pułapki. Wnioski dla Data Governance."
 tags: [homelab, dns, pi-hole, redundancja, master-data, observability]
 categories: [homelab]
 giscus_comments: true

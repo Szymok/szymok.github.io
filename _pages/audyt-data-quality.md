@@ -2,7 +2,7 @@
 layout: page
 permalink: /audyt-data-quality/
 title: audyt jakości danych
-description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni. Szymon Kowalewski, Data Governance Specialist."
+description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni."
 nav: true
 nav_order: 2
 ---
