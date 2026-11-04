@@ -152,7 +152,7 @@ Regex `NN-NNN` przepuszcza 100 000 kombinacji, a w użyciu jest około 20 tysię
 
 Prefiks `79-` jest dobrym przykładem, bo w spisie PNA nie ma żadnego kodu, który by się nim zaczynał. Kusi, żeby załatać regex wykluczeniem `^(?!79)[0-9]{2}-[0-9]{3}$`, ale to odrzuci tylko 1000 kombinacji z około 80 tysięcy, które mają dobry format, a nie istnieją. Łatanie wzorca nie ma więc sensu: sprawdzenie składni mówi tylko, że zapis wygląda jak kod pocztowy. Czy taki kod istnieje, rozstrzyga dopiero `JOIN` albo `EXISTS` ze słownikiem.
 
-Ciekawostka: według wpisu na forum kod `02-137` (Warszawa, Włochy, ul. Radarowa) składa się z cyfr „2137”, czyli liczby znanej z polskiego internetu. Ten kod przejdzie każdy regex, ale zanim użyjesz go jako przykładu, sprawdź go w aktualnym spisie PNA, bo kody się zmieniają.
+Ciekawostka: kod `02-137` (Warszawa, Włochy, ul. Radarowa, numery od 1 do końca) jest zapisany w Oficjalnym Spisie PNA Poczty Polskiej i składa się z cyfr „2137”, czyli liczby znanej z polskiego internetu. Przejdzie więc i test formatu, i słownik, czego nie da się powiedzieć o `79-100`.
 
 ```sql
 -- R05: Walidacja kodu pocztowego — format NN-NNN oraz obecność w słowniku PNA
