@@ -4,7 +4,7 @@
 
 `al-folio` is a **thin starter** for the pluginized architecture.
 
-This repo owns starter configuration, docs, sample content, integration tests, and visual parity checks.
+This repo owns starter configuration, docs, sample content, integration tests, and browser tests of the site's own pages.
 
 ## Ownership Boundaries
 
@@ -42,7 +42,7 @@ Do not reintroduce plugin-owned runtime assets into starter paths unless intenti
 - `_data/featured_plugins.yml` - plugin catalog metadata
 - `test/style_contract.js` - starter contract checks
 - `test/integration_*.sh` - cross-plugin integration checks
-- `test/visual/` - visual parity checks
+- `test/visual/` - Playwright tests of the site's own pages
 - `.github/workflows/` - CI workflows
 - `docs/` - user, maintainer, upgrade, and plugin-system documentation
 - `.agents/skills/al-folio-bootstrap/SKILL.md` - canonical agent workflow for new site setup
