@@ -353,10 +353,6 @@ Od czego zacząć naprawy? Od czerwonych: R03 (błędne NIP-y blokują faktury w
 
 ## Gdzie kończy się SQL
 
-{% include figure.liquid path="assets/img/reguly-dq-granica-walidacji.webp" class="img-fluid rounded z-depth-1" zoomable=true alt="Cztery warstwy weryfikacji NIP, kodu pocztowego i e-maila: składnia i algorytm w SQL, słowniki w bazie, rejestry publiczne i API, proces biznesowy" %}
-
-<div class="caption">Cztery warstwy walidacji: pierwsze dwie wykonasz w SQL, kolejne wymagają wyjścia poza bazę.</div>
-
 Wszystkie 12 reguł sprawdza poprawność formalną. Mówią Ci, że dane **wyglądają** dobrze, a nie że są prawdziwe:
 
 - **NIP** z poprawną sumą kontrolną może nigdy nie zostać nadany albo należeć do innej firmy. Istnienie podmiotu potwierdzisz w rejestrach (Biała Lista VAT, GUS, CEIDG, KRS, VIES).
