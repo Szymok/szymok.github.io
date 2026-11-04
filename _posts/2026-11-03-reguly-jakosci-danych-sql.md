@@ -150,6 +150,8 @@ WHERE email IS NULL
 
 Regex `NN-NNN` przepuszcza 100 000 kombinacji, a w użyciu jest około 20 tysięcy kodów z Oficjalnego Spisu PNA Poczty Polskiej. Dlatego format sprawdzamy razem ze słownikiem. W przykładzie to wycinek 15 kodów, w produkcji załaduj pełny spis. **Wynik: 90,0% (18/20), błędne `id = 17, 20`:** `79-100` ma dobry format, ale nie ma go w słowniku, a `90001` nie ma myślnika. Semafor żółty, SLA 98%. **Naprawa:** wstaw brakujący myślnik (`SUBSTR(kod_pocztowy, 1, 2) || '-' || SUBSTR(kod_pocztowy, 3, 3)`), a resztę przypisz ponownie po miejscowości i ulicy.
 
+Prefiks `79-` jest dobrym przykładem, bo w spisie PNA nie ma żadnego kodu, który by się nim zaczynał. Kusi, żeby załatać regex wykluczeniem `^(?!79)[0-9]{2}-[0-9]{3}$`, ale to odrzuci tylko 1000 kombinacji z około 80 tysięcy, które mają dobry format, a nie istnieją. Łatanie wzorca nie ma więc sensu: sprawdzenie składni mówi tylko, że zapis wygląda jak kod pocztowy. Czy taki kod istnieje, rozstrzyga dopiero `JOIN` albo `EXISTS` ze słownikiem.
+
 ```sql
 -- R05: Walidacja kodu pocztowego — format NN-NNN oraz obecność w słowniku PNA
 SELECT
@@ -171,7 +173,7 @@ WHERE k.kod_pocztowy IS NULL
 
 ### R06: numer telefonu (E.164, +48)
 
-Polskie numery mają 9 cyfr, pierwsza nie jest zerem. Regex sprawdza też zapis `+48` i odrzuca oczywiste numery fikcyjne. **Wynik: 90,0% (18/20), błędne `id = 16, 17`.** Semafor żółty, SLA 95% (dane pomocnicze). **Naprawa:** w ETL usuń spacje i myślniki, zamień `0048` na `+48`, dopisz `+48` do 9-cyfrowych numerów, a numery fikcyjne wyczyść do `NULL`.
+Polskie numery mają 9 cyfr, pierwsza nie jest zerem. Regex sprawdza też zapis `+48` i odrzuca oczywiste numery fikcyjne. Uwaga na kontrast z kodami pocztowymi: w numerach telefonów `79` jest poprawnym początkiem (zakres sieci komórkowych), więc `+48791234567` przejdzie regułę, a kod `79-100` nie. **Wynik: 90,0% (18/20), błędne `id = 16, 17`.** Semafor żółty, SLA 95% (dane pomocnicze). **Naprawa:** w ETL usuń spacje i myślniki, zamień `0048` na `+48`, dopisz `+48` do 9-cyfrowych numerów, a numery fikcyjne wyczyść do `NULL`.
 
 ```sql
 -- R06: Walidacja polskiego numeru telefonu w formacie E.164 (+48 i 9 cyfr planu krajowego)
