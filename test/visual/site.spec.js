@@ -59,6 +59,21 @@ for (const theme of ["light", "dark"]) {
   }
 }
 
+test("blog tag and category links resolve", async ({ page, request }) => {
+  await preparePage(page, "light");
+  await page.goto("/blog/", { waitUntil: "networkidle" });
+
+  const hrefs = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('a[href^="/blog/tag/"], a[href^="/blog/category/"]')).map((a) => a.getAttribute("href"))
+  );
+  expect(hrefs.length).toBeGreaterThan(0);
+
+  for (const href of [...new Set(hrefs)]) {
+    const response = await request.get(href);
+    expect(response.status(), `${href} should resolve`).toBe(200);
+  }
+});
+
 test("dark theme actually switches colors", async ({ page }) => {
   await preparePage(page, "light");
   await page.goto("/", { waitUntil: "networkidle" });
