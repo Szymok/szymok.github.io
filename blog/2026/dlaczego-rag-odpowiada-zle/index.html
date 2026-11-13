@@ -1,0 +1,559 @@
+<!DOCTYPE html> <html lang="pl"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy | Szymon Kowalewski </title> <meta name="author" content="Szymon Kowalewski"> <meta name="description" content="Jakość danych RAG decyduje o odpowiedziach AI. 12 reguł SQL w PostgreSQL 16 wykrywa duplikaty, stare wersje i puste fragmenty w bazie wiedzy."> <meta name="keywords" content="data governance, data quality, ai, sztuczna inteligencja, zarządzanie danymi, ataccama, self-hosting, selfhosting, etl, data engineering"> <meta property="og:site_name" content="Szymon Kowalewski"> <meta property="og:type" content="article"> <meta property="og:title" content="Szymon Kowalewski | Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy"> <meta property="og:url" content="https://skszymon.eu/blog/2026/dlaczego-rag-odpowiada-zle/"> <meta property="og:description" content="Jakość danych RAG decyduje o odpowiedziach AI. 12 reguł SQL w PostgreSQL 16 wykrywa duplikaty, stare wersje i puste fragmenty w bazie wiedzy."> <meta property="og:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <meta property="og:locale" content="pl"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy"> <meta name="twitter:description" content="Jakość danych RAG decyduje o odpowiedziach AI. 12 reguł SQL w PostgreSQL 16 wykrywa duplikaty, stare wersje i puste fragmenty w bazie wiedzy."> <meta name="twitter:image" content="https://skszymon.eu/assets/img/prof_pic.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Szymon Kowalewski"
+        },
+        "url": "https://skszymon.eu/blog/2026/dlaczego-rag-odpowiada-zle/",
+        "@type": "BlogPosting",
+        "description": "Jakość danych RAG decyduje o odpowiedziach AI. 12 reguł SQL w PostgreSQL 16 wykrywa duplikaty, stare wersje i puste fragmenty w bazie wiedzy.",
+        "headline": "Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy",
+        
+        "sameAs": ["https://github.com/Szymok","https://www.linkedin.com/in/skszymon","https://twitter.com/SkSzymon"],
+        
+        "name": "Szymon Kowalewski",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="/assets/third-party/tocbot/dist/tocbot.css" integrity="sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/third-party/fontawesome/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="/assets/fonts/roboto/roboto.css"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%E2%9A%99%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <style>
+  /* Akcent strony: granat (tryb jasny) i bursztyn (tryb ciemny). Nadpisuje zmienne motywu z main.css. */
+  :root {
+    --global-theme-color: #1d4b8f;
+    --global-hover-color: #1d4b8f;
+  }
+  html[data-theme='dark'] {
+    --global-theme-color: #f0b429;
+    --global-hover-color: #f0b429;
+  }
+  /* Linki w treści są podkreślone: sam kolor akcentu nie odróżnia ich od tekstu (WCAG 1.4.1). Linki z klasą (przyciski, karty, menu) bez zmian. */
+  article :is(p, li, td, dd, blockquote) a:not([class]) {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+</style> <link rel="canonical" href="https://skszymon.eu/blog/2026/dlaczego-rag-odpowiada-zle/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_img_tools/css/lightbox2-adapter.css"> <link rel="stylesheet" href="/assets/third-party/cookieconsent/dist/cookieconsent.css"> <script defer src="/assets/third-party/cookieconsent/dist/cookieconsent.umd.js"></script> <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var checkCC = setInterval(function () {
+      if (window.CookieConsent) {
+        clearInterval(checkCC);
+        window.CookieConsent.run({
+          categories: {
+            necessary: { enabled: true, readOnly: true },
+            analytics: {},
+          },
+          language: {
+            default: 'pl',
+            translations: {
+              pl: {
+                consentModal: {
+                  title: 'Używamy ciasteczek 🍪',
+                  description:
+                    'Ta strona używa plików cookie w celu analizy ruchu i optymalizacji działania (w tym, dla części odwiedzin, zapisu przebiegu sesji z maskowaniem pól formularzy). Możesz zaakceptować wszystkie ciasteczka lub zarządzać indywidualnymi preferencjami.',
+                  acceptAllBtn: 'Akceptuj wszystkie',
+                  acceptNecessaryBtn: 'Odrzuć wszystkie',
+                  showPreferencesBtn: 'Zarządzaj ustawieniami',
+                },
+                preferencesModal: {
+                  title: 'Preferencje plików cookie',
+                  acceptAllBtn: 'Akceptuj wszystkie',
+                  acceptNecessaryBtn: 'Odrzuć wszystkie',
+                  savePreferencesBtn: 'Zapisz wybrane',
+                  closeIconLabel: 'Zamknij',
+                  sections: [
+                    {
+                      title: 'Użycie plików cookie',
+                      description: 'Używamy plików cookie w celu zapewnienia prawidłowego działania strony oraz analizowania ruchu analitycznego.',
+                    },
+                    {
+                      title: 'Niezbędne pliki cookie',
+                      description: 'Te pliki cookie są wymagane do poprawnego działania witryny.',
+                      linkedCategory: 'necessary',
+                    },
+                    {
+                      title: 'Analityczne pliki cookie',
+                      description:
+                        'Te pliki cookie pozwalają nam mierzyć ruch na stronie oraz, dla części odwiedzin, rejestrować przebieg sesji (przewijanie i kliknięcia, z maskowaniem pól formularzy) w celu ulepszania treści i użyteczności strony.',
+                      linkedCategory: 'analytics',
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        });
+      }
+    }, 100);
+  });
+</script> <script type="text/plain" data-category="analytics" async defer data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986" src="https://umami.skszymon.eu/script.js"></script> <script type="text/plain" data-category="analytics" async defer src="https://umami.skszymon.eu/recorder.js" data-website-id="21cb5317-11f6-48c3-b4fd-43ccc9607986" data-sample-rate="0.15" data-mask-level="moderate" data-max-duration="300000"></script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Szymon</span> Kowalewski </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/audyt-data-quality/">audyt jakości danych </a> </li> <li class="nav-item "> <a class="nav-link" href="/narzedzia/">narzędzia </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-nav-dropdown-toggle="true" aria-haspopup="true" aria-expanded="false">więcej </a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/garden/">🌱 ogród wiedzy</a> <a class="dropdown-item " href="/dojrzalosc-dq/">🧭 test dojrzałości DQ</a> </div> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top toc toc-sidebar" aria-label="Table of contents" data-toc-collapse="expanded" data-toc-collapse-depth=""></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy</h1> <p class="post-meta"> Created on November 13, 2026 </p> <p class="post-tags"> <a href="/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/blog/tag/data-quality"> <i class="fa-solid fa-hashtag fa-sm"></i> data-quality</a>   <a href="/blog/tag/ai"> <i class="fa-solid fa-hashtag fa-sm"></i> ai</a>   <a href="/blog/tag/rag"> <i class="fa-solid fa-hashtag fa-sm"></i> rag</a>   <a href="/blog/tag/sql"> <i class="fa-solid fa-hashtag fa-sm"></i> sql</a>   <a href="/blog/tag/jakosc-danych"> <i class="fa-solid fa-hashtag fa-sm"></i> jakosc-danych</a>   ·   <a href="/blog/category/data-governance"> <i class="fa-solid fa-tag fa-sm"></i> data-governance</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Czatbot firmy podaje klientowi 30 dni na zwrot, a obowiązuje 14. Albo obiecuje pracownikowi 4500 zł dziennie za prąd przy pracy zdalnej. Pierwszy odruch to wymiana modelu albo przepisanie promptu, ale często problem leży w danych. Chodzi o <strong>jakość danych RAG</strong>: duplikaty, stare wersje, brakujące metadane i puste fragmenty w bazie wiedzy, z której model czerpie odpowiedzi. Poniżej pokazuję, jak zmierzyć ją zwykłym SQL-em: 12 reguł na syntetycznej bazie wiedzy fikcyjnej firmy, z progami semafora i zapytaniem, którego wynik wstawisz do <a href="/scorecard/">arkusza Scorecard</a>. To ten sam sposób myślenia, co we wpisach o <a href="/blog/2026/data-quality-dimensions/">wymiarach jakości danych</a> i <a href="/blog/2026/reguly-jakosci-danych-sql/">regułach jakości danych w SQL</a>.</p> <p>Cały skrypt (tabele, 30 dokumentów, 18 fragmentów, 12 reguł i zapytanie zbiorcze) pobierzesz jako <a href="/assets/files/rag-jakosc-danych.sql">rag-jakosc-danych.sql</a>. Uruchomiłem go w PostgreSQL 16 z rozszerzeniem <code class="language-plaintext highlighter-rouge">pg_trgm</code> (<code class="language-plaintext highlighter-rouge">CREATE EXTENSION pg_trgm</code>). Dane są wymyślone, a adresy e-mail mają domenę <code class="language-plaintext highlighter-rouge">.example</code>. Reguły oznaczyłem K01–K12 (K jak korpus), żeby nie mylić ich z R01–R12 z wpisu o regułach dla tabeli klientów.</p> <h2 id="dlaczego-rag-daje-złe-odpowiedzi">Dlaczego RAG daje złe odpowiedzi</h2> <p>System RAG działa w trzech krokach: dokumenty trafiają do indeksu, wyszukiwarka wybiera pasujące fragmenty, a model generuje odpowiedź na ich podstawie. Błąd z pierwszego kroku nie znika w następnych. Model dostaje to, co znalazła wyszukiwarka, nawet jeśli to duplikat, stara wersja albo pusty fragment.</p> <p>Barnett i współautorzy opisali siedem punktów awarii przy budowie systemów RAG (<a href="https://arxiv.org/abs/2401.05856" rel="external nofollow noopener" target="_blank">arXiv:2401.05856</a>). Cztery pierwsze to brak właściwej treści w bazie (FP1), dokument poza najlepszymi wynikami (FP2), dokument pobrany, ale pominięty w kontekście (FP3) i odpowiedź obecna w kontekście, ale niewyłuskana (FP4). Moim zdaniem to właśnie te cztery są najbardziej wrażliwe na stan bazy wiedzy. Pozostałe trzy (zły format odpowiedzi, nietrafiony poziom szczegółowości, odpowiedź niepełna) zależą bardziej od promptu i modelu.</p> <p>Trzy kolejne prace tłumaczą, dlaczego model sam sobie z kiepskimi danymi nie poradzi:</p> <ul> <li>Chen i współautorzy (<a href="https://arxiv.org/abs/2309.01431" rel="external nofollow noopener" target="_blank">arXiv:2309.01431</a>) badali m.in. odporność modeli na fałszywe informacje w pobranych dokumentach i odmowę odpowiedzi, gdy brak danych. Modele radziły sobie z tym wyraźnie słabo.</li> <li>Liu i współautorzy (<a href="https://arxiv.org/abs/2307.03172" rel="external nofollow noopener" target="_blank">arXiv:2307.03172</a>) pokazali, że modele gorzej wykorzystują informację z środka długiego kontekstu niż z jego początku i końca (efekt „lost in the middle”).</li> <li>Ouyang i współautorzy (<a href="https://arxiv.org/abs/2503.04800" rel="external nofollow noopener" target="_blank">arXiv:2503.04800</a>) zbadali wpływ przeterminowanych informacji na RAG. Stare dokumenty w bazie pogarszają odpowiedzi także wtedy, gdy aktualny dokument też trafił do kontekstu.</li> </ul> <p>Z tego wynika praktyczny wniosek. Miara wierności kontekstowi (faithfulness) z frameworku RAGAS (<a href="https://arxiv.org/abs/2309.15217" rel="external nofollow noopener" target="_blank">arXiv:2309.15217</a>) sprawdza, czy odpowiedź wynika z pobranych fragmentów, a nie czy same fragmenty są prawdziwe i aktualne. Odpowiedź wierna błędnemu dokumentowi dostanie wysoką ocenę. Tej luki nie zamknie ocena modelu, tylko kontrola danych.</p> <h2 id="jakość-danych-rag-w-praktyce-sześć-wymiarów-w-bazie-wiedzy">Jakość danych RAG w praktyce: sześć wymiarów w bazie wiedzy</h2> <p>Poniżej moje mapowanie sześciu wymiarów z wpisu o <a href="/blog/2026/data-quality-dimensions/">wymiarach jakości danych</a> na bazę wiedzy dla AI. To moja interpretacja, nie klasyfikacja z literatury.</p> <table> <thead> <tr> <th>Wymiar</th> <th>Jak wygląda w bazie wiedzy</th> <th>Reguły</th> </tr> </thead> <tbody> <tr> <td>Unikalność</td> <td>Duplikaty dokładne i zbliżone, np. ten sam regulamin z intranetu i z SharePointu</td> <td>K01, K02</td> </tr> <tr> <td>Aktualność</td> <td>Obowiązujące dokumenty po terminie ważności, stare dokumenty bez daty przeglądu</td> <td>K03, K04</td> </tr> <tr> <td>Spójność</td> <td>Dwie wersje tego samego dokumentu jako obowiązujące, daty niezgodne ze sobą, sprzeczne treści</td> <td>K05, K06</td> </tr> <tr> <td>Kompletność</td> <td>Brak właściciela i kategorii, dokument bez żadnego fragmentu w indeksie</td> <td>K07, K08</td> </tr> <tr> <td>Zgodność formatu</td> <td>Puste i za krótkie fragmenty, błędny format e-maila i numeru wersji</td> <td>K09, K10</td> </tr> <tr> <td>Dokładność</td> <td>Skrót niezgodny z treścią, artefakty OCR, nierozwiązane placeholdery</td> <td>K11, K12</td> </tr> </tbody> </table> <p>Przy dokładności SQL sprawdzi tylko to, co techniczne. Czy treść jest prawdziwa, rozstrzyga człowiek (o tym w sekcji o granicach SQL), więc K11 i K12 to przybliżenie.</p> <h2 id="dane-testowe">Dane testowe</h2> <p>Fikcyjna firma NordVist Logistyka ma w tabeli <code class="language-plaintext highlighter-rouge">dokumenty</code> 30 dokumentów (procedury, regulaminy, instrukcje), a w tabeli <code class="language-plaintext highlighter-rouge">fragmenty</code> 18 fragmentów przekazanych do indeksu. Celowo zaszyłem w nich błędy:</p> <ul> <li> <strong>Unikalność:</strong> <code class="language-plaintext highlighter-rouge">id = 5</code> i <code class="language-plaintext highlighter-rouge">19</code> to kopie dokładne <code class="language-plaintext highlighter-rouge">4</code> i <code class="language-plaintext highlighter-rouge">18</code>, a <code class="language-plaintext highlighter-rouge">id = 7</code> i <code class="language-plaintext highlighter-rouge">21</code> to kopie <code class="language-plaintext highlighter-rouge">6</code> i <code class="language-plaintext highlighter-rouge">20</code> z jednym zmienionym słowem.</li> <li> <strong>Aktualność:</strong> <code class="language-plaintext highlighter-rouge">id = 8</code>, <code class="language-plaintext highlighter-rouge">9</code>, <code class="language-plaintext highlighter-rouge">22</code> są obowiązujące po terminie ważności, a <code class="language-plaintext highlighter-rouge">id = 23</code> jest sprzed ponad 3 lat i nie ma daty ważności.</li> <li> <strong>Spójność:</strong> <code class="language-plaintext highlighter-rouge">id = 10</code> i <code class="language-plaintext highlighter-rouge">11</code> to dwie wersje regulaminu zwrotów, obie obowiązujące (14 vs 30 dni), a <code class="language-plaintext highlighter-rouge">id = 24</code> ma ważność wcześniejszą niż publikacja.</li> <li> <strong>Kompletność:</strong> <code class="language-plaintext highlighter-rouge">id = 14</code> bez właściciela, <code class="language-plaintext highlighter-rouge">15</code> z właścicielem z samych spacji, <code class="language-plaintext highlighter-rouge">25</code> bez kategorii, <code class="language-plaintext highlighter-rouge">26</code> obowiązujący, ale bez fragmentów.</li> <li> <strong>Zgodność formatu:</strong> <code class="language-plaintext highlighter-rouge">id = 16</code> ma e-mail z <code class="language-plaintext highlighter-rouge">#</code> i wersję <code class="language-plaintext highlighter-rouge">wersja_2.0</code>, a fragmenty <code class="language-plaintext highlighter-rouge">4</code>, <code class="language-plaintext highlighter-rouge">9</code>, <code class="language-plaintext highlighter-rouge">15</code> są puste, to sam nagłówek i sama stopka strony.</li> <li> <strong>Dokładność:</strong> <code class="language-plaintext highlighter-rouge">id = 17</code> i <code class="language-plaintext highlighter-rouge">28</code> mają skrót niezgodny z treścią, <code class="language-plaintext highlighter-rouge">29</code> nierozwiązany ``, a <code class="language-plaintext highlighter-rouge">30</code> artefakt <code class="language-plaintext highlighter-rouge">[BŁĄD_OCR]</code>.</li> </ul> <p>Trzy przypadki są poza zasięgiem SQL i wrócą w sekcji o granicach: <code class="language-plaintext highlighter-rouge">id = 3</code> (ekwiwalent 4500 PLN dziennie zamiast 4,50) oraz <code class="language-plaintext highlighter-rouge">id = 12</code> i <code class="language-plaintext highlighter-rouge">13</code> (darmowa dostawa od 150 vs od 250 PLN). Jako datę odniesienia dla reguł aktualności przyjąłem 2026-11-11, żeby wynik dało się powtórzyć. W produkcji zamień ją na <code class="language-plaintext highlighter-rouge">CURRENT_DATE</code>.</p> <h2 id="12-reguł-jakości-danych-bazy-wiedzy">12 reguł jakości danych bazy wiedzy</h2> <p>Progi semafora jak w Scorecardzie: zielony od 95%, żółty 85–95%, czerwony poniżej 85%. Procenty obcinam (<code class="language-plaintext highlighter-rouge">TRUNC</code>), a nie zaokrąglam, żeby wynik nie wyglądał lepiej niż jest: 29/30 to 96,66%, nie 96,67%. SLA przy regułach to przykłady do uzgodnienia z właścicielem bazy wiedzy.</p> <h3 id="k01-duplikaty-dokładne">K01: duplikaty dokładne</h3> <p>Reguła porównuje skrót <code class="language-plaintext highlighter-rouge">hash_tresci</code> ze skrótami starszych dokumentów (niższe <code class="language-plaintext highlighter-rouge">id</code>). Łapie ten sam plik załadowany z kilku repozytoriów, np. z intranetu i z SharePointu. <strong>Wynik: 93,33% (28/30), błędne <code class="language-plaintext highlighter-rouge">id = 5, 19</code>.</strong> Semafor żółty, przykładowe SLA 98%. <strong>Naprawa:</strong> usuń oba dokumenty z rejestru i z indeksu, potem dodaj <code class="language-plaintext highlighter-rouge">UNIQUE (hash_tresci)</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K01: Brak duplikatów dokładnych (hash_tresci)</span>
+<span class="k">SELECT</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">id_duplikatu</span><span class="p">,</span>
+    <span class="n">d2</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">id_oryginalu</span><span class="p">,</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">tytul</span><span class="p">,</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">status</span><span class="p">,</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">zrodlo</span><span class="p">,</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">hash_tresci</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span> <span class="n">d1</span>
+<span class="k">JOIN</span> <span class="n">dokumenty</span> <span class="n">d2</span>
+  <span class="k">ON</span> <span class="n">d1</span><span class="p">.</span><span class="n">hash_tresci</span> <span class="o">=</span> <span class="n">d2</span><span class="p">.</span><span class="n">hash_tresci</span>
+ <span class="k">AND</span> <span class="n">d2</span><span class="p">.</span><span class="n">id</span> <span class="o">&lt;</span> <span class="n">d1</span><span class="p">.</span><span class="n">id</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">d1</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k02-duplikaty-zbliżone-pg_trgm">K02: duplikaty zbliżone (pg_trgm)</h3> <p>Skrót MD5 nie widzi kopii z jednym zmienionym słowem. Rozszerzenie <code class="language-plaintext highlighter-rouge">pg_trgm</code> mierzy podobieństwo tekstu funkcją <code class="language-plaintext highlighter-rouge">similarity()</code>, a próg 0,70 wyłapuje kopie z drobną korektą. Dokumenty <code class="language-plaintext highlighter-rouge">id = 7</code> i <code class="language-plaintext highlighter-rouge">21</code> różnią się od <code class="language-plaintext highlighter-rouge">6</code> i <code class="language-plaintext highlighter-rouge">20</code> jednym słowem („zespoły” na „komisje”, „weryfikuje” na „sprawdza”), a ich podobieństwo to 0,8955 i 0,8707. <strong>Wynik: 93,33% (28/30), błędne <code class="language-plaintext highlighter-rouge">id = 7, 21</code>.</strong> Żółty, SLA 95%. <strong>Naprawa:</strong> właściciel przegląda pary, scala zmiany do jednej wersji i usuwa robocze klony z indeksowania.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K02: Brak duplikatów zbliżonych (pg_trgm, similarity &gt;= 0.70)</span>
+<span class="k">SELECT</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">id_duplikatu_zblizonego</span><span class="p">,</span>
+    <span class="n">d2</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">id_wzorca</span><span class="p">,</span>
+    <span class="n">d1</span><span class="p">.</span><span class="n">tytul</span> <span class="k">AS</span> <span class="n">tytul_duplikatu</span><span class="p">,</span>
+    <span class="n">d2</span><span class="p">.</span><span class="n">tytul</span> <span class="k">AS</span> <span class="n">tytul_wzorca</span><span class="p">,</span>
+    <span class="n">ROUND</span><span class="p">(</span><span class="n">similarity</span><span class="p">(</span><span class="n">d1</span><span class="p">.</span><span class="n">tresc</span><span class="p">,</span> <span class="n">d2</span><span class="p">.</span><span class="n">tresc</span><span class="p">)::</span><span class="nb">numeric</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">AS</span> <span class="n">podobienstwo_trgm</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span> <span class="n">d1</span>
+<span class="k">JOIN</span> <span class="n">dokumenty</span> <span class="n">d2</span>
+  <span class="k">ON</span> <span class="n">d2</span><span class="p">.</span><span class="n">id</span> <span class="o">&lt;</span> <span class="n">d1</span><span class="p">.</span><span class="n">id</span>
+ <span class="k">AND</span> <span class="n">d1</span><span class="p">.</span><span class="n">tresc</span> <span class="o">&lt;&gt;</span> <span class="n">d2</span><span class="p">.</span><span class="n">tresc</span>
+ <span class="k">AND</span> <span class="n">similarity</span><span class="p">(</span><span class="n">d1</span><span class="p">.</span><span class="n">tresc</span><span class="p">,</span> <span class="n">d2</span><span class="p">.</span><span class="n">tresc</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">70</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">d1</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k03-przeterminowane-dokumenty-obowiązujące">K03: przeterminowane dokumenty obowiązujące</h3> <p>Dokument ze statusem <code class="language-plaintext highlighter-rouge">obowiazujacy</code> nie powinien mieć przekroczonej daty ważności. To najprostszy sposób, żeby stare cenniki i procedury nie konkurowały z aktualnymi. <strong>Wynik: 90,00% (27/30), błędne <code class="language-plaintext highlighter-rouge">id = 8, 9, 22</code>.</strong> Żółty, SLA 98%. <strong>Naprawa:</strong> zmień status na <code class="language-plaintext highlighter-rouge">archiwalny</code> i usuń fragmenty z aktywnego indeksu albo odnów datę ważności z właścicielem.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K03: Brak przeterminowanych dokumentów obowiązujących</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">wersja</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">,</span>
+    <span class="n">data_publikacji</span><span class="p">,</span>
+    <span class="n">data_waznosci</span><span class="p">,</span>
+    <span class="p">(</span><span class="s1">'2026-11-11'</span><span class="p">::</span><span class="nb">date</span> <span class="o">-</span> <span class="n">data_waznosci</span><span class="p">)</span> <span class="k">AS</span> <span class="n">dni_po_terminie</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="n">status</span> <span class="o">=</span> <span class="s1">'obowiazujacy'</span>
+  <span class="k">AND</span> <span class="n">data_waznosci</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+  <span class="k">AND</span> <span class="n">data_waznosci</span> <span class="o">&lt;</span> <span class="s1">'2026-11-11'</span><span class="p">::</span><span class="nb">date</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k04-stare-dokumenty-bez-daty-ważności">K04: stare dokumenty bez daty ważności</h3> <p>Obowiązujące dokumenty bez daty ważności mają „wieczne życie”. Reguła szuka takich, opublikowanych ponad 3 lata przed datą odniesienia. <strong>Wynik: 96,66% (29/30), błędny <code class="language-plaintext highlighter-rouge">id = 23</code>.</strong> Zielony, SLA 95% spełnione. <strong>Naprawa:</strong> wymagaj <code class="language-plaintext highlighter-rouge">data_waznosci</code> dla każdego obowiązującego dokumentu, np. do 24 lub 36 miesięcy od publikacji.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K04: Data ważności dla dokumentów obowiązujących starszych niż 3 lata</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">wersja</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">,</span>
+    <span class="n">data_publikacji</span><span class="p">,</span>
+    <span class="n">data_waznosci</span><span class="p">,</span>
+    <span class="n">wlasciciel</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="n">status</span> <span class="o">=</span> <span class="s1">'obowiazujacy'</span>
+  <span class="k">AND</span> <span class="n">data_publikacji</span> <span class="o">&lt;</span> <span class="p">(</span><span class="s1">'2026-11-11'</span><span class="p">::</span><span class="nb">date</span> <span class="o">-</span> <span class="n">INTERVAL</span> <span class="s1">'3 years'</span><span class="p">)::</span><span class="nb">date</span>
+  <span class="k">AND</span> <span class="n">data_waznosci</span> <span class="k">IS</span> <span class="k">NULL</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k05-jedna-wersja-obowiązująca-pod-jednym-tytułem">K05: jedna wersja obowiązująca pod jednym tytułem</h3> <p><code class="language-plaintext highlighter-rouge">id = 10</code> (v1.0, 14 dni) i <code class="language-plaintext highlighter-rouge">id = 11</code> (v2.0, 30 dni) mają ten sam tytuł i oba status <code class="language-plaintext highlighter-rouge">obowiazujacy</code>, więc wyszukiwarka może podać modelowi obie wersje naraz. <strong>Wynik: 93,33% (28/30), błędne <code class="language-plaintext highlighter-rouge">id = 10, 11</code>.</strong> Żółty, SLA 100%. <strong>Naprawa:</strong> zarchiwizuj v1.0, usuń jej fragment z indeksu i załóż indeks częściowy: <code class="language-plaintext highlighter-rouge">CREATE UNIQUE INDEX idx_unikalny_obowiazujacy_tytul ON dokumenty (tytul) WHERE status = 'obowiazujacy';</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K05: Jedna obowiązująca wersja dokumentu o danym tytule</span>
+<span class="k">SELECT</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">tytul</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">wersja</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">status</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">data_publikacji</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">tresc</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span> <span class="n">d</span>
+<span class="k">WHERE</span> <span class="n">d</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'obowiazujacy'</span>
+  <span class="k">AND</span> <span class="k">EXISTS</span> <span class="p">(</span>
+      <span class="k">SELECT</span> <span class="mi">1</span>
+      <span class="k">FROM</span> <span class="n">dokumenty</span> <span class="n">d2</span>
+      <span class="k">WHERE</span> <span class="n">d2</span><span class="p">.</span><span class="n">tytul</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">tytul</span>
+        <span class="k">AND</span> <span class="n">d2</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'obowiazujacy'</span>
+        <span class="k">AND</span> <span class="n">d2</span><span class="p">.</span><span class="n">id</span> <span class="o">&lt;&gt;</span> <span class="n">d</span><span class="p">.</span><span class="n">id</span>
+  <span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">d</span><span class="p">.</span><span class="n">tytul</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k06-spójność-dat">K06: spójność dat</h3> <p>Data ważności nie może być wcześniejsza niż data publikacji. <strong>Wynik: 96,66% (29/30), błędny <code class="language-plaintext highlighter-rouge">id = 24</code></strong> (publikacja 2026-03-15, ważność 2025-03-15). Zielony, ale SLA 100% jest naruszone. <strong>Naprawa:</strong> popraw datę i dodaj <code class="language-plaintext highlighter-rouge">CHECK (data_waznosci IS NULL OR data_waznosci &gt;= data_publikacji)</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K06: Spójność dat (data_waznosci &gt;= data_publikacji)</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">wersja</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">,</span>
+    <span class="n">data_publikacji</span><span class="p">,</span>
+    <span class="n">data_waznosci</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="n">data_waznosci</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+  <span class="k">AND</span> <span class="n">data_waznosci</span> <span class="o">&lt;</span> <span class="n">data_publikacji</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k07-kompletność-metadanych">K07: kompletność metadanych</h3> <p>Właściciel i kategoria muszą być wypełnione, także gdy pole zawiera same spacje (<code class="language-plaintext highlighter-rouge">btrim</code>). Bez nich nie da się zawęzić wyszukiwania metadanymi ani ustalić, kto odpowiada za przegląd. <strong>Wynik: 90,00% (27/30), błędne <code class="language-plaintext highlighter-rouge">id = 14, 15, 25</code></strong> (NULL, same spacje, brak kategorii). Żółty, SLA 95%. <strong>Naprawa:</strong> uzupełnij z rejestru właścicieli procesów i dodaj <code class="language-plaintext highlighter-rouge">NOT NULL</code> oraz <code class="language-plaintext highlighter-rouge">CHECK (btrim(wlasciciel) &lt;&gt; '' AND btrim(kategoria) &lt;&gt; '')</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K07: Wypełniony właściciel i kategoria</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">,</span>
+    <span class="n">wlasciciel</span><span class="p">,</span>
+    <span class="n">kategoria</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="n">wlasciciel</span> <span class="k">IS</span> <span class="k">NULL</span>
+   <span class="k">OR</span> <span class="n">btrim</span><span class="p">(</span><span class="n">wlasciciel</span><span class="p">)</span> <span class="o">=</span> <span class="s1">''</span>
+   <span class="k">OR</span> <span class="n">kategoria</span> <span class="k">IS</span> <span class="k">NULL</span>
+   <span class="k">OR</span> <span class="n">btrim</span><span class="p">(</span><span class="n">kategoria</span><span class="p">)</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k08-dokument-obowiązujący-ma-fragmenty">K08: dokument obowiązujący ma fragmenty</h3> <p>Brak fragmentów to cicha awaria potoku indeksowania: dokument jest w rejestrze, ale wyszukiwarka go nie widzi (to FP1 z pracy Barnetta i współautorów). <strong>Wynik: 96,66% (29/30), błędny <code class="language-plaintext highlighter-rouge">id = 26</code></strong> (procedura zgłaszania incydentów RODO). Zielony, SLA 100% naruszone. <strong>Naprawa:</strong> uruchom podział na fragmenty ponownie i dodaj test uzgadniający po każdym przebiegu indeksowania.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K08: Obowiązujący dokument ma fragmenty</span>
+<span class="k">SELECT</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">tytul</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">wersja</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">status</span><span class="p">,</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">kategoria</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span> <span class="n">d</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">fragmenty</span> <span class="n">f</span>
+  <span class="k">ON</span> <span class="n">f</span><span class="p">.</span><span class="n">dokument_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">d</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="s1">'obowiazujacy'</span>
+  <span class="k">AND</span> <span class="n">f</span><span class="p">.</span><span class="n">id</span> <span class="k">IS</span> <span class="k">NULL</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">d</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k09-minimalna-długość-fragmentu">K09: minimalna długość fragmentu</h3> <p>Ta reguła działa na tabeli <code class="language-plaintext highlighter-rouge">fragmenty</code> (18 rekordów), nie na dokumentach. Szuka fragmentów krótszych niż 40 znaków po <code class="language-plaintext highlighter-rouge">btrim</code>: pustych, samych nagłówków i stopek stron, które powstają przy złym cięciu PDF-ów. Próg 40 znaków to przykład, dobierz własny. <strong>Wynik: 83,33% (15/18), błędne fragmenty <code class="language-plaintext highlighter-rouge">id = 4, 9, 15</code></strong> (0, 33 i 13 znaków, z dokumentów 3, 10 i 20). To jedyna reguła czerwona. SLA 95%. <strong>Naprawa:</strong> oczyść dokumenty ze stopek i paginacji przed podziałem, łącz nagłówki z następującym akapitem i wygeneruj fragment dla <code class="language-plaintext highlighter-rouge">id = 3</code> jeszcze raz.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K09: Minimalna długość fragmentu (&gt;= 40 znaków po btrim)</span>
+<span class="k">SELECT</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">id_fragmentu</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">dokument_id</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">nr</span><span class="p">,</span>
+    <span class="k">char_length</span><span class="p">(</span><span class="n">btrim</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">tresc</span><span class="p">))</span> <span class="k">AS</span> <span class="n">dlugosc_po_btrim</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">tresc</span>
+<span class="k">FROM</span> <span class="n">fragmenty</span> <span class="n">f</span>
+<span class="k">WHERE</span> <span class="k">char_length</span><span class="p">(</span><span class="n">btrim</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">tresc</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">40</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">f</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k10-format-e-maila-właściciela-i-numeru-wersji">K10: format e-maila właściciela i numeru wersji</h3> <p>Adres e-mail właściciela i numer wersji muszą mieć poprawny format (<code class="language-plaintext highlighter-rouge">vX.Y</code>). Wzorzec e-maila zakłada tu domenę <code class="language-plaintext highlighter-rouge">.example</code>, w produkcji wpisz własną. <strong>Wynik: 96,66% (29/30), błędny <code class="language-plaintext highlighter-rouge">id = 16</code></strong> (<code class="language-plaintext highlighter-rouge">bhp.admin#nordvist.example</code>, <code class="language-plaintext highlighter-rouge">wersja_2.0</code>). Zielony, SLA 95% spełnione. <strong>Naprawa:</strong> popraw wartości i dodaj <code class="language-plaintext highlighter-rouge">CHECK</code> z operatorem <code class="language-plaintext highlighter-rouge">~</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K10: Format e-maila właściciela i numeru wersji</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">wersja</span><span class="p">,</span>
+    <span class="n">wlasciciel</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="p">(</span>
+        <span class="n">wlasciciel</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+        <span class="k">AND</span> <span class="n">btrim</span><span class="p">(</span><span class="n">wlasciciel</span><span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="s1">''</span>
+        <span class="k">AND</span> <span class="n">wlasciciel</span> <span class="o">!~</span> <span class="s1">'^[a-z0-9._%+-]+@[a-z0-9.-]+</span><span class="se">\.</span><span class="s1">example$'</span>
+      <span class="p">)</span>
+   <span class="k">OR</span> <span class="n">wersja</span> <span class="o">!~</span> <span class="s1">'^v[0-9]+</span><span class="se">\.</span><span class="s1">[0-9]+$'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k11-skrót-treści-zgodny-z-md5">K11: skrót treści zgodny z md5</h3> <p>Zapisany skrót <code class="language-plaintext highlighter-rouge">hash_tresci</code> powinien równać się <code class="language-plaintext highlighter-rouge">md5(tresc)</code>. Niezgodność oznacza, że treść zmieniono bez przeliczenia skrótu, a więc prawdopodobnie także bez odświeżenia wektorów w indeksie, albo że skrót uszkodzono przy migracji. <strong>Wynik: 93,33% (28/30), błędne <code class="language-plaintext highlighter-rouge">id = 17, 28</code></strong> (skróty same zera i same <code class="language-plaintext highlighter-rouge">f</code>). Żółty, SLA 100%. <strong>Naprawa:</strong> przelicz skrót, wymuś ponowne zindeksowanie i zamień kolumnę na wyliczaną: <code class="language-plaintext highlighter-rouge">hash_tresci TEXT GENERATED ALWAYS AS (md5(tresc)) STORED</code>.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K11: Skrót treści zgodny z md5(tresc)</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">wersja</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">,</span>
+    <span class="n">hash_tresci</span> <span class="k">AS</span> <span class="n">zapisany_hash</span><span class="p">,</span>
+    <span class="n">md5</span><span class="p">(</span><span class="n">tresc</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rzeczywisty_md5</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="n">hash_tresci</span> <span class="o">&lt;&gt;</span> <span class="n">md5</span><span class="p">(</span><span class="n">tresc</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h3 id="k12-artefakty-ocr-i-placeholdery">K12: artefakty OCR i placeholdery</h3> <p>Reguła szuka w treści nierozwiązanych znaczników szablonu (``), znacznika <code class="language-plaintext highlighter-rouge">[BŁĄD_OCR]</code> i znaku zastępczego Unicode U+FFFD. Model może przepisać taki znacznik do odpowiedzi albo zmyślić brakującą liczbę. <strong>Wynik: 93,33% (28/30), błędne <code class="language-plaintext highlighter-rouge">id = 29, 30</code>.</strong> Żółty, SLA 98%. <strong>Naprawa:</strong> podstaw właściwą wartość w <code class="language-plaintext highlighter-rouge">id = 29</code>, popraw skan <code class="language-plaintext highlighter-rouge">id = 30</code> i dodaj bramkę walidacyjną przed publikacją dokumentu do bazy wiedzy.</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- K12: Brak artefaktów OCR i placeholderów w treści</span>
+<span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="n">tytul</span><span class="p">,</span>
+    <span class="n">wersja</span><span class="p">,</span>
+    <span class="n">status</span><span class="p">,</span>
+    <span class="n">tresc</span>
+<span class="k">FROM</span> <span class="n">dokumenty</span>
+<span class="k">WHERE</span> <span class="n">tresc</span> <span class="o">~</span> <span class="s1">'(</span><span class="se">\{\{</span><span class="s1">.*</span><span class="se">\}\}</span><span class="s1">|</span><span class="se">\[</span><span class="s1">BŁĄD_OCR</span><span class="se">\]</span><span class="s1">|</span><span class="se">\u</span><span class="s1">FFFD)'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span><span class="p">;</span>
+</code></pre></div></div> <h2 id="wszystkie-reguły-w-jednym-zapytaniu-scorecard-z-semaforem">Wszystkie reguły w jednym zapytaniu: scorecard z semaforem</h2> <p>Zapytanie zbiorcze liczy każdą regułę, zamienia wynik w semafor i porównuje go z SLA. Cały kod jest w <a href="/assets/files/rag-jakosc-danych.sql">pobranym skrypcie</a>. Na danych testowych wynik wygląda tak:</p> <table> <thead> <tr> <th>Reguła</th> <th>Wymiar</th> <th>Wynik</th> <th>Semafor</th> <th>SLA</th> <th>Błędne <code class="language-plaintext highlighter-rouge">id</code> </th> </tr> </thead> <tbody> <tr> <td>K01 duplikaty dokładne</td> <td>Unikalność</td> <td>93,33% (28/30)</td> <td>żółty</td> <td>98%</td> <td>5, 19</td> </tr> <tr> <td>K02 duplikaty zbliżone</td> <td>Unikalność</td> <td>93,33% (28/30)</td> <td>żółty</td> <td>95%</td> <td>7, 21</td> </tr> <tr> <td>K03 przeterminowane</td> <td>Aktualność</td> <td>90,00% (27/30)</td> <td>żółty</td> <td>98%</td> <td>8, 9, 22</td> </tr> <tr> <td>K04 brak daty ważności</td> <td>Aktualność</td> <td>96,66% (29/30)</td> <td>zielony</td> <td>95%</td> <td>23</td> </tr> <tr> <td>K05 kolizja wersji</td> <td>Spójność</td> <td>93,33% (28/30)</td> <td>żółty</td> <td>100%</td> <td>10, 11</td> </tr> <tr> <td>K06 spójność dat</td> <td>Spójność</td> <td>96,66% (29/30)</td> <td>zielony</td> <td>100%</td> <td>24</td> </tr> <tr> <td>K07 właściciel i kategoria</td> <td>Kompletność</td> <td>90,00% (27/30)</td> <td>żółty</td> <td>95%</td> <td>14, 15, 25</td> </tr> <tr> <td>K08 pokrycie fragmentami</td> <td>Kompletność</td> <td>96,66% (29/30)</td> <td>zielony</td> <td>100%</td> <td>26</td> </tr> <tr> <td>K09 długość fragmentu</td> <td>Zgodność formatu</td> <td>83,33% (15/18)</td> <td>czerwony</td> <td>95%</td> <td>4, 9, 15</td> </tr> <tr> <td>K10 format e-maila i wersji</td> <td>Zgodność formatu</td> <td>96,66% (29/30)</td> <td>zielony</td> <td>95%</td> <td>16</td> </tr> <tr> <td>K11 skrót treści</td> <td>Dokładność</td> <td>93,33% (28/30)</td> <td>żółty</td> <td>100%</td> <td>17, 28</td> </tr> <tr> <td>K12 artefakty OCR</td> <td>Dokładność</td> <td>93,33% (28/30)</td> <td>żółty</td> <td>98%</td> <td>29, 30</td> </tr> </tbody> </table> <p>W podziale na wymiary wychodzi: Unikalność 56/60 (93,33%), Aktualność 56/60 (93,33%), Spójność 57/60 (95,00%), Kompletność 56/60 (93,33%), Zgodność formatu 44/48 (91,66%), Dokładność 56/60 (93,33%).</p> <p>Razem jest 325 poprawnych wyników na 348 sprawdzeń (11 reguł po 30 dokumentów i K09 na 18 fragmentach): 325/348 = <strong>93,39%</strong>, semafor żółty. Uwaga na mianownik: K09 liczy fragmenty, a reszta dokumenty, więc to wynik ważony liczbą sprawdzeń, a nie średnia z procentów. Cztery reguły są zielone, siedem żółtych i jedna czerwona. Przykładowe SLA spełniają tylko K04 i K10.</p> <p>Wynik 93,39% brzmi przyzwoicie, ale w RAG jeden błąd bywa wystarczający. K05 ma 28/30, a do złej odpowiedzi czatbota wystarczy jedna para sprzecznych wersji obowiązujących. Dlatego obok semafora trzymaj SLA per reguła, np. 100% dla kolizji wersji. Naprawy zacznij od tego, co najbardziej psuje wyszukiwanie: K09 (puste fragmenty), K05 (kolizja wersji) i K03 (przeterminowane dokumenty).</p> <h2 id="czego-sql-nie-rozstrzygnie">Czego SQL nie rozstrzygnie</h2> <p>Naprawa wszystkich 23 trafień i wynik 100% w karcie nie sprawi, że RAG przestanie halucynować. W danych są trzy przypadki, które przechodzą wszystkie 12 reguł, a mimo to zepsują odpowiedzi:</p> <ul> <li> <strong>Sprzeczność między różnymi dokumentami (<code class="language-plaintext highlighter-rouge">id = 12</code> i <code class="language-plaintext highlighter-rouge">13</code>).</strong> Jeden dokument obiecuje darmową dostawę od 150 PLN, drugi tylko powyżej 250 PLN. Mają różne tytuły, aktualne daty i poprawne metadane, więc żadna reguła ich nie zgłasza. Podobieństwo trigramowe tych tekstów to 0,2895. Przegląd Xu i współautorów (<a href="https://aclanthology.org/2024.emnlp-main.486.pdf" rel="external nofollow noopener" target="_blank">ACL Anthology</a>) nazywa takie sprzeczności między pobranymi dokumentami konfliktem między kontekstami (inter-context conflict), a zagadnienie rozwijają też Jin i współautorzy (<a href="https://arxiv.org/abs/2402.14409" rel="external nofollow noopener" target="_blank">arXiv:2402.14409</a>).</li> <li> <strong>Błąd merytoryczny w poprawnym dokumencie (<code class="language-plaintext highlighter-rouge">id = 3</code>).</strong> Regulamin pracy zdalnej mówi o 4500 PLN dziennie zamiast 4,50. Dla bazy to tak samo poprawny tekst. Asystent HR bez wahania poda pracownikom absurdalną kwotę.</li> <li> <strong>Sens fragmentów.</strong> SQL sprawdzi, czy fragment ma 40 znaków, ale nie ocenia, czy zaimek na początku fragmentu nie stracił odniesienia, które zostało w poprzednim.</li> </ul> <p>Granicę widać też w samych trigramach, bo <code class="language-plaintext highlighter-rouge">pg_trgm</code> mierzy podobieństwo znaków, a nie znaczenia. Sprawdziłem to na czterech przykładach (zdania w skrypcie):</p> <table> <thead> <tr> <th>Przypadek</th> <th><code class="language-plaintext highlighter-rouge">similarity()</code></th> </tr> </thead> <tbody> <tr> <td>Zmiana liczby: termin 14 dni kontra 30 dni (sprzeczne wartości)</td> <td>0,9326</td> </tr> <tr> <td>„przysługuje” kontra „nie przysługuje” (przeciwne znaczenie)</td> <td>0,8214</td> </tr> <tr> <td>Parafraza o tym samym znaczeniu, inne słowa</td> <td>0,1121</td> </tr> <tr> <td>Dokumenty <code class="language-plaintext highlighter-rouge">id = 12</code> i <code class="language-plaintext highlighter-rouge">13</code> (150 kontra 250 PLN)</td> <td>0,2895</td> </tr> </tbody> </table> <p>Wysokie podobieństwo nie znaczy więc zgodności treści, a niskie nie znaczy, że dokumenty mówią co innego.</p> <table> <thead> <tr> <th>Warstwa kontroli</th> <th>Narzędzie</th> <th>Co wykrywa</th> <th>Czego nie wykryje</th> </tr> </thead> <tbody> <tr> <td>Deterministyczna</td> <td>SQL (<code class="language-plaintext highlighter-rouge">md5</code>, <code class="language-plaintext highlighter-rouge">btrim</code>, regex, <code class="language-plaintext highlighter-rouge">JOIN</code>, <code class="language-plaintext highlighter-rouge">CHECK</code>)</td> <td>Duplikaty dokładne, braki metadanych, daty, kolizje wersji, puste fragmenty, placeholdery, skróty</td> <td>Parafrazy, sprzeczności, błędy faktograficzne</td> </tr> <tr> <td>Podobieństwo tekstu</td> <td><code class="language-plaintext highlighter-rouge">pg_trgm</code></td> <td>Kopie z drobnymi zmianami</td> <td>Parafrazy i sprzeczne zdania o podobnym brzmieniu</td> </tr> <tr> <td>Semantyczna</td> <td>Właściciel dokumentu (SME), model oceniający, NLI</td> <td>Sprzeczności między dokumentami, błędne liczby w treści</td> <td>Nie zastępuje twardych więzów w bazie</td> </tr> </tbody> </table> <p>Wniosek: SQL i <code class="language-plaintext highlighter-rouge">pg_trgm</code> odpowiadają za higienę korpusu, a sprzeczności i błędy faktograficzne wymagają przeglądu przez właściciela dokumentu i, jako wsparcia, automatycznego wykrywania sprzeczności na parach bliskich fragmentów. Tego drugiego tutaj nie mierzę.</p> <h2 id="co-z-tego-wynika-dla-data-quality--data-governance">Co z tego wynika dla Data Quality / Data Governance</h2> <ol> <li> <strong>Baza wektorowa nie powinna być systemem rekordowym.</strong> Wrzucanie plików prosto do indeksu omija kontrolę jakości. Każdy dokument i fragment niech najpierw trafia do rejestru relacyjnego (tabele <code class="language-plaintext highlighter-rouge">dokumenty</code> i <code class="language-plaintext highlighter-rouge">fragmenty</code>), gdzie działają reguły K01–K12, a do indeksu idą tylko rekordy, które je przeszły i mają status <code class="language-plaintext highlighter-rouge">obowiazujacy</code>.</li> <li> <strong>Metadane to kontrakt, nie ozdoba.</strong> Żaden dokument nie dostaje statusu <code class="language-plaintext highlighter-rouge">obowiazujacy</code> bez właściciela, kategorii, daty ważności i jednoznacznej wersji w obrębie tytułu. Dzięki temu wyszukiwarka może odfiltrować archiwalne i robocze dokumenty jeszcze przed porównaniem wektorów.</li> <li> <strong>Oddziel pomiar od przeglądu merytorycznego.</strong> SQL mierzy higienę korpusu w sposób powtarzalny, a sprzeczności i błędne liczby ocenia właściciel dokumentu. Dodaj bazę wiedzy do firmowego <a href="/scorecard/">scorecardu</a> i sprawdź w <a href="/dojrzalosc-dq/">teście dojrzałości Data Quality</a>, czy ktoś odpowiada za ten pomiar. Szerszy kontekst, czyli jak AI zmienia pracę z danymi, opisuje wpis <a href="/blog/2025/ai-models-dg/">AI w Data Governance</a>.</li> </ol> <h2 id="checklista-sześć-wymiarów-dla-bazy-wiedzy-ai">Checklista: sześć wymiarów dla bazy wiedzy AI</h2> <ul> <li> <strong>Unikalność:</strong> każdy dokument ma skrót treści, a duplikaty dokładne są usuwane przed indeksowaniem (K01). Kopie z drobnymi zmianami wykrywa <code class="language-plaintext highlighter-rouge">pg_trgm</code> (K02). W wyszukiwaniu hybrydowym wyniki z obu podsystemów są deduplikowane przed przekazaniem do kontekstu.</li> <li> <strong>Aktualność:</strong> żaden dokument obowiązujący nie jest po terminie ważności (K03), a starsze mają datę przeglądu (K04). Wycofane dokumenty znikają z aktywnego indeksu albo są w nim oznaczone jako archiwalne.</li> <li> <strong>Spójność:</strong> pod jednym tytułem jest jedna wersja obowiązująca (K05), a daty są ze sobą zgodne (K06). Pary bliskich fragmentów z różnych dokumentów przegląda człowiek lub model oceniający pod kątem sprzeczności.</li> <li> <strong>Kompletność:</strong> pola używane do filtrowania i nadzoru są wypełnione, bez NULL i samych spacji (K07). Po każdym przebiegu indeksowania test uzgadniający potwierdza, że każdy dokument obowiązujący ma fragmenty (K08).</li> <li> <strong>Zgodność formatu:</strong> podział na fragmenty odrzuca puste przebiegi, same nagłówki i stopki (K09). Tabele przed podziałem są zamieniane na format zachowujący nagłówki kolumn. Atrybuty zarządcze spełniają wzorce (K10).</li> <li> <strong>Dokładność:</strong> skrót treści zgadza się z <code class="language-plaintext highlighter-rouge">md5(tresc)</code> (K11), treść nie ma placeholderów ani artefaktów OCR (K12), a kluczowe liczby (stawki, terminy, limity) zatwierdza ekspert domenowy przed publikacją.</li> </ul> <h2 id="co-dalej">Co dalej</h2> <ul> <li>Wpisz wyniki do <a href="/scorecard/">arkusza Scorecard</a> i ustaw własne SLA dla reguł bazy wiedzy.</li> <li>Masz tylko eksport metadanych dokumentów do pliku CSV? Policz kompletność, unikalność i zakresy w <a href="/narzedzia/profil-danych/">narzędziu DQ Profiler</a>. Działa w przeglądarce, a plik nie jest nigdzie wysyłany.</li> <li>Zobacz, jak mierzyć kompletność w SQL, we wpisie <a href="/blog/2026/kompletnosc-danych-sql/">Kompletność danych w SQL: 5 zapytań do uruchomienia dziś</a>.</li> <li>Potrzebujesz pełnego pomiaru w sześciu wymiarach z progami i planem naprawy? To rezultat <a href="/audyt-data-quality/">audytu jakości danych</a>.</li> </ul> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/reguly-jakosci-danych-sql/">Reguły jakości danych: 12 przykładów z progami</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/kompletnosc-danych-sql/">Kompletność danych w SQL: 5 zapytań do uruchomienia dziś</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/dns-redundancja-pihole/">DNS z zapasem: replika Pi-hole, synchronizacja jednokierunkowa i test awarii w homelabie</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/kopia-straznik-backupow/">Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w homelabie</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2026/data-quality-dimensions/">Wymiary jakości danych: praktyczny przewodnik po Data Quality</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/ai-models-dg/">AI w Data Governance: szanse, wyzwania i praktyczne zastosowania</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/ataccama/">Ataccama ONE: przegląd platformy do Data Governance z perspektywy użytkownika</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2025/informatica/">Informatica jako narzędzie Data Governance: przegląd dla praktyków</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dg-standars/">Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/blog/2024/dg-iso-standards/">Które normy ISO stosować w Data Governance? Praktyczny przegląd</a> </li> </ul> <p class="mb-2" style="margin-top: 1.5rem !important">Subscribe to be notified of future articles:</p> <div class="newsletter-form-container"> <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/cmuy6r04i0cbe0jzzzpxl742z" method="POST" style="justify-content: flex-start"> <input class="newsletter-form-input" name="newsletter-form-input" type="email" placeholder="user@example.com" required="" aria-describedby="newsletter-consent"> <button type="submit" class="newsletter-form-button" style="justify-content: flex-start"> Zapisz się </button> <button type="button" class="newsletter-loading-button" style="justify-content: flex-start"> Proszę czekać... </button> </form> <div class="newsletter-success" style="justify-content: flex-start"> <p class="newsletter-success-message">Zapisano pomyślnie! 🎉</p> </div> <div class="newsletter-error" style="justify-content: flex-start"> <p class="newsletter-error-message">Ups! Coś poszło nie tak, spróbuj ponownie.</p> </div> <button class="newsletter-back-button" type="button" onmouseout='this.style.textDecoration="none"' onmouseover='this.style.textDecoration="underline"'> ← Wróć </button> <p id="newsletter-consent" class="newsletter-consent" style="font-size: 0.85rem; margin-top: 0.5rem; text-align: left"> Zapisując się, zgadzasz się na otrzymywanie newslettera o Data Quality, Data Governance i AI (rzadko, bez spamu). Administratorem danych jest Szymon Kowalewski, wysyłkę obsługuje Loops. Najpierw potwierdzisz adres w mailu. Wiadomości mierzą otwarcia i kliknięcia (statystyki). Zgodę wycofasz linkiem w każdej wiadomości. Szczegóły w <a href="/privacy-policy/">polityce prywatności</a>. </p> </div> <noscript> <style>
+    .newsletter-form-container {
+      display: none;
+    }
+  </style> </noscript> <div id="giscus_thread" style="max-width: 930px; margin: 0 auto;"> <br> <script>
+    (function setupGiscus() {
+      function determineGiscusTheme() {
+        var theme = localStorage.getItem("theme") || document.documentElement.getAttribute("data-theme") || "system";
+if (theme === "dark") return "dark";
+if (theme === "light") return "light";
+var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+return prefersDark ? "dark" : "light";
+
+      }
+
+      var giscusTheme = determineGiscusTheme();
+      var attrs = {
+        src: "https://giscus.app/client.js",
+        "data-repo": "Szymok/szymok.github.io",
+        "data-repo-id": "R_kgDOOBrl3Q",
+        "data-category": "Announcements",
+        "data-category-id": "DIC_kwDOOBrl3c4DHW0N",
+        "data-mapping": "pathname",
+        "data-strict": "1",
+        "data-reactions-enabled": "1",
+        "data-emit-metadata": "0",
+        "data-input-position": "bottom",
+        "data-theme": giscusTheme,
+        "data-lang": "pl",
+        crossorigin: "anonymous",
+        async: true
+      };
+
+      var giscusScript = document.createElement("script");
+      Object.entries(attrs).forEach(function(entry) { giscusScript.setAttribute(entry[0], entry[1]); });
+      var host = document.getElementById("giscus_thread");
+      if (host) host.appendChild(giscusScript);
+    })();
+  </script> <noscript> Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Szymon Kowalewski. <a href="/garden/">Ogród wiedzy</a> · Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. <a href="https://skszymon.eu/privacy-policy/">Impressum</a>. Last updated: November 13, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script defer src="/assets/third-party/tocbot/dist/tocbot.min.js" integrity="sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw=" crossorigin="anonymous"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="/assets/al_img_tools/js/lightbox2-adapter.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="/assets/third-party/vanilla-back-to-top/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-audyt-jakości-danych",
+          title: "audyt jakości danych",
+          description: "Audyt jakości danych (Data Quality) dla firm średniej wielkości: pomiar w sześciu wymiarach, priorytety i plan na 90 dni. Stała cena, raport w kilka tygodni.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/audyt-data-quality/";
+          },
+        },{id: "nav-narzędzia",
+          title: "narzędzia",
+          description: "Darmowe mini narzędzia do pracy z jakością danych (DQ) i zarządzaniem danymi (DG). Działają w przeglądarce, bez wysyłania danych na serwer.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/narzedzia/";
+          },
+        },{id: "dropdown-ogród-wiedzy",
+              title: "🌱 ogród wiedzy",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/garden/";
+              },
+            },{id: "dropdown-test-dojrzałości-dq",
+              title: "🧭 test dojrzałości DQ",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/dojrzalosc-dq/";
+              },
+            },{id: "post-dlaczego-rag-odpowiada-źle-jakość-danych-w-bazie-wiedzy",
+        
+          title: "Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy",
+        
+        description: "Jakość danych RAG decyduje o odpowiedziach AI. 12 reguł SQL w PostgreSQL 16 wykrywa duplikaty, stare wersje i puste fragmenty w bazie wiedzy.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dlaczego-rag-odpowiada-zle/";
+          
+        },
+      },{id: "post-reguły-jakości-danych-12-przykładów-z-progami",
+        
+          title: "Reguły jakości danych: 12 przykładów z progami",
+        
+        description: "12 reguł jakości danych gotowych do skopiowania: NIP, e-mail, daty, słowniki, unikalność. Każda z zapisem SQL, progiem akceptacji i sposobem naprawy.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/reguly-jakosci-danych-sql/";
+          
+        },
+      },{id: "post-kompletność-danych-w-sql-5-zapytań-do-uruchomienia-dziś",
+        
+          title: "Kompletność danych w SQL: 5 zapytań do uruchomienia dziś",
+        
+        description: "Jak zmierzyć jakość danych w SQL bez dodatkowych narzędzi: 5 zapytań do kompletności, od NULL-i po wynik z semaforem do scorecardu. Dane przykładowe do pobrania.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kompletnosc-danych-sql/";
+          
+        },
+      },{id: "post-dns-z-zapasem-replika-pi-hole-synchronizacja-jednokierunkowa-i-test-awarii-w-homelabie",
+        
+          title: "DNS z zapasem: replika Pi-hole, synchronizacja jednokierunkowa i test awarii w homelabie",
+        
+        description: "Jak wyeliminowałem pojedynczy punkt awarii DNS w homelabie drugim Pi-hole: selektywna synchronizacja, test awarii i trzy pułapki. Wnioski dla Data Governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/dns-redundancja-pihole/";
+          
+        },
+      },{id: "post-backup-który-sam-mówi-czy-działa-kopia-n8n-jako-data-observability-w-homelabie",
+        
+          title: "Backup, który sam mówi, czy działa: Kopia + n8n jako data observability w...",
+        
+        description: "Backup 3-2-1 w homelabie na Kopii i Strażnik w n8n, który codziennie sprawdza 14 źródeł progami jak w Data Quality. Case study z pułapkami i wnioskami.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kopia-straznik-backupow/";
+          
+        },
+      },{id: "post-wymiary-jakości-danych-praktyczny-przewodnik-po-data-quality",
+        
+          title: "Wymiary jakości danych: praktyczny przewodnik po Data Quality",
+        
+        description: "6 wymiarów jakości danych, metryki, praktyczne wdrożenie i narzędzia - wszystko, co musisz wiedzieć o Data Quality w kontekście Data Governance.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/data-quality-dimensions/";
+          
+        },
+      },{id: "post-ai-w-data-governance-szanse-wyzwania-i-praktyczne-zastosowania",
+        
+          title: "AI w Data Governance: szanse, wyzwania i praktyczne zastosowania",
+        
+        description: "Jak AI zmienia zarządzanie danymi? Od automatycznej klasyfikacji PII po frontier data governance — analiza na podstawie pracy z arXiv.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ai-models-dg/";
+          
+        },
+      },{id: "post-ataccama-one-przegląd-platformy-do-data-governance-z-perspektywy-użytkownika",
+        
+          title: "Ataccama ONE: przegląd platformy do Data Governance z perspektywy użytkownika",
+        
+        description: "Przegląd Ataccama ONE z perspektywy użytkownika: co potrafi w Data Quality, katalogu danych i glosariuszu, dla kogo ma sens i jakie ma ograniczenia.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ataccama/";
+          
+        },
+      },{id: "post-informatica-jako-narzędzie-data-governance-przegląd-dla-praktyków",
+        
+          title: "Informatica jako narzędzie Data Governance: przegląd dla praktyków",
+        
+        description: "Przegląd platformy Informatica Data Governance — Axon, EDC, CLAIRE GPT. Co potrafi, do czego się nadaje i jak wypada na tle konkurencji.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/informatica/";
+          
+        },
+      },{id: "post-standardy-danych-czym-są-i-dlaczego-bez-nich-nie-zbudujesz-programu-dg",
+        
+          title: "Standardy danych: czym są i dlaczego bez nich nie zbudujesz programu DG?",
+        
+        description: "Czym są standardy danych, jak działają w praktyce i dlaczego interoperacyjność jest kluczowa — analiza na podstawie inicjatywy TransparenCEE.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dg-standars/";
+          
+        },
+      },{id: "post-które-normy-iso-stosować-w-data-governance-praktyczny-przegląd",
+        
+          title: "Które normy ISO stosować w Data Governance? Praktyczny przegląd",
+        
+        description: "Przegląd standardów ISO przydatnych w programie Data Governance — od jakości danych (ISO 8000) po bezpieczeństwo informacji (ISO 27001).",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/dg-iso-standards/";
+          
+        },
+      },{id: "post-wstęp-do-data-governance",
+        
+          title: "Wstęp do Data Governance",
+        
+        description: "Od czego zacząć przygodę z zarządzaniem danymi? Kluczowe elementy, role i wyzwania — z perspektywy praktyka.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/data-governance-start/";
+          
+        },
+      },{id: "post-wstęp-do-promptingu",
+        
+          title: "Wstęp do Promptingu",
+        
+        description: "Praktyczny przewodnik po promptingu — zasady, iteracyjny rozwój, podsumowywanie, analiza sentymentu i transformacja tekstu z OpenAI API.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/guide-prompting/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "dq_tools-ataccama-one",
+          title: 'Ataccama ONE',
+          description: "Wpisy o Ataccama ONE: jakość danych, katalog i glosariusz z perspektywy użytkownika, plus moje ułatwienia do pracy z platformą.",
+          section: "Dq_tools",handler: () => {
+              window.location.href = "/narzedzia/ataccama/";
+            },},{id: "dq_tools-informatica",
+          title: 'Informatica',
+          description: "Wpisy o Informatica (IDMC): zarządzanie danymi i jakość danych z perspektywy użytkownika, plus moje ułatwienia do pracy z platformą.",
+          section: "Dq_tools",handler: () => {
+              window.location.href = "/narzedzia/informatica/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%68%65%6C%6C%6F@%73%6B%73%7A%79%6D%6F%6E.%65%75", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Szymok", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/skszymon", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/SkSzymon", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_newsletter/js/newsletter.js"></script> </body> </html>
