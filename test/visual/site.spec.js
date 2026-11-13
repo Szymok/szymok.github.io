@@ -8,6 +8,7 @@ const routes = [
   { path: "/blog/", id: "blog" },
   { path: "/blog/2026/reguly-jakosci-danych-sql/", id: "post: reguly jakosci danych" },
   { path: "/blog/2026/kompletnosc-danych-sql/", id: "post: kompletnosc danych" },
+  { path: "/blog/2026/dlaczego-rag-odpowiada-zle/", id: "post: rag jakosc danych" },
   { path: "/scorecard/", id: "scorecard" },
   { path: "/audyt-data-quality/", id: "audyt" },
   { path: "/dojrzalosc-dq/", id: "dojrzalosc" },
