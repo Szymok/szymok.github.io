@@ -16,20 +16,20 @@ Front matter (zgodny z istniejącymi wpisami): `layout: post`, `title`, `date`, 
 
 ## Przegląd
 
-| #   | Data  | Filar        | Tytuł roboczy                                                      | Fraza główna                                       | Status              |
-| --- | ----- | ------------ | ------------------------------------------------------------------ | -------------------------------------------------- | ------------------- |
-| 1   | 13.10 | DQ           | Kompletność danych w SQL: 5 zapytań do uruchomienia dziś           | jak zmierzyć jakość danych, kompletność danych SQL | opublikowany        |
-| 4   | 3.11  | DQ           | Reguły jakości danych: 12 przykładów z progami                     | reguły jakości danych przykłady, walidacja NIP     | opublikowany        |
-| 2   | 10.11 | AI → DQ      | Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy           | jakość danych RAG                                  | zaległy, było 20.10 |
-| 3   | 17.11 | homelab → DG | Rejestr usług w homelabie jako mały katalog danych                 | katalog danych co to                               | zaległy, było 27.10 |
-| 5   | 24.11 | AI → DG      | Zanim wpuścisz Copilota na dane firmy: 7 pytań z Data Governance   | data governance AI, AI governance                  | przesunięty z 10.11 |
-| 6   | 1.12  | homelab → DQ | Reguły jakości w n8n: prosty pipeline walidacji danych             | walidacja danych n8n                               | przesunięty z 17.11 |
-| 7   | 8.12  | DG           | Data owner i data steward: kto za co odpowiada (RACI)              | data steward co robi, data owner                   | przesunięty z 24.11 |
-| 8   | 15.12 | AI → DQ      | LLM w profilowaniu danych: co działa, czego nie robić              | LLM jakość danych                                  | przesunięty z 1.12  |
-| 9   | 22.12 | homelab → DG | Retencja danych w praktyce: 24 miesiące w Umami i polityki w Kopii | retencja danych polityka                           | przesunięty z 8.12  |
-| 10  | 29.12 | DQ           | Ile kosztują złe dane: prosty model dla firmy średniej wielkości   | koszt złej jakości danych                          | przesunięty z 15.12 |
-| 11  | 5.01  | AI → DG      | Prompty jako dane: wersjonowanie, właściciel, jakość               | zarządzanie promptami                              | przesunięty z 22.12 |
-| 12  | 12.01 | homelab → DQ | Data Quality as code: reguły w Git z przeglądem zmian              | data quality as code                               | przesunięty z 29.12 |
+| #   | Data  | Filar        | Tytuł roboczy                                                      | Fraza główna                                       | Status                         |
+| --- | ----- | ------------ | ------------------------------------------------------------------ | -------------------------------------------------- | ------------------------------ |
+| 1   | 13.10 | DQ           | Kompletność danych w SQL: 5 zapytań do uruchomienia dziś           | jak zmierzyć jakość danych, kompletność danych SQL | opublikowany                   |
+| 4   | 3.11  | DQ           | Reguły jakości danych: 12 przykładów z progami                     | reguły jakości danych przykłady, walidacja NIP     | opublikowany                   |
+| 2   | 10.11 | AI → DQ      | Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy           | jakość danych RAG                                  | opublikowany 13.11, było 20.10 |
+| 3   | 17.11 | homelab → DG | Rejestr usług w homelabie jako mały katalog danych                 | katalog danych co to                               | zaległy, było 27.10            |
+| 5   | 24.11 | AI → DG      | Zanim wpuścisz Copilota na dane firmy: 7 pytań z Data Governance   | data governance AI, AI governance                  | przesunięty z 10.11            |
+| 6   | 1.12  | homelab → DQ | Reguły jakości w n8n: prosty pipeline walidacji danych             | walidacja danych n8n                               | przesunięty z 17.11            |
+| 7   | 8.12  | DG           | Data owner i data steward: kto za co odpowiada (RACI)              | data steward co robi, data owner                   | przesunięty z 24.11            |
+| 8   | 15.12 | AI → DQ      | LLM w profilowaniu danych: co działa, czego nie robić              | LLM jakość danych                                  | przesunięty z 1.12             |
+| 9   | 22.12 | homelab → DG | Retencja danych w praktyce: 24 miesiące w Umami i polityki w Kopii | retencja danych polityka                           | przesunięty z 8.12             |
+| 10  | 29.12 | DQ           | Ile kosztują złe dane: prosty model dla firmy średniej wielkości   | koszt złej jakości danych                          | przesunięty z 15.12            |
+| 11  | 5.01  | AI → DG      | Prompty jako dane: wersjonowanie, właściciel, jakość               | zarządzanie promptami                              | przesunięty z 22.12            |
+| 12  | 12.01 | homelab → DQ | Data Quality as code: reguły w Git z przeglądem zmian              | data quality as code                               | przesunięty z 29.12            |
 
 Wpisy 2 i 3 nie wyszły w terminie (20.10 i 27.10), więc zostały dopisane na kolejne tygodnie, a pozostałe wpisy przesunęły się o dwa tygodnie. Po tej zmianie rdzeń DQ/DG (wpisy 4, 7 i 10) ustępuje tematom pobocznym, więc po 12.01 warto zacząć od wpisu z rdzenia.
 
@@ -44,10 +44,10 @@ Frazy to **hipotezy**, nie dane o wolumenie wyszukiwań. Zweryfikuj je w podpowi
 - **Artefakt:** skrypt SQL na danych syntetycznych.
 - **CTA:** `/scorecard/` (arkusz) i `/dojrzalosc-dq/`.
 
-### 2. Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy (10.11, AI → DQ; zaległy, było 20.10)
+### 2. Dlaczego RAG odpowiada źle: jakość danych w bazie wiedzy (13.11, AI → DQ; opublikowany, planowany 10.11, pierwotnie 20.10)
 
 - **Mostek do DQ:** te same wymiary dotyczą korpusu dokumentów: duplikaty = unikalność, stare wersje = aktualność, sprzeczne dokumenty = spójność, brakujące metadane = kompletność.
-- **Przykład własny:** analiza duplikatów w ogrodzie wiedzy (zidentyfikowane 118 kopii notatek). To prawdziwy przypadek, który możesz opisać z liczbami.
+- **Przykład:** syntetyczna baza wiedzy fikcyjnej firmy (30 dokumentów, 18 fragmentów, 12 reguł K01–K12). Ogród wiedzy nie został użyty jako przykład, więc w treści nie ma liczb z prawdziwych notatek.
 - **Artefakt:** checklista „6 wymiarów dla bazy wiedzy AI".
 - **Co z tego dla DQ/DG:** jakość danych decyduje o jakości odpowiedzi AI, więc audyt DQ jest warunkiem wstępnym projektu AI.
 
